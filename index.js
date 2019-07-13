@@ -95,7 +95,8 @@ function create() {
 	
 	platform = this.add.image(115, 500, "platform");
 	invPlatform = this.matter.add.image(115,525, "invPlatform");
-	this.matter.body.scale(invPlatform, 220, 10);
+	invPlatform.displayWidth = 200;
+	invPlatform.displayHeight = 10;
 	//invPlatform.scale(invPlatform,220, 10);
 	invPlatform.setStatic(true);
 	invPlatform.setFriction(0.009);
