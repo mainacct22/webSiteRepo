@@ -33,6 +33,10 @@ let camera;
 let track;
 let invPlatform;
 let invTrack;
+let lblDist;
+let lblDmg;
+let dist;
+let dmg;
 
 function preload() {
     
@@ -109,17 +113,27 @@ function create() {
 	invPlatform.setFriction(0.009);
 	
 
-    sandbag = this.matter.add.image(130, 250, "sandbag");
+    sandbag = this.matter.add.image(120, 250, "sandbag");
 	sandbag.setFriction(0.05);
 	sandbag.setFrictionAir(0.0005);
 	
 	sandbag.setInteractive();
 	
 	//sandbag.events.onInputDown.add(onDown, this);
-	
+	dmg = 0;
 	sandbag.on('pointerdown', function (pointer) {
 		//sandbag.setVelocityY(-5);
-		sandbag.setVelocity(5,-5);
+		dmg += 5;
+		
+		if(pointer.x > sandbag.x)
+		{
+			//right side
+			sandbag.setVelocity(-5,-5);
+		}
+		else
+		{
+			sandbag.setVelocity(5, -5);
+		}
 		
 	});
 	//sandbag.once('pointerdown', function (pointer) {
@@ -164,15 +178,25 @@ function create() {
   //this.controls = new Phaser.Cameras.Controls.FixedKeyControl(controlConfig);
 
   // Help text that has a "fixed" position on the screen
-  //this.add
-  //    .text(16, 16, 'Arrow keys to move\nPress "D" to show hitboxes', {
-//      font: "18px monospace",
-//      fill: "#000000",
-//      padding: { x: 20, y: 10 },
-//      backgroundColor: "#ffffff"
-//    })
-//    .setScrollFactor(0)
-//    .setDepth(30);
+  lblDmg = this.add
+      .text(100, 16, 'Damage = ' + dmg, {
+      font: "18px monospace",
+      fill: "#000000",
+      padding: { x: 20, y: 10 },
+      backgroundColor: "#ffffff"
+    })
+    .setScrollFactor(0)
+    .setDepth(30);
+	
+  lblDist = this.add
+      .text(200, 16, 'Distance = 0 ft', {
+      font: "18px monospace",
+      fill: "#000000",
+      padding: { x: 20, y: 10 },
+      backgroundColor: "#ffffff"
+    })
+    .setScrollFactor(0)
+    .setDepth(30);
 
   // Debug graphics
 }
@@ -187,6 +211,14 @@ function update(time, delta) {
     cloud_4.tilePositionX = camera.scrollX * .9;
     
     sky.tilePositionX = camera.scrollX;
+	
+	if (sandbag.x > 600)
+	{
+		//dist = 
+	}
+	
+	lblDmg = 'Damage = ' + dmg;
+	
     
     //this.controls.update(delta);
 
