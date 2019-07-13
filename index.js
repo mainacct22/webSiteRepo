@@ -118,7 +118,7 @@ function create() {
 		{
 			//touched right side
 			//sandbag.setAngularVelocity(5,-5, {pointer.x,pointer.y});
-			sandbag.applyForce(-5, -5, pointer.x,pointer.y);
+			sandbag.applyForce(-5, -5, {pointer.x,pointer.y});
 		}
 		else if (pointer.y > sandbag.y)
 		{
@@ -132,6 +132,7 @@ function create() {
   camera = this.cameras.main;
   //camera.startFollow(player);
   camera.setBounds(0, 0, 800 * 12, 600);
+  camera.startFollow(sandbag);
 
   cursors = this.input.keyboard.createCursorKeys();
   const controlConfig = {
