@@ -96,7 +96,7 @@ function create() {
 	platform = this.add.image(115, 500, "platform");
 	invPlatform = this.matter.add.image(115,525, "invPlatform");
 	//invPlatform.scale(invPlatform,220, 10);
-	invPlatofrm.setStatic(true);
+	invPlatform.setStatic(true);
 	invPlatform.setFriction(0.009);
 	
   // Create a sprite with physics enabled via the physics system. The image used for the sprite has
