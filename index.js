@@ -80,10 +80,11 @@ function create() {
     cloud_4.setScrollFactor(0);
 	
 	
+	
 	let x;
 	for(x = 433; x < (gameWidth * 12) - 43; x += 43) {
 		
-		this.add.tileSprite(x, 550, "track");
+		this.add.image(x, 550, "track");
 	}
 	
   // Create a sprite with physics enabled via the physics system. The image used for the sprite has
