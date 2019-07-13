@@ -95,13 +95,14 @@ function create() {
 	
 	platform = this.add.image(115, 500, "platform");
 	invPlatform = this.matter.add.image(115,525, "invPlatform");
+	this.matter.body.scale(invPlatform, 220, 10);
 	//invPlatform.scale(invPlatform,220, 10);
 	invPlatform.setStatic(true);
 	invPlatform.setFriction(0.009);
 	
   // Create a sprite with physics enabled via the physics system. The image used for the sprite has
   // a bit of whitespace, so I'm using setSize & setOffset to control the size of the player's body.
-    sandbag = this.matter.add.image(175, 250, "sandbag");
+    sandbag = this.matter.add.image(150, 250, "sandbag");
 	sandbag.setFriction(0.05);
 	sandbag.setFrictionAir(0.0005);
 	
@@ -114,7 +115,8 @@ function create() {
 		console.log("sandbag y = " + sandbag.y);
 		if(pointer.x > sandbag.x)
 		{
-			
+			//sandbag.setAngularVelocity(5,-5, {pointer.x,pointer.y});
+			//sandbag.applyForce(body, position, force);
 		}
 		else if (pointer.y > sandbag.y)
 		{
