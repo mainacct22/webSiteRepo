@@ -93,18 +93,21 @@ function create() {
     cloud_4.setScrollFactor(0);
 	
 	
-	
+	//Add the track to the scene
 	let x;
 	for(x = 255; x < (gameWidth * 12) - 43; x += 43) {
 		
 		this.add.image(x, 550, "track");
 	}
+	
+	//place the inv platform on the track
 	invTrack = this.matter.add.image(255, 558, "invPlatform");
 	invTrack.displayWidth = gameWidth * 12;
 	invTrack.displayHeight = 10;
 	invTrack.setStatic(true);
 	invTrack.setFriction(0.003);
 	
+	//Add platform and inv Platform 
 	platform = this.add.image(115, 500, "platform");
 	invPlatform = this.matter.add.image(110,490, "invPlatform");
 	invPlatform.displayWidth = 200;
@@ -113,26 +116,28 @@ function create() {
 	invPlatform.setFriction(0.009);
 	
 
+	//Add sandbag and use matter.js
     sandbag = this.matter.add.image(120, 250, "sandbag");
 	sandbag.setFriction(0.05);
 	sandbag.setFrictionAir(0.0005);
 	
+	//Set interactive so the matter object is clickable
 	sandbag.setInteractive();
 	
-	//sandbag.events.onInputDown.add(onDown, this);
+	
 	dmg = 0;
 	sandbag.on('pointerdown', function (pointer) {
-		//sandbag.setVelocityY(-5);
+
 		dmg += 5;
 		
 		if(pointer.x > sandbag.x)
 		{
 			//right side
-			sandbag.setVelocity(-5,-5);
+			sandbag.setVelocity(-.25 * dmg , -5);
 		}
 		else
 		{
-			sandbag.setVelocity(5, -5);
+			sandbag.setVelocity(.25 * dmg, -5);
 		}
 		
 	});
@@ -189,7 +194,7 @@ function create() {
     .setDepth(30);
 	
   lblDist = this.add
-      .text(275, 16, 'Distance = 0 ft', {
+      .text(300, 16, 'Distance = 0 ft', {
       font: "18px monospace",
       fill: "#000000",
       padding: { x: 20, y: 10 },
@@ -217,7 +222,7 @@ function update(time, delta) {
 		//dist = 
 	}
 	
-	lblDmg = 'Damage = ' + dmg;
+	lblDmg.text = 'Damage = ' + dmg;
 	
     
     //this.controls.update(delta);
