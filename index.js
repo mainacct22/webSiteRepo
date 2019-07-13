@@ -95,7 +95,7 @@ function create() {
 	
 	platform = this.add.image(115, 500, "platform");
 	invPlatform = this.matter.add.image(115,525, "invPlatform");
-	invPlatform.scale(invPlatform,220, 10);
+	//invPlatform.scale(invPlatform,220, 10);
 	invPlatofrm.setStatic(true);
 	invPlatform.setFriction(0.009);
 	
@@ -108,6 +108,10 @@ function create() {
 	
 	this.input.on('pointerdown', function (pointer) {
 		
+		console.log("pointer x = " + pointer.x);
+		console.log("sandbag x = " + sandbag.x);
+		console.log("pointer y = " + pointer.y);
+		console.log("sandbag y = " + sandbag.y);
 		if(pointer.x > sandbag.x)
 		{
 			
