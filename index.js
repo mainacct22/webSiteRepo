@@ -97,7 +97,7 @@ function create() {
 	}
 	
 	platform = this.add.image(115, 500, "platform");
-	invPlatform = this.matter.add.image(115,510, "invPlatform");
+	invPlatform = this.matter.add.image(110,490, "invPlatform");
 	invPlatform.displayWidth = 200;
 	invPlatform.displayHeight = 10;
 	invPlatform.setStatic(true);
@@ -111,7 +111,7 @@ function create() {
 	sandbag.setInteractive();
 	
 	
-	sandbag.input.on('pointerdown', function (pointer) {
+	sandbag.once('pointerdown', function (pointer) {
 		
 		console.log("pointer x = " + pointer.x);
 		console.log("sandbag x = " + sandbag.x);
