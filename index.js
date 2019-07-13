@@ -137,22 +137,22 @@ function create() {
 			//right side
 			if ( dmg < 100)
 			{
-				sandbag.setVelocity(-.15 * dmg , -.25 * dmg);
+				sandbag.setVelocity(-.10 * dmg , -.20 * dmg);
 			}
 			else
 			{
-				sandbag.setVelocity(-.35 * dmg , -.45 * dmg);
+				sandbag.setVelocity(-.30 * dmg , -.40 * dmg);
 			}
 		}
 		else
 		{
 			if (dmg < 100)
 			{
-				sandbag.setVelocity(.15 * dmg, -.25 * dmg);
+				sandbag.setVelocity(.10 * dmg, -.20 * dmg);
 			}
 			else
 			{
-				sandbag.setVelocity(.35 * dmg, -.45 * dmg);
+				sandbag.setVelocity(.30 * dmg, -.40 * dmg);
 			}
 		}
 		
@@ -182,7 +182,6 @@ function create() {
 
 
   camera = this.cameras.main;
-  //camera.startFollow(player);
   camera.setBounds(0, 0, 800 * 12, 600);
   camera.startFollow(sandbag);
 
@@ -241,10 +240,19 @@ function update(time, delta) {
 		dist = dist/16;
 		dist = +dist.toFixed(2);
 		//dist = Phaser.Math.distance(120,0,sandbag.x,0)
-		lblDist.text = 'Distance = ' + dist; 
+		lblDist.text = 'Distance = ' + dist + ' ft'; 
 	}
 	
 	lblDmg.text = 'Damage = ' + dmg;
+	
+	if (game.input.activePointer.duration > 600) {
+		
+		console.log("long press");
+		dmg += 30;
+		sandbag.setVelocity(.50 * dmg, -.40 * dmg);
+		
+	}
+		
 	
     
     //this.controls.update(delta);
