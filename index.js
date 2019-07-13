@@ -31,6 +31,8 @@ let rock_2;
 let sky;
 let camera;
 let track;
+let invPlatform;
+let invTrack;
 
 function preload() {
     
@@ -45,6 +47,7 @@ function preload() {
 	this.load.image("track",   "assets/simpleTrack.png");
 	this.load.image("sandbag", "assets/sandbag1.png");
     this.load.image("platform", "assets/platform_a.png");
+	this.load.image("invPlatform", "assets/invPlatform.png")
 
 }
 
@@ -91,10 +94,14 @@ function create() {
 	}
 	
 	platform = this.add.image(115, 500, "platform");
+	invPlatform = this.matter.add.image(115,475, "invPlatform");
+	invPlatform.scale(220, 10);
+	invPlatofrm.setStatic(true);
+	invPlatform.setFriction(0.009);
 	
   // Create a sprite with physics enabled via the physics system. The image used for the sprite has
   // a bit of whitespace, so I'm using setSize & setOffset to control the size of the player's body.
-    sandbag = this.matter.add.image(185, 250, "sandbag");
+    sandbag = this.matter.add.image(175, 250, "sandbag");
 	
 
 
