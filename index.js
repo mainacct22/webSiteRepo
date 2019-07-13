@@ -94,7 +94,7 @@ function create() {
 	}
 	
 	platform = this.add.image(115, 500, "platform");
-	invPlatform = this.matter.add.image(115,525, "invPlatform");
+	invPlatform = this.matter.add.image(115,510, "invPlatform");
 	invPlatform.displayWidth = 200;
 	invPlatform.displayHeight = 10;
 	//invPlatform.scale(invPlatform,220, 10);
