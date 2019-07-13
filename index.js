@@ -119,7 +119,7 @@ function create() {
 	
 	sandbag.on('pointerdown', function (pointer) {
 		//sandbag.setVelocityY(-5);
-		sandbag.SetVelocity(5,-5);
+		sandbag.setVelocity(5,-5);
 		
 	});
 	//sandbag.once('pointerdown', function (pointer) {
