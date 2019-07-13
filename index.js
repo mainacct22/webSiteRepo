@@ -118,7 +118,7 @@ function create() {
 		{
 			//touched right side
 			//sandbag.setAngularVelocity(5,-5, {pointer.x,pointer.y});
-			sandbag.applyForce(-5, -5, {pointer.x,pointer.y});
+			sandbag.applyForce(-5, -5);
 		}
 		else if (pointer.y > sandbag.y)
 		{
