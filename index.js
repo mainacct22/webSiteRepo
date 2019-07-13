@@ -238,8 +238,10 @@ function update(time, delta) {
 		xDif = 120 - sandbag.x;
 		yDif = 0 - 0;
 		dist = Math.sqrt(xDif * xDif + yDif * yDif);
+		dist = dist/16;
+		dist = +dist.toFixed(2);
 		//dist = Phaser.Math.distance(120,0,sandbag.x,0)
-		lblDist.text = 'Distance = ' + dist/16; 
+		lblDist.text = 'Distance = ' + dist; 
 	}
 	
 	lblDmg.text = 'Damage = ' + dmg;
