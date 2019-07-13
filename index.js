@@ -40,7 +40,7 @@ function preload() {
     this.load.image("rock_2",  "assets/rocks_2_600.png");
     this.load.image("sky",     "assets/sky_600.png");
 	
-	this.load.image("track",   "assets/simpleTrack");
+	this.load.image("track",   "assets/simpleTrack.png");
     
 
 }
