@@ -28,6 +28,7 @@ let rock_1;
 let rock_2;
 let sky;
 let camera;
+let track;
 
 function preload() {
     
@@ -38,6 +39,8 @@ function preload() {
     this.load.image("rock_1",  "assets/rocks_1_600.png");
     this.load.image("rock_2",  "assets/rocks_2_600.png");
     this.load.image("sky",     "assets/sky_600.png");
+	
+	this.load.image("track",   "assets/simpleTrack");
     
 
 }
@@ -75,6 +78,14 @@ function create() {
     cloud_4 = this.add.tileSprite(0, 0, gameWidth, gameHeight, "cloud_4");
     cloud_4.setOrigin(0,0);
     cloud_4.setScrollFactor(0);
+	
+	
+	let x;
+	for(x = 433; x < (gameWidth * 12) - 43; x += 43) {
+		
+		this.add.tileSprite(x, 550, "track");
+	}
+	
   // Create a sprite with physics enabled via the physics system. The image used for the sprite has
   // a bit of whitespace, so I'm using setSize & setOffset to control the size of the player's body.
   //player = this.matter.
@@ -113,7 +124,7 @@ function create() {
 
 function update(time, delta) {
     
-    cloud_1.tilePositionX = camera.scrollX * .3;
+    cloud_1.tilePositionX = camera.scrollX * .2;
     cloud_2.tilePositionX = camera.scrollX * .45;
     rock_1.tilePositionX = camera.scrollX * .6;
     cloud_3.tilePositionX = camera.scrollX * .75;
