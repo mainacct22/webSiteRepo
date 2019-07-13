@@ -95,7 +95,7 @@ function create() {
 		
 		this.add.image(x, 550, "track");
 	}
-	invTrack = this.matter.add.image(255, 550, "invPlatform");
+	invTrack = this.matter.add.image(255, 558, "invPlatform");
 	invTrack.displayWidth = gameWidth * 12;
 	invTrack.displayHeight = 10;
 	invTrack.setStatic(true);
@@ -109,7 +109,7 @@ function create() {
 	invPlatform.setFriction(0.009);
 	
 
-    sandbag = this.matter.add.image(140, 250, "sandbag");
+    sandbag = this.matter.add.image(130, 250, "sandbag");
 	sandbag.setFriction(0.05);
 	sandbag.setFrictionAir(0.0005);
 	
