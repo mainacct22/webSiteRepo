@@ -15,7 +15,7 @@ const config = {
 };
 
 const game = new Phaser.Game(config);
-cosnt gameWidth = 800;
+const gameWidth = 800;
 const gameHeight = 600;
 let cursors;
 let player;
