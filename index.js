@@ -85,16 +85,16 @@ function create() {
 	
 	
 	let x;
-	for(x = 150; x < (gameWidth * 12) - 43; x += 43) {
+	for(x = 240; x < (gameWidth * 12) - 43; x += 43) {
 		
 		this.add.image(x, 550, "track");
 	}
 	
-	platform = this.add.image(10, 500, "platform");
+	platform = this.add.image(100, 500, "platform");
 	
   // Create a sprite with physics enabled via the physics system. The image used for the sprite has
   // a bit of whitespace, so I'm using setSize & setOffset to control the size of the player's body.
-    sandbag = this.matter.add.image(85, 250, "sandbag");
+    sandbag = this.matter.add.image(175, 250, "sandbag");
 	
 
 
