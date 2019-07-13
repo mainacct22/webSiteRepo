@@ -133,11 +133,25 @@ function create() {
 		if(pointer.x > sandbag.x)
 		{
 			//right side
-			sandbag.setVelocity(-.25 * dmg , -5);
+			if ( dmg < 100)
+			{
+				sandbag.setVelocity(-.15 * dmg , -.25 * dmg);
+			}
+			else
+			{
+				sandbag.setVelocity(-.45 * dmg , -.55 * dmg);
+			}
 		}
 		else
 		{
-			sandbag.setVelocity(.25 * dmg, -5);
+			if (dmg < 100)
+			{
+				sandbag.setVelocity(.15 * dmg, -.25 * dmg);
+			}
+			else
+			{
+				sandbag.setVelocity(.45 * dmg, -.55 * dmg);
+			}
 		}
 		
 	});
