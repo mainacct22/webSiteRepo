@@ -130,7 +130,7 @@ function update(time, delta) {
     rock_1.tilePositionX = camera.scrollX * .6;
     cloud_3.tilePositionX = camera.scrollX * .75;
     rock_2.tilePositionX = camera.scrollX * .9;
-    cloud_4.tilePositionX = camera.scrollX * .85;
+    cloud_4.tilePositionX = camera.scrollX * .1;
     
     sky.tilePositionX = camera.scrollX;
     
