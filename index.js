@@ -52,6 +52,9 @@ function preload() {
 }
 
 function create() {
+	
+	this.matter.world.setBounds(0,0, 800 * 12, 600);
+	
   
     sky = this.add.tileSprite(0, 0, gameWidth, gameHeight, "sky");
     sky.setOrigin(0,0);
@@ -105,8 +108,10 @@ function create() {
 	sandbag.setFriction(0.05);
 	sandbag.setFrictionAir(0.0005);
 	
+	sandbag.setInteractive();
 	
-	this.input.on('pointerdown', function (pointer) {
+	
+	sandbag.input.on('pointerdown', function (pointer) {
 		
 		console.log("pointer x = " + pointer.x);
 		console.log("sandbag x = " + sandbag.x);
