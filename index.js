@@ -109,7 +109,7 @@ function create() {
 	invPlatform.setFriction(0.009);
 	
 
-    sandbag = this.matter.add.image(150, 250, "sandbag");
+    sandbag = this.matter.add.image(140, 250, "sandbag");
 	sandbag.setFriction(0.05);
 	sandbag.setFrictionAir(0.0005);
 	
@@ -118,8 +118,8 @@ function create() {
 	//sandbag.events.onInputDown.add(onDown, this);
 	
 	sandbag.on('pointerdown', function (pointer) {
-		sandbag.setVelocityY(-5);
-		sandbag.SetVelocityX(5);
+		//sandbag.setVelocityY(-5);
+		sandbag.SetVelocity(5,-5);
 		
 	});
 	//sandbag.once('pointerdown', function (pointer) {
