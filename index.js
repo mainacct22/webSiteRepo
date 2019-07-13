@@ -114,11 +114,11 @@ function create() {
 function update(time, delta) {
     
     cloud_1.tilePositionX = camera.scrollX * .3;
-    cloud_2.tilePositionX = camera.scrollX * .3;
+    cloud_2.tilePositionX = camera.scrollX * .45;
     rock_1.tilePositionX = camera.scrollX * .6;
-    cloud_3.tilePositionX = camera.scrollX * .9;
+    cloud_3.tilePositionX = camera.scrollX * .75;
     rock_2.tilePositionX = camera.scrollX * .9;
-    cloud_4.tilePositionX = camera.scrollX * .6;
+    cloud_4.tilePositionX = camera.scrollX * .85;
     
     sky.tilePositionX = camera.scrollX;
     
