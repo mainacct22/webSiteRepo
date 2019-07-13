@@ -19,6 +19,7 @@ const gameWidth = 800;
 const gameHeight = 600;
 let cursors;
 let player;
+let platform;
 let sandbag;
 let showDebug = false;
 let cloud_1;
@@ -43,7 +44,7 @@ function preload() {
 	
 	this.load.image("track",   "assets/simpleTrack.png");
 	this.load.image("sandbag", "assets/sandbag1.png");
-    
+    this.load.image("platform", "assets/platform_a.png");
 
 }
 
@@ -88,6 +89,8 @@ function create() {
 		
 		this.add.image(x, 550, "track");
 	}
+	
+	platform = this.add.image(180, 500, "platform");
 	
   // Create a sprite with physics enabled via the physics system. The image used for the sprite has
   // a bit of whitespace, so I'm using setSize & setOffset to control the size of the player's body.
