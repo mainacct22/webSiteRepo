@@ -94,7 +94,7 @@ function create() {
 	}
 	
 	platform = this.add.image(115, 500, "platform");
-	invPlatform = this.matter.add.image(115,510, "invPlatform");
+	invPlatform = this.matter.add.image(115,500, "invPlatform");
 	invPlatform.displayWidth = 200;
 	invPlatform.displayHeight = 10;
 	//invPlatform.scale(invPlatform,220, 10);
@@ -116,8 +116,9 @@ function create() {
 		console.log("sandbag y = " + sandbag.y);
 		if(pointer.x > sandbag.x)
 		{
+			//touched right side
 			//sandbag.setAngularVelocity(5,-5, {pointer.x,pointer.y});
-			//sandbag.applyForce(body, position, force);
+			sandbag.applyForce(-5, -5, pointer.x,pointer.y);
 		}
 		else if (pointer.y > sandbag.y)
 		{
