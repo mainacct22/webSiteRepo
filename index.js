@@ -95,6 +95,11 @@ function create() {
 		
 		this.add.image(x, 550, "track");
 	}
+	invTrack = this.matter.add.image(255, 550, "invPlatform");
+	invTrack.displayWidth = gameWidth * 12;
+	invTrack.displayHeight = 10;
+	invTrack.setStatic(true);
+	intTrack.setFriction(0.003);
 	
 	platform = this.add.image(115, 500, "platform");
 	invPlatform = this.matter.add.image(110,490, "invPlatform");
@@ -114,6 +119,7 @@ function create() {
 	
 	sandbag.on('pointerdown', function (pointer) {
 		sandbag.setVelocityY(-5);
+		sandbag.SetVelocityX(5);
 		
 	});
 	//sandbag.once('pointerdown', function (pointer) {
