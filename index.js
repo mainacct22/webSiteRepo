@@ -110,27 +110,32 @@ function create() {
 	
 	sandbag.setInteractive();
 	
+	//sandbag.events.onInputDown.add(onDown, this);
 	
-	sandbag.once('pointerdown', function (pointer) {
+	sandbag.on('pointerdown', function (pointer) {
+		sandbag.setVelocityY(-5);
 		
-		console.log("pointer x = " + pointer.x);
-		console.log("sandbag x = " + sandbag.x);
-		console.log("pointer y = " + pointer.y);
-		console.log("sandbag y = " + sandbag.y);
-		if(pointer.x > sandbag.x)
-		{
+	});
+	//sandbag.once('pointerdown', function (pointer) {
+		
+	//	console.log("pointer x = " + pointer.x);
+	//	console.log("sandbag x = " + sandbag.x);
+	//	console.log("pointer y = " + pointer.y);
+	//	console.log("sandbag y = " + sandbag.y);
+	//	if(pointer.x > sandbag.x)
+	//	{
 			//touched right side
 			//sandbag.setAngularVelocity(5,-5);
 			//sandbag.applyForce(-5, -5);
-			sandbag.setVelocityX(-5);
-			sandbag.setVelocityY(-5);
+	//		sandbag.setVelocityX(-5);
+	//		sandbag.setVelocityY(-5);
 			
-		}
-		else if (pointer.y > sandbag.y)
-		{
+	//	}
+	//	else if (pointer.y > sandbag.y)
+	//	{
 			
-		}
-	});
+	//	}
+	//});
 	
 
 
