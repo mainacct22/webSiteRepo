@@ -139,7 +139,7 @@ function create() {
 			}
 			else
 			{
-				sandbag.setVelocity(-.45 * dmg , -.55 * dmg);
+				sandbag.setVelocity(-.35 * dmg , -.45 * dmg);
 			}
 		}
 		else
@@ -150,7 +150,7 @@ function create() {
 			}
 			else
 			{
-				sandbag.setVelocity(.45 * dmg, -.55 * dmg);
+				sandbag.setVelocity(.35 * dmg, -.45 * dmg);
 			}
 		}
 		
@@ -233,7 +233,8 @@ function update(time, delta) {
 	
 	if (sandbag.x > 600)
 	{
-		//dist = 
+		dist = Phaser.Math.distance(120,0,sandbag.x,0)
+		lblDist.text = 'Distance = ' + dist/16; 
 	}
 	
 	lblDmg.text = 'Damage = ' + dmg;
