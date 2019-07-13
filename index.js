@@ -37,6 +37,8 @@ let lblDist;
 let lblDmg;
 let dist;
 let dmg;
+let xDif;
+let yDif;
 
 function preload() {
     
@@ -233,7 +235,10 @@ function update(time, delta) {
 	
 	if (sandbag.x > 600)
 	{
-		dist = Phaser.Math.distance(120,0,sandbag.x,0)
+		xDif = 120 - sandbag.x;
+		yDif = 0 - 0;
+		dist = (xDif * xDif) + (yDif * yDif);
+		//dist = Phaser.Math.distance(120,0,sandbag.x,0)
 		lblDist.text = 'Distance = ' + dist/16; 
 	}
 	
