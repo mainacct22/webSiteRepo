@@ -19,6 +19,7 @@ const gameWidth = 800;
 const gameHeight = 600;
 let cursors;
 let player;
+let sandbag;
 let showDebug = false;
 let cloud_1;
 let cloud_2;
@@ -41,6 +42,7 @@ function preload() {
     this.load.image("sky",     "assets/sky_600.png");
 	
 	this.load.image("track",   "assets/simpleTrack.png");
+	this.load.image("sandbag", "assets/sandbag1.png");
     
 
 }
@@ -89,7 +91,8 @@ function create() {
 	
   // Create a sprite with physics enabled via the physics system. The image used for the sprite has
   // a bit of whitespace, so I'm using setSize & setOffset to control the size of the player's body.
-  //player = this.matter.
+    sandbag = this.matter.add.image(233, 250, "sandbag");
+	
 
 
 
@@ -129,8 +132,8 @@ function update(time, delta) {
     cloud_2.tilePositionX = camera.scrollX * .45;
     rock_1.tilePositionX = camera.scrollX * .6;
     cloud_3.tilePositionX = camera.scrollX * .75;
-    rock_2.tilePositionX = camera.scrollX * .9;
-    cloud_4.tilePositionX = camera.scrollX * .1;
+    rock_2.tilePositionX = camera.scrollX * .8;
+    cloud_4.tilePositionX = camera.scrollX * .9;
     
     sky.tilePositionX = camera.scrollX;
     
