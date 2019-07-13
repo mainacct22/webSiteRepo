@@ -189,7 +189,7 @@ function create() {
     .setDepth(30);
 	
   lblDist = this.add
-      .text(200, 16, 'Distance = 0 ft', {
+      .text(275, 16, 'Distance = 0 ft', {
       font: "18px monospace",
       fill: "#000000",
       padding: { x: 20, y: 10 },
