@@ -94,15 +94,13 @@ function create() {
 	}
 	
 	platform = this.add.image(115, 500, "platform");
-	invPlatform = this.matter.add.image(115,500, "invPlatform");
+	invPlatform = this.matter.add.image(115,510, "invPlatform");
 	invPlatform.displayWidth = 200;
 	invPlatform.displayHeight = 10;
-	//invPlatform.scale(invPlatform,220, 10);
 	invPlatform.setStatic(true);
 	invPlatform.setFriction(0.009);
 	
-  // Create a sprite with physics enabled via the physics system. The image used for the sprite has
-  // a bit of whitespace, so I'm using setSize & setOffset to control the size of the player's body.
+
     sandbag = this.matter.add.image(150, 250, "sandbag");
 	sandbag.setFriction(0.05);
 	sandbag.setFrictionAir(0.0005);
@@ -134,17 +132,17 @@ function create() {
   camera.setBounds(0, 0, 800 * 12, 600);
   camera.startFollow(sandbag);
 
-  cursors = this.input.keyboard.createCursorKeys();
-  const controlConfig = {
-      camera: this.cameras.main,
-      left: cursors.left,
-      right: cursors.right,
-      up: cursors.up,
-      down: cursors.down,
-      speed: 0.5
-    };
+  //cursors = this.input.keyboard.createCursorKeys();
+  //const controlConfig = {
+  //    camera: this.cameras.main,
+  //    left: cursors.left,
+  //    right: cursors.right,
+  //    up: cursors.up,
+  //    down: cursors.down,
+  //    speed: 0.5
+  //  };
     
-  this.controls = new Phaser.Cameras.Controls.FixedKeyControl(controlConfig);
+  //this.controls = new Phaser.Cameras.Controls.FixedKeyControl(controlConfig);
 
   // Help text that has a "fixed" position on the screen
   //this.add
@@ -171,6 +169,6 @@ function update(time, delta) {
     
     sky.tilePositionX = camera.scrollX;
     
-    this.controls.update(delta);
+    //this.controls.update(delta);
 
 }
