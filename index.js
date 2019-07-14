@@ -234,14 +234,14 @@ function update(time, delta) {
     
     sky.tilePositionX = camera.scrollX;
 	
-	if (this.pointer.duration > 500) {
+	if (this.pointer.downTime > 500) {
 		
 		console.log("long press");
 		dmg += 30;
 		sandbag.setVelocity(.50 * dmg, -.40 * dmg);
 		
 	}
-	else if (this.pointer.duration > 1 && this.pointer.duration < 500) {
+	else if (this.pointer.downTime > 1 && this.pointer.downTime < 500) {
 		 dmg += 5;
 		
 		if(pointer.x > sandbag.x)
