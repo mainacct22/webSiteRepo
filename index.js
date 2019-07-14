@@ -178,8 +178,10 @@ function create() {
 				dmg += 30;
 				sandbag.setVelocity(.5 * dmg, -.6 * dmg);
 			}
+			
+		}	
 		
-	    });
+	});
 	
 	//sandbag.once('pointerdown', function (pointer) {
 		
