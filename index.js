@@ -105,7 +105,7 @@ function create() {
 	
 	//place the inv platform on the track
 	invTrack = this.matter.add.image(255, 558, "invPlatform");
-	invTrack.displayWidth = gameWidth * 20;
+	invTrack.displayWidth = gameWidth * 24;
 	invTrack.displayHeight = 10;
 	invTrack.setStatic(true);
 	invTrack.setFriction(0.003);
