@@ -1,7 +1,7 @@
 const config = {
   type: Phaser.AUTO,
-  width: 800,
-  height: 600,
+  width: window.innerWidth * window.devicePixelRatio,
+  height: window.innerHeight * window.devicePixelRatio,
   parent: "game-container",
   pixelArt: true,
   physics: {
@@ -13,6 +13,7 @@ const config = {
     update: update
   }
 };
+
 
 const game = new Phaser.Game(config);
 const gameWidth = 800;
@@ -241,7 +242,7 @@ function create() {
 	//console.log("camera w = " camera.width);
 
   // Debug graphics
-  window.addEventListener('resize', resizeApp);
+  //window.addEventListener('resize', resizeApp);
 
 }
 
@@ -278,6 +279,7 @@ function update(time, delta) {
 
 }
 
+/*
 function resizeApp ()
 {
 	// Width-height-ratio of game resolution
@@ -302,3 +304,4 @@ function resizeApp ()
 	canvas.style.width	= width + 'px';
 	canvas.style.height	= height + 'px';
 }
+*/
