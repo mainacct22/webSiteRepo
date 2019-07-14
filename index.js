@@ -123,7 +123,7 @@ function create() {
 	invTrack.displayWidth = gameWidth * 24;
 	invTrack.displayHeight = 10;
 	invTrack.setStatic(true);
-	invTrack.setFriction(0.009);
+	invTrack.setFriction(0.02);
 	
 	
 	//Add platform and inv Platform 
@@ -132,11 +132,12 @@ function create() {
 	invPlatform.displayWidth = 200;
 	invPlatform.displayHeight = 10;
 	invPlatform.setStatic(true);
-	invPlatform.setFriction(0.009);
+	invPlatform.setFriction(0.04);
 	
 
 	//Add sandbag and use matter.js
     sandbag = this.matter.add.image(120, 250, "sandbag");
+	sandbag.restitution = 0.15;
 	sandbag.setFriction(0.05);
 	sandbag.setFrictionAir(0.0005);
 	
