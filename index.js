@@ -4,6 +4,10 @@ const config = {
   height: 600,
   parent: "game-container",
   pixelArt: true,
+  scale: {
+	  mode: Phaser.Scale.FIT,
+	  autoCenter: Phaser.Scale.CENTER_BOTH
+  },
   physics: {
     default: "matter",
   },
@@ -108,7 +112,7 @@ function create() {
 	invTrack.displayWidth = gameWidth * 24;
 	invTrack.displayHeight = 10;
 	invTrack.setStatic(true);
-	invTrack.setFriction(0.003);
+	invTrack.setFriction(0.009);
 	
 	
 	//Add platform and inv Platform 
