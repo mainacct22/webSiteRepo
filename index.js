@@ -131,12 +131,10 @@ function create() {
 	dmg = 0;
 	
 	sandbag.on('pointerup', function (pointer) {
-
-		
 		
 		if(pointer.x > sandbag.x)
 		{
-			if (pointer.downTime < 500)
+			if (pointer.getDuration() < 500)
 			{
 			//right side
 			  if ( dmg < 100)
@@ -152,27 +150,36 @@ function create() {
 			}
 			else
 			{
-				console.log("longpress");
-				console.log("Down " + pointer.downTime);
-				console.log("Up " + pointer.upTime);
-				console.log("Duration " + pointer.getDuration());
+				dmg += 30;
+				sandbag.setVelocity(-.5 * dmg, -.6 * dmg);
+				//console.log("longpress");
+				//console.log("Down " + pointer.downTime);
+				//console.log("Up " + pointer.upTime);
+				//console.log("Duration " + pointer.getDuration());
 			}
 		}
 		else
 		{
-			if (dmg < 100)
+			if (pointer.getDuration() < 500)
 			{
-				dmg += 5;
-				sandbag.setVelocity(.10 * dmg, -.20 * dmg);
-			}
+			  if (dmg < 100)
+			  {
+				  dmg += 5;
+				  sandbag.setVelocity(.10 * dmg, -.20 * dmg);
+			  }
+			  else
+			  {
+				  dmg += 8;
+				  sandbag.setVelocity(.30 * dmg, -.40 * dmg);
+			  }
+		    }
 			else
 			{
-				dmg += 8;
-				sandbag.setVelocity(.30 * dmg, -.40 * dmg);
+				dmg += 30;
+				sandbag.setVelocity(.5 * dmg, -.6 * dmg);
 			}
-		}
 		
-	});
+	    });
 	
 	//sandbag.once('pointerdown', function (pointer) {
 		
@@ -249,42 +256,6 @@ function update(time, delta) {
     
     sky.tilePositionX = camera.scrollX;
 	
-	/*
-	if (this.pointer.downTime > 500) {
-		
-		console.log("long press");
-		dmg += 30;
-		sandbag.setVelocity(.50 * dmg, -.40 * dmg);
-		
-	}
-	else if (scene.input.activePointer.downTime > 1 && this.pointer.downTime < 500) {
-		 dmg += 5;
-		
-		if(pointer.x > sandbag.x)
-		{
-			//right side
-			if ( dmg < 100)
-			{
-				sandbag.setVelocity(-.05 * dmg , -.10 * dmg);
-			}
-			else
-			{
-				sandbag.setVelocity(-.30 * dmg , -.40 * dmg);
-			}
-		}
-		else
-		{
-			if (dmg < 100)
-			{
-				sandbag.setVelocity(.05 * dmg, -.10 * dmg);
-			}
-			else
-			{
-				sandbag.setVelocity(.30 * dmg, -.40 * dmg);
-			}
-		}
-	}
-	*/
 	
 	if (sandbag.x > 300)
 	{
