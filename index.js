@@ -16,8 +16,8 @@ const config = {
 
 
 const game = new Phaser.Game(config);
-const gameWidth = 800;
-const gameHeight = 600;
+const gameWidth = window.innerWidth * window.devicePixelRatio;
+const gameHeight = window.innerHeight * window.devicePixelRatio;
 let cursors;
 let player;
 let platform;
