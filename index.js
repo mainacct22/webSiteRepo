@@ -241,7 +241,7 @@ function update(time, delta) {
 		sandbag.setVelocity(.50 * dmg, -.40 * dmg);
 		
 	}
-	else if (game.input.activePointer.duration > 1 and game.input.activePointer.duration < 500) {
+	else if (game.input.activePointer.duration > 1 && game.input.activePointer.duration < 500) {
 		 dmg += 5;
 		
 		if(pointer.x > sandbag.x)
