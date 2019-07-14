@@ -39,6 +39,7 @@ let dist;
 let dmg;
 let xDif;
 let yDif;
+let myPointer;
 
 function preload() {
     
@@ -128,37 +129,48 @@ function create() {
 	
 	
 	dmg = 0;
-	/*
-	sandbag.on('pointerdown', function (pointer) {
+	
+	sandbag.on('pointerup', function (pointer) {
 
-		dmg += 5;
+		
 		
 		if(pointer.x > sandbag.x)
 		{
-			//right side
-			if ( dmg < 100)
+			if (pointer.downTime < 500)
 			{
+			//right side
+			  if ( dmg < 100)
+			  {
+			    dmg += 5;
 				sandbag.setVelocity(-.10 * dmg , -.20 * dmg);
+			  }
+			  else
+			  {
+				dmg += 8;
+				sandbag.setVelocity(-.30 * dmg , -.40 * dmg);
+			  }
 			}
 			else
 			{
-				sandbag.setVelocity(-.30 * dmg , -.40 * dmg);
+				console.log("longpress");
 			}
 		}
 		else
 		{
 			if (dmg < 100)
 			{
+				dmg += 5;
 				sandbag.setVelocity(.10 * dmg, -.20 * dmg);
 			}
 			else
 			{
+				dmg += 8;
 				sandbag.setVelocity(.30 * dmg, -.40 * dmg);
 			}
 		}
 		
 	});
-	*/
+	
 	//sandbag.once('pointerdown', function (pointer) {
 		
 	//	console.log("pointer x = " + pointer.x);
@@ -234,6 +246,7 @@ function update(time, delta) {
     
     sky.tilePositionX = camera.scrollX;
 	
+	/*
 	if (this.pointer.downTime > 500) {
 		
 		console.log("long press");
@@ -241,7 +254,7 @@ function update(time, delta) {
 		sandbag.setVelocity(.50 * dmg, -.40 * dmg);
 		
 	}
-	else if (this.pointer.downTime > 1 && this.pointer.downTime < 500) {
+	else if (scene.input.activePointer.downTime > 1 && this.pointer.downTime < 500) {
 		 dmg += 5;
 		
 		if(pointer.x > sandbag.x)
@@ -268,6 +281,7 @@ function update(time, delta) {
 			}
 		}
 	}
+	*/
 	
 	if (sandbag.x > 300)
 	{
