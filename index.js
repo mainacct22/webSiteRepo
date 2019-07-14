@@ -231,7 +231,7 @@ function create() {
     .setDepth(30);
 	
 	console.log("invTrack w = " + invTrack.displayWidth);
-	console.log("camera w = " camera.width);
+	//console.log("camera w = " camera.width);
 
   // Debug graphics
 }
