@@ -60,7 +60,7 @@ function preload() {
 
 function create() {
 	
-	this.matter.world.setBounds(0,0, 800 * 12, 600);
+	this.matter.world.setBounds(0,0, gameWidth * 18, gameHeight);
 	
   
     sky = this.add.tileSprite(0, 0, gameWidth, gameHeight, "sky");
@@ -98,14 +98,14 @@ function create() {
 	
 	//Add the track to the scene
 	let x;
-	for(x = 255; x < (gameWidth * 12) - 43; x += 43) {
+	for(x = 255; x < (gameWidth * 18) - 43; x += 43) {
 		
 		this.add.image(x, 550, "track");
 	}
 	
 	//place the inv platform on the track
 	invTrack = this.matter.add.image(255, 558, "invPlatform");
-	invTrack.displayWidth = gameWidth * 16;
+	invTrack.displayWidth = gameWidth * 20;
 	invTrack.displayHeight = 10;
 	invTrack.setStatic(true);
 	invTrack.setFriction(0.003);
@@ -193,7 +193,7 @@ function create() {
 	//sandbag.setVelocityY(-5);
 			
   camera = this.cameras.main;
-  camera.setBounds(0, 0, 800 * 12, 600);
+  camera.setBounds(0, 0, gameWidth * 18, gameHeight);
   camera.startFollow(sandbag);
 
   //cursors = this.input.keyboard.createCursorKeys();
