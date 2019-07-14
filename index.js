@@ -1,8 +1,12 @@
 const config = {
   type: Phaser.AUTO,
-  width: window.innerWidth * window.devicePixelRatio,
-  height: window.innerHeight * window.devicePixelRatio,
-  parent: "game-container",
+  scale: {
+	  parent: 'game-container',
+	  mode: Phaser.DOM.FIT,
+	  autoCenter: Phaser.DOM.CENTER_BOTH,
+	  width: 800,
+	  height: 600
+  },
   pixelArt: true,
   physics: {
     default: "matter",
@@ -14,6 +18,9 @@ const config = {
   }
 };
 
+//width: window.innerWidth * window.devicePixelRatio,
+//height: window.innerHeight * window.devicePixelRatio,
+//parent: "game-container",
 
 const game = new Phaser.Game(config);
 const gameWidth = window.innerWidth * window.devicePixelRatio;
