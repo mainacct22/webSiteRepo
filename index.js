@@ -105,7 +105,7 @@ function create() {
 	
 	//place the inv platform on the track
 	invTrack = this.matter.add.image(255, 558, "invPlatform");
-	invTrack.displayWidth = gameWidth * 12;
+	invTrack.displayWidth = gameWidth * 16;
 	invTrack.displayHeight = 10;
 	invTrack.setStatic(true);
 	invTrack.setFriction(0.003);
@@ -130,28 +130,31 @@ function create() {
 	
 	dmg = 0;
 	
+	//Matter.js orients x & y coords in the center of the object, so pointer.x > sandbag.x
+	//means that the pointer touched the right side of the object
 	sandbag.on('pointerup', function (pointer) {
 		
 		if(pointer.x > sandbag.x)
 		{
-			if (pointer.getDuration() < 500)
-			{
 			//right side
+			if (pointer.getDuration() < 600)
+			{
+			
 			  if ( dmg < 100)
 			  {
 			    dmg += 5;
-				sandbag.setVelocity(-.10 * dmg , -.20 * dmg);
+				sandbag.setVelocity(-.05 * dmg , -.08 * dmg);
 			  }
 			  else
 			  {
 				dmg += 8;
-				sandbag.setVelocity(-.30 * dmg , -.40 * dmg);
+				sandbag.setVelocity(-.15 * dmg , -.24 * dmg);
 			  }
 			}
 			else
 			{
 				dmg += 30;
-				sandbag.setVelocity(-.5 * dmg, -.6 * dmg);
+				sandbag.setVelocity(-.5 * dmg, -.4 * dmg);
 				//console.log("longpress");
 				//console.log("Down " + pointer.downTime);
 				//console.log("Up " + pointer.upTime);
@@ -160,53 +163,35 @@ function create() {
 		}
 		else
 		{
-			if (pointer.getDuration() < 500)
+			if (pointer.getDuration() < 600)
 			{
 			  if (dmg < 100)
 			  {
 				  dmg += 5;
-				  sandbag.setVelocity(.10 * dmg, -.20 * dmg);
+				  sandbag.setVelocity(.05 * dmg, -.08 * dmg);
 			  }
 			  else
 			  {
 				  dmg += 8;
-				  sandbag.setVelocity(.30 * dmg, -.40 * dmg);
+				  sandbag.setVelocity(.15 * dmg, -.24 * dmg);
 			  }
 		    }
 			else
 			{
 				dmg += 30;
-				sandbag.setVelocity(.5 * dmg, -.6 * dmg);
+				sandbag.setVelocity(.5 * dmg, -.4 * dmg);
 			}
 			
 		}	
 		
 	});
 	
-	//sandbag.once('pointerdown', function (pointer) {
-		
-	//	console.log("pointer x = " + pointer.x);
-	//	console.log("sandbag x = " + sandbag.x);
-	//	console.log("pointer y = " + pointer.y);
-	//	console.log("sandbag y = " + sandbag.y);
-	//	if(pointer.x > sandbag.x)
-	//	{
-			//touched right side
-			//sandbag.setAngularVelocity(5,-5);
-			//sandbag.applyForce(-5, -5);
-	//		sandbag.setVelocityX(-5);
-	//		sandbag.setVelocityY(-5);
+
+	//sandbag.setAngularVelocity(5,-5);
+	//sandbag.applyForce(-5, -5);
+	//sandbag.setVelocityX(-5);
+	//sandbag.setVelocityY(-5);
 			
-	//	}
-	//	else if (pointer.y > sandbag.y)
-	//	{
-			
-	//	}
-	//});
-	
-
-
-
   camera = this.cameras.main;
   camera.setBounds(0, 0, 800 * 12, 600);
   camera.startFollow(sandbag);
