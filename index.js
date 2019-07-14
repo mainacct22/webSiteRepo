@@ -110,6 +110,7 @@ function create() {
 	invTrack.setStatic(true);
 	invTrack.setFriction(0.003);
 	
+	
 	//Add platform and inv Platform 
 	platform = this.add.image(115, 500, "platform");
 	invPlatform = this.matter.add.image(110,490, "invPlatform");
@@ -228,6 +229,9 @@ function create() {
     })
     .setScrollFactor(0)
     .setDepth(30);
+	
+	console.log("invTrack w = " + invTrack.displayWidth);
+	console.log("camera w = " camera.width);
 
   // Debug graphics
 }
