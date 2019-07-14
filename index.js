@@ -154,7 +154,7 @@ function create() {
 			else
 			{
 				dmg += 30;
-				sandbag.setVelocity(-.5 * dmg, -.4 * dmg);
+				sandbag.setVelocity(-.5 * dmg, -.17 * dmg);
 				//console.log("longpress");
 				//console.log("Down " + pointer.downTime);
 				//console.log("Up " + pointer.upTime);
@@ -179,7 +179,7 @@ function create() {
 			else
 			{
 				dmg += 30;
-				sandbag.setVelocity(.5 * dmg, -.4 * dmg);
+				sandbag.setVelocity(.5 * dmg, -.17 * dmg);
 			}
 			
 		}	
@@ -246,6 +246,7 @@ function update(time, delta) {
 	
 	if (sandbag.x > 300)
 	{
+		sandbag.removeInteractive();
 		xDif = 120 - sandbag.x;
 		yDif = 0 - 0;
 		dist = Math.sqrt(xDif * xDif + yDif * yDif);
