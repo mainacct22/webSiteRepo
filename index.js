@@ -128,6 +128,7 @@ function create() {
 	
 	
 	dmg = 0;
+	/*
 	sandbag.on('pointerdown', function (pointer) {
 
 		dmg += 5;
@@ -157,6 +158,7 @@ function create() {
 		}
 		
 	});
+	*/
 	//sandbag.once('pointerdown', function (pointer) {
 		
 	//	console.log("pointer x = " + pointer.x);
@@ -232,7 +234,42 @@ function update(time, delta) {
     
     sky.tilePositionX = camera.scrollX;
 	
-	if (sandbag.x > 600)
+	if (game.input.activePointer.duration > 500) {
+		
+		console.log("long press");
+		dmg += 30;
+		sandbag.setVelocity(.50 * dmg, -.40 * dmg);
+		
+	}
+	else if (game.input.activePointer.duration > 1 and game.input.activePointer.duration < 500) {
+		 dmg += 5;
+		
+		if(pointer.x > sandbag.x)
+		{
+			//right side
+			if ( dmg < 100)
+			{
+				sandbag.setVelocity(-.05 * dmg , -.10 * dmg);
+			}
+			else
+			{
+				sandbag.setVelocity(-.30 * dmg , -.40 * dmg);
+			}
+		}
+		else
+		{
+			if (dmg < 100)
+			{
+				sandbag.setVelocity(.05 * dmg, -.10 * dmg);
+			}
+			else
+			{
+				sandbag.setVelocity(.30 * dmg, -.40 * dmg);
+			}
+		}
+	}
+	
+	if (sandbag.x > 300)
 	{
 		xDif = 120 - sandbag.x;
 		yDif = 0 - 0;
@@ -245,13 +282,6 @@ function update(time, delta) {
 	
 	lblDmg.text = 'Damage = ' + dmg;
 	
-	if (game.input.activePointer.duration > 600) {
-		
-		console.log("long press");
-		dmg += 30;
-		sandbag.setVelocity(.50 * dmg, -.40 * dmg);
-		
-	}
 		
 	
     
