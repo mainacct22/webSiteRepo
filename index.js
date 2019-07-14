@@ -312,4 +312,13 @@ function resizeApp ()
 	canvas.style.width	= width + 'px';
 	canvas.style.height	= height + 'px';
 }
+
+
+      #game-container {
+        min-width: 100vw;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
 */
