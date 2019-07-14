@@ -153,6 +153,7 @@ function create() {
 			else
 			{
 				console.log("longpress");
+				console.log(pointer.downTime);
 			}
 		}
 		else
