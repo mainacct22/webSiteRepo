@@ -115,11 +115,11 @@ function create() {
 	let x;
 	for(x = 255; x < (gameWidth * 18) - 43; x += 43) {
 		
-		this.add.image(x, gameHeight - 50, "track");
+		this.add.image(x, gameHeight - 20, "track");
 	}
 	
 	//place the inv platform on the track
-	invTrack = this.matter.add.image(255, gameHeight - 42, "invPlatform");
+	invTrack = this.matter.add.image(255, gameHeight - 12, "invPlatform");
 	invTrack.displayWidth = gameWidth * 24;
 	invTrack.displayHeight = 10;
 	invTrack.setStatic(true);
@@ -128,7 +128,7 @@ function create() {
 	
 	//Add platform and inv Platform 
 	platform = this.add.image(115, gameHeight - 50, "platform");
-	invPlatform = this.matter.add.image(110, gameHeight - 110, "invPlatform");
+	invPlatform = this.matter.add.image(110, gameHeight - 60, "invPlatform");
 	invPlatform.displayWidth = 200;
 	invPlatform.displayHeight = 10;
 	invPlatform.setStatic(true);
