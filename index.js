@@ -150,14 +150,14 @@ function create() {
 	invLeft.displayHeight = gameHeight;
 	invLeft.setStatic(true);
 	invLeft.setFriction(0.04);
-	invLeft.setRestitution(0.5);
+	invLeft.restitution(0.5);
 	
 	invRight = this.matter.add.image(platform.x + platform.width/2 + 40, 300, "invPlatform");
 	invRight.displayWidth = 80;
 	invRight.displayHeight = gameHeight;
 	invRight.setStatic(true);
 	invRight.setFriction(0.04);
-	invRight.setRestitution(0.5);
+	invRight.restitution(0.5);
 	
 	//Left
 	//invLeft = this.matter.add.rectangle(platform.x - platform.width/2, 300, 10, gameHeight, {isStatic: true});
