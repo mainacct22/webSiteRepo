@@ -152,7 +152,7 @@ function create() {
 	//invRight.displayHeight = gameHeight;
 	//invRight.setStatic(true);
 	//invRight.setFriction(0.04);
-	this.matter.add.rectangle(platform.x + 216, 100, gameHeight, 5, {isStatic: true});
+	this.matter.add.rectangle(platform.x + 216, 100, 5, gameHeight, {isStatic: true});
 	console.log("game height = " + gameHeight);
 	//console.log("invRight h = " + invRight.displayHeight);
 	console.log("invLeft h = " + invLeft.displayHeight);
@@ -251,7 +251,7 @@ function create() {
       speed: 0.5
     };
     
-  //this.controls = new Phaser.Cameras.Controls.FixedKeyControl(controlConfig);
+  this.controls = new Phaser.Cameras.Controls.FixedKeyControl(controlConfig);
 
   // Help text that has a "fixed" position on the screen
   lblDmg = this.add
