@@ -130,9 +130,7 @@ function create() {
 	//invTrack.displayHeight = 10;
 	//invTrack.setStatic(true);
 	//invTrack.setFriction(0.05);
-	invTrack = this.matter.add.rectangle(platform.x + platform.width/2, gameHeight - 12, gameWidth * 18, 10, {isStatic: true});
-	invTrack.restitution = .3;
-	invTrack.setFriction(0.05);
+
 	
 	
 	//Add platform and inv Platform 
@@ -142,6 +140,10 @@ function create() {
 	invPlatform.displayHeight = 10;
 	invPlatform.setStatic(true);
 	invPlatform.setFriction(0.04);
+	
+	invTrack = this.matter.add.rectangle(platform.x + platform.width/2, gameHeight - 12, gameWidth * 18, 10, {isStatic: true});
+	invTrack.restitution = .3;
+	invTrack.setFriction(0.05);
 	
 	//Add invisible walls to Platform
 	//invLeft = this.matter.add.image(platform.x, 100, "invPlatform");
