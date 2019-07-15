@@ -118,14 +118,14 @@ function create() {
 	
 	//Add the track to the scene
 	let x;
-	for(x = 255; x < (gameWidth * 18) - 43; x += 43) {
+	for(x = 305; x < (gameWidth * 18) - 43; x += 43) {
 		
 		this.add.image(x, gameHeight - 20, "track");
 		trackLength = x;
 	}
 	
 	//place the inv platform on the track
-	invTrack = this.matter.add.image(255, gameHeight - 12, "invPlatform");
+	invTrack = this.matter.add.image(305, gameHeight - 12, "invPlatform");
 	invTrack.displayWidth = trackLength;
 	invTrack.displayHeight = 10;
 	invTrack.setStatic(true);
@@ -133,8 +133,8 @@ function create() {
 	
 	
 	//Add platform and inv Platform 
-	platform = this.add.image(115, gameHeight - 50, "platform");
-	invPlatform = this.matter.add.image(110, gameHeight - 60, "invPlatform");
+	platform = this.add.image(165, gameHeight - 50, "platform");
+	invPlatform = this.matter.add.image(160, gameHeight - 60, "invPlatform");
 	invPlatform.displayWidth = 216;
 	invPlatform.displayHeight = 10;
 	invPlatform.setStatic(true);
@@ -159,10 +159,10 @@ function create() {
 	invRight = this.matter.add.rectangle(platform.x + platform.width/2, 300, 10, gameHeight, {isStatic: true});
 	
 	invLeft.frictionStatic = 0;
-	invLeft.restitution = .8;
+	invLeft.restitution = .5;
 	
 	invRight.frictionStatic = 0;
-	invRight.restitution = .8;
+	invRight.restitution = .5;
 	
 	console.log("game height = " + gameHeight);
 	console.log("invRight h = " + invRight.displayHeight);
@@ -171,7 +171,7 @@ function create() {
 	
 
 	//Add sandbag and use matter.js
-    sandbag = this.matter.add.image(120, 250, "sandbag");
+    sandbag = this.matter.add.image(170, 250, "sandbag");
 	sandbag.restitution = 0.3;
 	sandbag.setFriction(0.05);
 	sandbag.setFrictionAir(0.0005);
