@@ -62,7 +62,7 @@ function preload() {
 	this.load.image("track",   "assets/simpleTrack.png");
 	this.load.image("sandbag", "assets/sandbag1.png");
     this.load.image("platform", "assets/platform_a.png");
-	this.load.image("invPlatform", "assets/invPlatform.png")
+	this.load.image("invPlatform", "assets/invPlatform.png");
 
 }
 
@@ -111,14 +111,13 @@ function create() {
 		
 		this.add.image(x, gameHeight - 20, "track");
 	}
-	console.log("width = " + gameWidth);
 	
 	//place the inv platform on the track
 	invTrack = this.matter.add.image(255, gameHeight - 12, "invPlatform");
-	invTrack.displayWidth = gameWidth;
+	
 	invTrack.displayHeight = 10;
 	invTrack.setStatic(true);
-	invTrack.setFriction(0.1);
+	invTrack.setFriction(0.05);
 	
 	
 	//Add platform and inv Platform 
@@ -133,7 +132,7 @@ function create() {
 	//Add sandbag and use matter.js
     sandbag = this.matter.add.image(120, 250, "sandbag");
 	sandbag.restitution = 0.3;
-	sandbag.setFriction(0.1);
+	sandbag.setFriction(0.05);
 	sandbag.setFrictionAir(0.0005);
 	
 	//Set interactive so the matter object is clickable
@@ -207,8 +206,7 @@ function create() {
   camera = this.cameras.main;
   camera.setBounds(0, 0, gameWidth * 18, gameHeight);
   camera.startFollow(sandbag);
-  console.log("cam width = " + camera.width);
-  console.log("cam dispWidth = " + camera.displayWidth);
+  invTrack.displayWidth = gameWidth * 18;
 
   //cursors = this.input.keyboard.createCursorKeys();
   //const controlConfig = {
@@ -244,7 +242,6 @@ function create() {
     .setDepth(30);
 	
 	console.log("invTrack w = " + invTrack.displayWidth);
-	//console.log("camera w = " camera.width);
 
   // Debug graphics
   //window.addEventListener('resize', resizeApp);
