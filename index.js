@@ -168,7 +168,8 @@ function create() {
 	invRight.frictionStatic = 0;
 	invRight.restitution = .5;
 	
-	invTrack = this.matter.add.rectangle(platform.x + platform.width/2, gameHeight - 12, gameWidth * 18, 10, {isStatic: true});
+	invTrack = this.matter.add.rectangle(gameWidth * 9, gameHeight - 12, gameWidth * 18, 10, {isStatic: true});
+	//platform.x + platform.width/2
 	invTrack.restitution = .3;
 	invTrack.friction = .05;
 	
