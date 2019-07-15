@@ -330,13 +330,17 @@ function update(time, delta) {
 	seconds = timedEvent.getProgress() * 10;
 	seconds = seconds.toFixed(0)
 	lblTime.text = 'Time = ' + (10 - seconds);
+	//timedEvent.elapsed / timedEvent.delay
 	
 	if(seconds >= 10)
 	{
-		console.log("secs = " + seconds);
+		//console.log("secs = " + seconds);
 	}
-	//timedEvent.elapsed / timedEvent.delay
 	
+	if (sandbag.x < invLeft.x || sandbag.x > invRight.x)
+	{
+		sandbag.translate(sandbag.x + 10);
+	}
 		
 	
     
