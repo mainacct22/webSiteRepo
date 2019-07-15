@@ -287,7 +287,8 @@ function update(time, delta) {
 	
 	lblDmg.text = 'Damage = ' + dmg;
 	
-	lblTime.text = 'Time = ' + timedEvent.getProgress;
+	lblTime.text = 'Time = ' + timedEvent.getProgress();
+	//timedEvent.elapsed / timedEvent.delay
 	
 		
 	
