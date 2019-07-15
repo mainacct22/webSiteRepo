@@ -10,6 +10,9 @@ const config = {
   pixelArt: true,
   physics: {
     default: "matter",
+	matter: {
+		debug: true
+	}
   },
   scene: {
     preload: preload,
@@ -53,6 +56,9 @@ let timedEvent;
 let lblTime;
 let seconds;
 let clicked = false;
+
+let invLeft;
+let invRight;
 
 function preload() {
     
@@ -134,6 +140,20 @@ function create() {
 	invPlatform.setStatic(true);
 	invPlatform.setFriction(0.04);
 	
+	//Add invisible walls to Platform
+	invLeft = this.matter.add.image(110, 0, "invPlatform");
+	invLeft.displayWidth = 5;
+	invLeft.displayHeight = gameHeight - 60;
+	invLeft.setStatic(true);
+	invLeft.setFriction(0.04);
+	
+	invRight = this.matter.add.image(331, 0, "invPlatform");
+	invRight.displayWidth = 5;
+	invRight.displayHeight = gameHeight - 60;
+	invRight.setStatic(true);
+	invRight.setFriction(0.04);
+	
+	
 
 	//Add sandbag and use matter.js
     sandbag = this.matter.add.image(120, 250, "sandbag");
@@ -152,7 +172,6 @@ function create() {
 	sandbag.on('pointerup', function (pointer) {
 		if (clicked = false)
 		{
-			timedEvent = this.time.addEvent({ delay: 10000, repeat: 0});
 			clicked = true;
 		}
 		
@@ -262,6 +281,7 @@ function create() {
 	   .setScrollFactor(0)
 	   .setDepth(30);
   //TIMER CODE SHOULD GO HERE AND NOT AT THE BEGINNING OF CREATE
+  timedEvent = this.time.addEvent({ delay: 10000, repeat: 0});
 	
 
 }
@@ -292,13 +312,10 @@ function update(time, delta) {
 	
 	lblDmg.text = 'Damage = ' + dmg;
 	
-	if (clicked = true)
-	{
-		seconds = timedEvent.getProgress() * 10;
-		seconds = seconds.toFixed(0)
-		lblTime.text = 'Time = ' + (10 - seconds);
-		//timedEvent.elapsed / timedEvent.delay
-	}
+	seconds = timedEvent.getProgress() * 10;
+	seconds = seconds.toFixed(2)
+	lblTime.text = 'Time = ' + (10 - seconds);
+	//timedEvent.elapsed / timedEvent.delay
 	
 		
 	
@@ -343,4 +360,4 @@ function resizeApp ()
       }
 */
 
-w43p0101
+
