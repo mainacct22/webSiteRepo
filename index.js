@@ -291,7 +291,7 @@ function update(time, delta) {
 	
 	seconds = timedEvent.getProgress() * 10;
 	seconds = seconds.toFixed(0)
-	lblTime.text = 'Time = ' + seconds;
+	lblTime.text = 'Time = ' + (10 - seconds);
 	//timedEvent.elapsed / timedEvent.delay
 	
 		
