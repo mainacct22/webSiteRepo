@@ -67,12 +67,6 @@ function preload() {
 }
 
 function create() {
-	/*
-	scale: {
-	  mode: Phaser.Scale.ENVELOP,
-	  autoCenter: Phaser.Scale.CENTER_BOTH
-  },
-  */
 	
 	
 	this.matter.world.setBounds(0,0, gameWidth * 18, gameHeight);
@@ -82,11 +76,11 @@ function create() {
     sky.setOrigin(0,0);
     sky.setScrollFactor(0);
     
-  // create an tiled sprite with the size of our game screen
+    // create a tiled sprite with the size of our game screen
     cloud_1 = this.add.tileSprite(0, 0, gameWidth, gameHeight, "cloud_1");
     // Set its pivot to the top left corner
     cloud_1.setOrigin(0, 0);
-    // fixe it so it won't move when the camera moves.
+    // fix it so it won't move when the camera moves.
     // Instead we are moving its texture on the update
     cloud_1.setScrollFactor(0);
     
@@ -123,7 +117,7 @@ function create() {
 	invTrack.displayWidth = gameWidth * 24;
 	invTrack.displayHeight = 10;
 	invTrack.setStatic(true);
-	invTrack.setFriction(0.02);
+	invTrack.setFriction(0.1);
 	
 	
 	//Add platform and inv Platform 
@@ -137,8 +131,8 @@ function create() {
 
 	//Add sandbag and use matter.js
     sandbag = this.matter.add.image(120, 250, "sandbag");
-	sandbag.restitution = 0.15;
-	sandbag.setFriction(0.05);
+	sandbag.restitution = 0.3;
+	sandbag.setFriction(0.1);
 	sandbag.setFrictionAir(0.0005);
 	
 	//Set interactive so the matter object is clickable
