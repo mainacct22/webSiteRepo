@@ -172,9 +172,8 @@ function create() {
 	invTrack.restitution = .3;
 	invTrack.friction = .05;
 	
-	//console.log("game height = " + gameHeight);
-	//console.log("invRight h = " + invRight.displayHeight);
-	//console.log("invLeft h = " + invLeft.displayHeight);
+	console.log("invRight.x = " + invRight.x);
+	console.log("invLeft.x = " + invLeft.x);
 	
 	
 
@@ -197,6 +196,8 @@ function create() {
 		{
 			clicked = true;
 		}
+		
+		console.log("sandbag.x = " + sandbag.x);
 		
 		if(pointer.x > sandbag.x)
 		{
@@ -303,6 +304,7 @@ function create() {
 	   })
 	   .setScrollFactor(0)
 	   .setDepth(30);
+	   
   //TIMER CODE SHOULD GO HERE AND NOT AT THE BEGINNING OF CREATE
   timedEvent = this.time.addEvent({ delay: 10000, repeat: 0});
 	
@@ -349,7 +351,7 @@ function update(time, delta) {
 	{
 		if (setBounds = false)
 		{
-			//this.matter.world.setBounds(0,0, gameWidth * 18, gameHeight);
+			
 			setBounds = true;
 		}
 		
@@ -406,4 +408,4 @@ function resizeApp ()
       }
 */
 
-
+jhazrose
