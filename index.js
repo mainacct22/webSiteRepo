@@ -154,7 +154,7 @@ function create() {
 	//invRight.setFriction(0.04);
 	this.matter.add.rectangle(platform.x + 216, 100, gameHeight, 5, {isStatic: true});
 	console.log("game height = " + gameHeight);
-	console.log("invRight h = " + invRight.displayHeight);
+	//console.log("invRight h = " + invRight.displayHeight);
 	console.log("invLeft h = " + invLeft.displayHeight);
 	
 	
