@@ -156,7 +156,7 @@ function create() {
 	//Left
 	invLeft = this.matter.add.rectangle(platform.x - platform.width/2, 300, 5, gameHeight, {isStatic: true});
 	//Right
-	invRight = this.matter.add.rectangle(platform.x + platform.width/2, 0, 5, gameHeight, {isStatic: true});
+	invRight = this.matter.add.rectangle(platform.x + platform.width/2, 300, 5, gameHeight, {isStatic: true});
 	
 	console.log("game height = " + gameHeight);
 	//console.log("invRight h = " + invRight.displayHeight);
