@@ -59,6 +59,7 @@ let clicked = false;
 
 let invLeft;
 let invRight;
+let setBounds = false;
 
 function preload() {
     
@@ -80,7 +81,8 @@ function preload() {
 function create() {
 	
 	
-	this.matter.world.setBounds(0,0, gameWidth * 18, gameHeight);
+	//this.matter.world.setBounds(0,0, gameWidth * 18, gameHeight);
+	
 	
   
     sky = this.add.tileSprite(0, 0, gameWidth, gameHeight, "sky");
@@ -145,6 +147,8 @@ function create() {
 	invTrack.restitution = .3;
 	invTrack.friction = .05;
 	
+	
+	this.matter.world.setBounds(platform.x + platform.width/2,0, platform.width, gameHeight);
 	//Add invisible walls to Platform
 	//invLeft = this.matter.add.image(platform.x, 100, "invPlatform");
 	//invLeft.displayWidth = 5;
@@ -159,19 +163,19 @@ function create() {
 	//invRight.setFriction(0.04);
 	
 	//Left
-	invLeft = this.matter.add.rectangle(platform.x - platform.width/2, 300, 10, gameHeight, {isStatic: true});
+	//invLeft = this.matter.add.rectangle(platform.x - platform.width/2, 300, 10, gameHeight, {isStatic: true});
 	//Right
-	invRight = this.matter.add.rectangle(platform.x + platform.width/2, 300, 10, gameHeight, {isStatic: true});
+	//invRight = this.matter.add.rectangle(platform.x + platform.width/2, 300, 10, gameHeight, {isStatic: true});
 	
-	invLeft.frictionStatic = 0;
-	invLeft.restitution = .5;
+	//invLeft.frictionStatic = 0;
+	//invLeft.restitution = .5;
 	
-	invRight.frictionStatic = 0;
-	invRight.restitution = .5;
+	//invRight.frictionStatic = 0;
+	//invRight.restitution = .5;
 	
-	console.log("game height = " + gameHeight);
-	console.log("invRight h = " + invRight.displayHeight);
-	console.log("invLeft h = " + invLeft.displayHeight);
+	//console.log("game height = " + gameHeight);
+	//console.log("invRight h = " + invRight.displayHeight);
+	//console.log("invLeft h = " + invLeft.displayHeight);
 	
 	
 
@@ -340,6 +344,16 @@ function update(time, delta) {
 	if(seconds >= 10)
 	{
 		//console.log("secs = " + seconds);
+	}
+	
+	if (seconds >= 7)
+	{
+		if (setBounds = false)
+		{
+			//this.matter.world.setBounds(0,0, gameWidth * 18, gameHeight);
+			setBounds = true;
+		}
+		
 	}
 	
 	if (sandbag.x < invLeft.x || sandbag.x > invRight.x)
