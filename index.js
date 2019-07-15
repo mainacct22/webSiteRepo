@@ -48,6 +48,7 @@ let dmg;
 let xDif;
 let yDif;
 let myPointer;
+let trackLength;
 
 function preload() {
     
@@ -110,11 +111,12 @@ function create() {
 	for(x = 255; x < (gameWidth * 18) - 43; x += 43) {
 		
 		this.add.image(x, gameHeight - 20, "track");
+		trackLength = x;
 	}
 	
 	//place the inv platform on the track
 	invTrack = this.matter.add.image(255, gameHeight - 12, "invPlatform");
-	
+	invTrack.displayWidth = trackLength;
 	invTrack.displayHeight = 10;
 	invTrack.setStatic(true);
 	invTrack.setFriction(0.05);
@@ -165,7 +167,7 @@ function create() {
 			else
 			{
 				dmg += 30;
-				sandbag.setVelocity(-.5 * dmg, -.17 * dmg);
+				sandbag.setVelocity(-.5 * dmg, -.25 * dmg);
 				//console.log("longpress");
 				//console.log("Down " + pointer.downTime);
 				//console.log("Up " + pointer.upTime);
@@ -190,7 +192,7 @@ function create() {
 			else
 			{
 				dmg += 30;
-				sandbag.setVelocity(.5 * dmg, -.17 * dmg);
+				sandbag.setVelocity(.5 * dmg, -.25 * dmg);
 			}
 			
 		}	
@@ -206,7 +208,6 @@ function create() {
   camera = this.cameras.main;
   camera.setBounds(0, 0, gameWidth * 18, gameHeight);
   camera.startFollow(sandbag);
-  invTrack.displayWidth = gameWidth * 18;
 
   //cursors = this.input.keyboard.createCursorKeys();
   //const controlConfig = {
@@ -241,7 +242,6 @@ function create() {
     .setScrollFactor(0)
     .setDepth(30);
 	
-	game.debug.body(invTrack);
 
   // Debug graphics
   //window.addEventListener('resize', resizeApp);
