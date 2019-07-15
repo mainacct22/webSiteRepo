@@ -256,7 +256,7 @@ function create() {
 	   .setDepth(30);
   //TIMER CODE SHOULD GO HERE AND NOT AT THE BEGINNING OF CREATE
 
-    timedEvent = this.time.addEvent({ delay: 10000, callback: onEvent, callbackScope: this, repeat: 0});
+    timedEvent = this.time.addEvent({ delay: 10000, repeat: 0});
 	
 
 }
