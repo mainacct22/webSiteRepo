@@ -356,12 +356,14 @@ function update(time, delta) {
 		
 	}
 	
+	/*
 	if (sandbag.x < invLeft.x || sandbag.x > invRight.x)
 	{
 		console.log("sb outside of barrier");
 		console.log("sb x = " + sandbag.x);
 		sandbag.translate(sandbag.x + 10);
 	}
+	*/
 		
 	
     
