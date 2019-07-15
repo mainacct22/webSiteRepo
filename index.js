@@ -243,8 +243,14 @@ function create() {
     .setDepth(30);
 	
 
-  // Debug graphics
-  //window.addEventListener('resize', resizeApp);
+  //TIMER CODE SHOULD GO HERE AND NOT AT THE BEGINNING OF CREATE
+
+    this.timeInSeconds = 120;
+    this.timeText = this.game.add.text(220, 30, "0:00",{font: '30px Arial', fill: 
+    '#FFFFFF', align: 'center'});
+    this.timeText.anchor.set(0.5, 0.5);
+    this.timer = this.game.time.events.loop(Phaser.Timer.SECOND, this.updateTimer, 
+    this);
 
 }
 
