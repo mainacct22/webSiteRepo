@@ -145,11 +145,11 @@ function create() {
 	
 	
 	//Add invisible walls to Platform
-	//invLeft = this.matter.add.image(platform.x, 100, "invPlatform");
-	//invLeft.displayWidth = 5;
-	//invLeft.displayHeight = gameHeight;
-	//invLeft.setStatic(true);
-	//invLeft.setFriction(0.04);
+	invLeft = this.matter.add.image(platform.x - platform.width/2, 300, "invPlatform");
+	invLeft.displayWidth = 10;
+	invLeft.displayHeight = gameHeight;
+	invLeft.setStatic(true);
+	invLeft.setFriction(0.04);
 	
 	//invRight = this.matter.add.image(platform.x + 216, 100, "invPlatform");
 	//invRight.displayWidth = 5;
@@ -158,12 +158,12 @@ function create() {
 	//invRight.setFriction(0.04);
 	
 	//Left
-	invLeft = this.matter.add.rectangle(platform.x - platform.width/2, 300, 10, gameHeight, {isStatic: true});
+	//invLeft = this.matter.add.rectangle(platform.x - platform.width/2, 300, 10, gameHeight, {isStatic: true});
 	//Right
 	invRight = this.matter.add.rectangle(platform.x + platform.width/2, 300, 10, gameHeight, {isStatic: true});
 	
-	invLeft.frictionStatic = 0;
-	invLeft.restitution = .5;
+	//invLeft.frictionStatic = 0;
+	//invLeft.restitution = .5;
 	
 	invRight.frictionStatic = 0;
 	invRight.restitution = .5;
@@ -408,4 +408,3 @@ function resizeApp ()
       }
 */
 
-jhazrose
