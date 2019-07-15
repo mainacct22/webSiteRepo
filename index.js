@@ -125,16 +125,19 @@ function create() {
 	}
 	
 	//place the inv platform on the track
-	invTrack = this.matter.add.image(305, gameHeight - 12, "invPlatform");
-	invTrack.displayWidth = trackLength;
-	invTrack.displayHeight = 10;
-	invTrack.setStatic(true);
+	//invTrack = this.matter.add.image(305, gameHeight - 12, "invPlatform");
+	//invTrack.displayWidth = trackLength;
+	//invTrack.displayHeight = 10;
+	//invTrack.setStatic(true);
+	//invTrack.setFriction(0.05);
+	invTrack = this.matter.add.rectangle(platform.x + platform.width/2, gameHeight - 12, gameWidth * 18, 10, {isStatic: true});
+	invTrack.restitution = .3;
 	invTrack.setFriction(0.05);
 	
 	
 	//Add platform and inv Platform 
 	platform = this.add.image(165, gameHeight - 50, "platform");
-	invPlatform = this.matter.add.image(160, gameHeight - 60, "invPlatform");
+	invPlatform = this.matter.add.image(platform.x/2, gameHeight - 60, "invPlatform");
 	invPlatform.displayWidth = 216;
 	invPlatform.displayHeight = 10;
 	invPlatform.setStatic(true);
