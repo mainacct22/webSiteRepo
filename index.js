@@ -289,7 +289,7 @@ function update(time, delta) {
 	lblDmg.text = 'Damage = ' + dmg;
 	
 	
-	seconds = timeEvent.getProgress() * 10;
+	seconds = timedEvent.getProgress() * 10;
 	seconds = seconds.toFixed(0)
 	lblTime.text = 'Time = ' + seconds;
 	//timedEvent.elapsed / timedEvent.delay
