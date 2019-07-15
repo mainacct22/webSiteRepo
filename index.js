@@ -260,8 +260,9 @@ function create() {
 			
   camera = this.cameras.main;
   camera.setBounds(0, 0, gameWidth * 18, gameHeight);
-  //camera.startFollow(sandbag);
+  camera.startFollow(sandbag);
 
+  /*
   cursors = this.input.keyboard.createCursorKeys();
   const controlConfig = {
       camera: this.cameras.main,
@@ -273,6 +274,7 @@ function create() {
     };
     
   this.controls = new Phaser.Cameras.Controls.FixedKeyControl(controlConfig);
+  */
 
   // Help text that has a "fixed" position on the screen
   lblDmg = this.add
@@ -371,7 +373,7 @@ function update(time, delta) {
 		
 	
     
-    this.controls.update(delta);
+    //this.controls.update(delta);
 
 }
 
