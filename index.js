@@ -158,9 +158,15 @@ function create() {
 	//Right
 	invRight = this.matter.add.rectangle(platform.x + platform.width/2, 300, 5, gameHeight, {isStatic: true});
 	
+	invLeft.frictionStatic = 0;
+	invLeft.restitution = .8;
+	
+	invRight.frictionStatic = 0;
+	invRight.restitution = .8;
+	
 	console.log("game height = " + gameHeight);
-	//console.log("invRight h = " + invRight.displayHeight);
-	//console.log("invLeft h = " + invLeft.displayHeight);
+	console.log("invRight h = " + invRight.displayHeight);
+	console.log("invLeft h = " + invLeft.displayHeight);
 	
 	
 
@@ -244,7 +250,7 @@ function create() {
 			
   camera = this.cameras.main;
   camera.setBounds(0, 0, gameWidth * 18, gameHeight);
-  camera.startFollow(sandbag);
+  //camera.startFollow(sandbag);
 
   cursors = this.input.keyboard.createCursorKeys();
   const controlConfig = {
@@ -322,7 +328,7 @@ function update(time, delta) {
 	lblDmg.text = 'Damage = ' + dmg;
 	
 	seconds = timedEvent.getProgress() * 10;
-	seconds = seconds.toFixed(2)
+	seconds = seconds.toFixed(0)
 	lblTime.text = 'Time = ' + (10 - seconds);
 	//timedEvent.elapsed / timedEvent.delay
 	
