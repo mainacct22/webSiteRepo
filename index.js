@@ -49,6 +49,8 @@ let xDif;
 let yDif;
 let myPointer;
 let trackLength;
+let timedEvent;
+let lblTime;
 
 function preload() {
     
@@ -243,14 +245,19 @@ function create() {
     .setDepth(30);
 	
 
+  lblTime = this.add
+       .text(200, 100, 'Time = 10', {
+	   font: "18px monospace",
+       fill: "#000000",
+       padding: { x: 20, y: 10 },
+       backgroundColor: "#ffffff"
+	   })
+	   .setScrollFactor(0)
+	   .setDepth(30);
   //TIMER CODE SHOULD GO HERE AND NOT AT THE BEGINNING OF CREATE
 
-    this.timeInSeconds = 120;
-    this.timeText = this.add.text(220, 30, "0:00",{font: '30px Arial', fill: 
-    '#FFFFFF', align: 'center'});
-    //this.timeText.anchor.set(0.5, 0.5);
-    this.timer = this.game.time.events.loop(Phaser.Timer.SECOND, this.updateTimer, 
-    this);
+    timedEvent = this.time.addEvent({ delay: 10000, callback: onEvent, callbackScope: this, repeat: 0});
+	
 
 }
 
@@ -279,6 +286,8 @@ function update(time, delta) {
 	}
 	
 	lblDmg.text = 'Damage = ' + dmg;
+	
+	lblTime.text = 'Time = ' + timedEvent.getProgress;
 	
 		
 	
