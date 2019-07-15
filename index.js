@@ -150,23 +150,25 @@ function create() {
 	invLeft.displayHeight = gameHeight;
 	invLeft.setStatic(true);
 	invLeft.setFriction(0.04);
+	invLeft.setRestitution(0.5);
 	
-	//invRight = this.matter.add.image(platform.x + 216, 100, "invPlatform");
-	//invRight.displayWidth = 5;
-	//invRight.displayHeight = gameHeight;
-	//invRight.setStatic(true);
-	//invRight.setFriction(0.04);
+	invRight = this.matter.add.image(platform.x + platform.width/2 + 40, 300, "invPlatform");
+	invRight.displayWidth = 80;
+	invRight.displayHeight = gameHeight;
+	invRight.setStatic(true);
+	invRight.setFriction(0.04);
+	invRight.setRestitution(0.5);
 	
 	//Left
 	//invLeft = this.matter.add.rectangle(platform.x - platform.width/2, 300, 10, gameHeight, {isStatic: true});
 	//Right
-	invRight = this.matter.add.rectangle(platform.x + platform.width/2 + 40, 300, 80, gameHeight, {isStatic: true});
+	//invRight = this.matter.add.rectangle(platform.x + platform.width/2 + 40, 300, 80, gameHeight, {isStatic: true});
 	
 	//invLeft.frictionStatic = 0;
 	//invLeft.restitution = .5;
 	
-	invRight.frictionStatic = 0;
-	invRight.restitution = .5;
+	//invRight.frictionStatic = 0;
+	//invRight.restitution = .5;
 	
 	invTrack = this.matter.add.rectangle(gameWidth * 9, gameHeight - 12, gameWidth * 18, 10, {isStatic: true});
 	//platform.x + platform.width/2
