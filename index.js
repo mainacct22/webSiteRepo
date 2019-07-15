@@ -152,11 +152,15 @@ function create() {
 	//invRight.displayHeight = gameHeight;
 	//invRight.setStatic(true);
 	//invRight.setFriction(0.04);
-	this.matter.add.rectangle(platform.x, 100, 5, 1000, {isStatic: true});
-	this.matter.add.rectangle(platform.x + 216, 100, 5, gameHeight, {isStatic: true});
+	
+	//Left
+	this.matter.add.rectangle(platform.x - platform.width/2, 100, 5, 800, {isStatic: true});
+	//Right
+	this.matter.add.rectangle(platform.x + platform.width/2, 100, 5, gameHeight, {isStatic: true});
+	
 	console.log("game height = " + gameHeight);
 	//console.log("invRight h = " + invRight.displayHeight);
-	console.log("invLeft h = " + invLeft.displayHeight);
+	//console.log("invLeft h = " + invLeft.displayHeight);
 	
 	
 
