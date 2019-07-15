@@ -154,9 +154,9 @@ function create() {
 	//invRight.setFriction(0.04);
 	
 	//Left
-	invLeft = this.matter.add.rectangle(platform.x - platform.width/2, 300, 5, gameHeight, {isStatic: true});
+	invLeft = this.matter.add.rectangle(platform.x - platform.width/2, 300, 10, gameHeight, {isStatic: true});
 	//Right
-	invRight = this.matter.add.rectangle(platform.x + platform.width/2, 300, 5, gameHeight, {isStatic: true});
+	invRight = this.matter.add.rectangle(platform.x + platform.width/2, 300, 10, gameHeight, {isStatic: true});
 	
 	invLeft.frictionStatic = 0;
 	invLeft.restitution = .8;
@@ -259,7 +259,7 @@ function create() {
       right: cursors.right,
       up: cursors.up,
       down: cursors.down,
-      speed: 0.5
+      speed: 1
     };
     
   this.controls = new Phaser.Cameras.Controls.FixedKeyControl(controlConfig);
@@ -330,6 +330,11 @@ function update(time, delta) {
 	seconds = timedEvent.getProgress() * 10;
 	seconds = seconds.toFixed(0)
 	lblTime.text = 'Time = ' + (10 - seconds);
+	
+	if(seconds >= 10)
+	{
+		console.log("secs = " + seconds);
+	}
 	//timedEvent.elapsed / timedEvent.delay
 	
 		
