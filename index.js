@@ -145,8 +145,8 @@ function create() {
 	
 	
 	//Add invisible walls to Platform
-	invLeft = this.matter.add.image(platform.x - platform.width/2, 300, "invPlatform");
-	invLeft.displayWidth = 40;
+	invLeft = this.matter.add.image(platform.x - platform.width/2 - 40, 300, "invPlatform");
+	invLeft.displayWidth = 80;
 	invLeft.displayHeight = gameHeight;
 	invLeft.setStatic(true);
 	invLeft.setFriction(0.04);
@@ -160,7 +160,7 @@ function create() {
 	//Left
 	//invLeft = this.matter.add.rectangle(platform.x - platform.width/2, 300, 10, gameHeight, {isStatic: true});
 	//Right
-	invRight = this.matter.add.rectangle(platform.x + platform.width/2, 300, 40, gameHeight, {isStatic: true});
+	invRight = this.matter.add.rectangle(platform.x + platform.width/2 + 40, 300, 80, gameHeight, {isStatic: true});
 	
 	//invLeft.frictionStatic = 0;
 	//invLeft.restitution = .5;
