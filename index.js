@@ -52,6 +52,7 @@ let trackLength;
 let timedEvent;
 let lblTime;
 let seconds;
+let clicked = false;
 
 function preload() {
     
@@ -149,6 +150,11 @@ function create() {
 	//Matter.js orients x & y coords in the center of the object, so pointer.x > sandbag.x
 	//means that the pointer touched the right side of the object
 	sandbag.on('pointerup', function (pointer) {
+		if (clicked = false)
+		{
+			timedEvent = this.time.addEvent({ delay: 10000, repeat: 0});
+			clicked = true;
+		}
 		
 		if(pointer.x > sandbag.x)
 		{
@@ -256,8 +262,6 @@ function create() {
 	   .setScrollFactor(0)
 	   .setDepth(30);
   //TIMER CODE SHOULD GO HERE AND NOT AT THE BEGINNING OF CREATE
-
-    timedEvent = this.time.addEvent({ delay: 10000, repeat: 0});
 	
 
 }
@@ -288,11 +292,13 @@ function update(time, delta) {
 	
 	lblDmg.text = 'Damage = ' + dmg;
 	
-	
-	seconds = timedEvent.getProgress() * 10;
-	seconds = seconds.toFixed(0)
-	lblTime.text = 'Time = ' + (10 - seconds);
-	//timedEvent.elapsed / timedEvent.delay
+	if (clicked = true)
+	{
+		seconds = timedEvent.getProgress() * 10;
+		seconds = seconds.toFixed(0)
+		lblTime.text = 'Time = ' + (10 - seconds);
+		//timedEvent.elapsed / timedEvent.delay
+	}
 	
 		
 	
@@ -336,3 +342,5 @@ function resizeApp ()
         justify-content: center;
       }
 */
+
+w43p0101
