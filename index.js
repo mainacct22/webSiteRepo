@@ -143,15 +143,18 @@ function create() {
 	//Add invisible walls to Platform
 	invLeft = this.matter.add.image(platform.x, 0, "invPlatform");
 	invLeft.displayWidth = 5;
-	invLeft.displayHeight = gameHeight - 60;
+	invLeft.displayHeight = gameHeight;
 	invLeft.setStatic(true);
 	invLeft.setFriction(0.04);
 	
 	invRight = this.matter.add.image(platform.x + 216, 0, "invPlatform");
 	invRight.displayWidth = 5;
-	invRight.displayHeight = gameHeight - 60;
+	invRight.displayHeight = gameHeight;
 	invRight.setStatic(true);
 	invRight.setFriction(0.04);
+	console.log("game height = " + gameHeight);
+	console.log("invRight h = " + invRight.displayHeight);
+	console.log("invLeft h = " + invLeft.displayHeight);
 	
 	
 
