@@ -248,7 +248,7 @@ function create() {
     this.timeInSeconds = 120;
     this.timeText = this.add.text(220, 30, "0:00",{font: '30px Arial', fill: 
     '#FFFFFF', align: 'center'});
-    this.timeText.anchor.set(0.5, 0.5);
+    //this.timeText.anchor.set(0.5, 0.5);
     this.timer = this.game.time.events.loop(Phaser.Timer.SECOND, this.updateTimer, 
     this);
 
