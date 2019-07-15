@@ -81,7 +81,7 @@ function preload() {
 function create() {
 	
 	
-	//this.matter.world.setBounds(0,0, gameWidth * 18, gameHeight);
+	this.matter.world.setBounds(0,0, gameWidth * 18, gameHeight);
 	
 	
   
@@ -137,18 +137,13 @@ function create() {
 	
 	//Add platform and inv Platform 
 	platform = this.add.image(165, gameHeight - 50, "platform");
-	invPlatform = this.matter.add.image(platform.x - platform.x/2, gameHeight - 60, "invPlatform");
+	invPlatform = this.matter.add.image(platform.x, gameHeight - 60, "invPlatform");
 	invPlatform.displayWidth = 216;
 	invPlatform.displayHeight = 10;
 	invPlatform.setStatic(true);
 	invPlatform.setFriction(0.04);
 	
-	invTrack = this.matter.add.rectangle(platform.x + platform.width/2, gameHeight - 12, gameWidth * 18, 10, {isStatic: true});
-	invTrack.restitution = .3;
-	invTrack.friction = .05;
 	
-	
-	this.matter.world.setBounds(platform.x + platform.width/2,0, platform.width, gameHeight);
 	//Add invisible walls to Platform
 	//invLeft = this.matter.add.image(platform.x, 100, "invPlatform");
 	//invLeft.displayWidth = 5;
@@ -163,15 +158,19 @@ function create() {
 	//invRight.setFriction(0.04);
 	
 	//Left
-	//invLeft = this.matter.add.rectangle(platform.x - platform.width/2, 300, 10, gameHeight, {isStatic: true});
+	invLeft = this.matter.add.rectangle(platform.x - platform.width/2, 300, 10, gameHeight, {isStatic: true});
 	//Right
-	//invRight = this.matter.add.rectangle(platform.x + platform.width/2, 300, 10, gameHeight, {isStatic: true});
+	invRight = this.matter.add.rectangle(platform.x + platform.width/2, 300, 10, gameHeight, {isStatic: true});
 	
-	//invLeft.frictionStatic = 0;
-	//invLeft.restitution = .5;
+	invLeft.frictionStatic = 0;
+	invLeft.restitution = .5;
 	
-	//invRight.frictionStatic = 0;
-	//invRight.restitution = .5;
+	invRight.frictionStatic = 0;
+	invRight.restitution = .5;
+	
+	invTrack = this.matter.add.rectangle(platform.x + platform.width/2, gameHeight - 12, gameWidth * 18, 10, {isStatic: true});
+	invTrack.restitution = .3;
+	invTrack.friction = .05;
 	
 	//console.log("game height = " + gameHeight);
 	//console.log("invRight h = " + invRight.displayHeight);
@@ -356,14 +355,14 @@ function update(time, delta) {
 		
 	}
 	
-	/*
+	
 	if (sandbag.x < invLeft.x || sandbag.x > invRight.x)
 	{
 		console.log("sb outside of barrier");
 		console.log("sb x = " + sandbag.x);
 		sandbag.translate(sandbag.x + 10);
 	}
-	*/
+	
 		
 	
     
