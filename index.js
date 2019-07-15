@@ -135,19 +135,19 @@ function create() {
 	//Add platform and inv Platform 
 	platform = this.add.image(115, gameHeight - 50, "platform");
 	invPlatform = this.matter.add.image(110, gameHeight - 60, "invPlatform");
-	invPlatform.displayWidth = 200;
+	invPlatform.displayWidth = 216;
 	invPlatform.displayHeight = 10;
 	invPlatform.setStatic(true);
 	invPlatform.setFriction(0.04);
 	
 	//Add invisible walls to Platform
-	invLeft = this.matter.add.image(110, 0, "invPlatform");
+	invLeft = this.matter.add.image(platform.x, 0, "invPlatform");
 	invLeft.displayWidth = 5;
 	invLeft.displayHeight = gameHeight - 60;
 	invLeft.setStatic(true);
 	invLeft.setFriction(0.04);
 	
-	invRight = this.matter.add.image(331, 0, "invPlatform");
+	invRight = this.matter.add.image(platform.x + 216, 0, "invPlatform");
 	invRight.displayWidth = 5;
 	invRight.displayHeight = gameHeight - 60;
 	invRight.setStatic(true);
