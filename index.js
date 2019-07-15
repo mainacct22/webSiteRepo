@@ -51,6 +51,7 @@ let myPointer;
 let trackLength;
 let timedEvent;
 let lblTime;
+let seconds;
 
 function preload() {
     
@@ -287,7 +288,10 @@ function update(time, delta) {
 	
 	lblDmg.text = 'Damage = ' + dmg;
 	
-	lblTime.text = 'Time = ' + timedEvent.getProgress();
+	
+	seconds = timeEvent.getProgress() * 10;
+	seconds = seconds.toFixed(0)
+	lblTime.text = 'Time = ' + seconds;
 	//timedEvent.elapsed / timedEvent.delay
 	
 		
