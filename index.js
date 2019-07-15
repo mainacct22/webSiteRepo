@@ -135,7 +135,7 @@ function create() {
 	
 	//Add platform and inv Platform 
 	platform = this.add.image(165, gameHeight - 50, "platform");
-	invPlatform = this.matter.add.image(platform.x/2, gameHeight - 60, "invPlatform");
+	invPlatform = this.matter.add.image(platform.x - platform.x/2, gameHeight - 60, "invPlatform");
 	invPlatform.displayWidth = 216;
 	invPlatform.displayHeight = 10;
 	invPlatform.setStatic(true);
@@ -344,6 +344,8 @@ function update(time, delta) {
 	
 	if (sandbag.x < invLeft.x || sandbag.x > invRight.x)
 	{
+		console.log("sb outside of barrier");
+		console.log("sb x = " + sandbag.x);
 		sandbag.translate(sandbag.x + 10);
 	}
 		
