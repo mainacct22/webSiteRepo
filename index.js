@@ -241,7 +241,7 @@ function create() {
     .setScrollFactor(0)
     .setDepth(30);
 	
-	console.log("invTrack w = " + invTrack.displayWidth);
+	game.debug.body(invTrack);
 
   // Debug graphics
   //window.addEventListener('resize', resizeApp);
