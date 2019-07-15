@@ -59,7 +59,7 @@ let clicked = false;
 
 let invLeft;
 let invRight;
-let setBounds = false;
+let setBounds = true;
 
 function preload() {
     
@@ -350,12 +350,12 @@ function update(time, delta) {
 	
 	if (seconds >= 7)
 	{
-		if (setBounds = false)
+		if (setBounds)
 		{
 			this.matter.world.remove(invLeft);
 			this.matter.world.remove(invRight);
 			console.log("walls removed");
-			setBounds = true;
+			setBounds = false;
 		}
 		
 	}
