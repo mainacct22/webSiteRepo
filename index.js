@@ -158,7 +158,7 @@ function create() {
 	//invRight.setFriction(0.04);
 	
 	//Left
-	invLeft = this.matter.add.rectangle(platform.x - platform.width/2, 300, 10, gameHeight, {isStatic: true});
+	invLeft = this.matter.add.rectangle(platform.x - platform.width/2 - 40, 300, 80, gameHeight, {isStatic: true});
 	//Right
 	invRight = this.matter.add.rectangle(platform.x + platform.width/2 + 40, 300, 80, gameHeight, {isStatic: true});
 	
@@ -352,8 +352,9 @@ function update(time, delta) {
 	{
 		if (setBounds = false)
 		{
-			this.matter.world.remove(this.matter.world, invLeft);
-			this.matter.world.remove(this.matter.world, invRight);
+			this.matter.world.remove(invLeft);
+			this.matter.world.remove(invRight);
+			console.log("walls removed");
 			setBounds = true;
 		}
 		
