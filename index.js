@@ -111,10 +111,11 @@ function create() {
 		
 		this.add.image(x, gameHeight - 20, "track");
 	}
+	console.log("width = " + gameWidth);
 	
 	//place the inv platform on the track
 	invTrack = this.matter.add.image(255, gameHeight - 12, "invPlatform");
-	invTrack.displayWidth = gameWidth * 24;
+	invTrack.displayWidth = gameWidth;
 	invTrack.displayHeight = 10;
 	invTrack.setStatic(true);
 	invTrack.setFriction(0.1);
@@ -206,6 +207,8 @@ function create() {
   camera = this.cameras.main;
   camera.setBounds(0, 0, gameWidth * 18, gameHeight);
   camera.startFollow(sandbag);
+  console.log("cam width = " + camera.width);
+  console.log("cam dispWidth = " + camera.displayWidth);
 
   //cursors = this.input.keyboard.createCursorKeys();
   //const controlConfig = {
