@@ -127,8 +127,8 @@ function create() {
 	
 	
 	//Add platform and inv Platform 
-	platform = this.add.image(115, gameHeight - 100, "platform");
-	invPlatform = this.matter.add.image(110,gameHeight - 110, "invPlatform");
+	platform = this.add.image(115, gameHeight - 50, "platform");
+	invPlatform = this.matter.add.image(110, gameHeight - 110, "invPlatform");
 	invPlatform.displayWidth = 200;
 	invPlatform.displayHeight = 10;
 	invPlatform.setStatic(true);
