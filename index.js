@@ -356,7 +356,8 @@ function update(time, delta) {
 		}
 		
 	}
-	else if(seconds >= 10)
+	
+	if(seconds >= 10)
 	{
 		//console.log("secs = " + seconds);
 		//console.log("velocity = " + sandbag.velocity);
