@@ -345,20 +345,6 @@ function update(time, delta) {
 	lblTime.text = 'Time = ' + (10 - seconds);
 	//timedEvent.elapsed / timedEvent.delay
 	
-	if(seconds >= 10)
-	{
-		//console.log("secs = " + seconds);
-		//console.log("velocity = " + sandbag.velocity);
-		if(Math.floor(sandbag.body.velocity.x) < 1 && Math.floor(sandbag.body.velocity.y) < 1)
-		{
-			console.log("got in the if statement");
-			//game over
-			//throw up a retry button to start again?
-			this.scene.restart();
-		}
-		
-	}
-	
 	if (seconds >= 7)
 	{
 		if (setBounds)
@@ -370,6 +356,23 @@ function update(time, delta) {
 		}
 		
 	}
+	else if(seconds >= 10)
+	{
+		//console.log("secs = " + seconds);
+		//console.log("velocity = " + sandbag.velocity);
+		if(Math.floor(sandbag.body.velocity.x) < 1 && Math.floor(sandbag.body.velocity.y) < 1)
+		{
+			console.log("got in the if statement");
+			//game over
+			//throw up a retry button to start again?
+			//reset initializers
+			setBound = true;
+			dmg = 0
+			this.scene.restart();
+		}
+		
+	}
+	
 	
 	
 	if (sandbag.x < invLeft.x || sandbag.x > invRight.x)
