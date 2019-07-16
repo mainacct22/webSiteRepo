@@ -351,10 +351,12 @@ function update(time, delta) {
     
     sky.tilePositionX = camera.scrollX;
 	
-	if (sandbag.y <= gameHeight - 18)
+	if (sandbag.y >= gameHeight - 18)
 	{
 		if (startEmitter)
 		{
+			console.log("inside start emitter");
+			console.log("sandbag.y = " + sandbag.y);
 			emitter.startFollow(sandbag);
 			startEmitter = false;
 		}
@@ -363,6 +365,7 @@ function update(time, delta) {
 	{
 		if (!startEmitter)
 		{
+			console.log("inside stop emitter");
 			emitter.stop();
 			startEmitter = true;
 		}
