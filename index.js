@@ -306,7 +306,10 @@ function create() {
 	   .setScrollFactor(0)
 	   .setDepth(30);
 	   
-	btnRestart = this.add.text(gameWidth/2, gameHeight/2, 'RETRY', {fill: '#0f0' font: "36px monospace"})
+	btnRestart = this.add
+		.text(gameWidth/2, gameHeight/2, 'RETRY', {
+		 fill: '#0f0', 
+		 font: "36px monospace"})
 		.setInteractive()
 		.on('pointerdown', () => restartGame() )
 		.on('pointerover', () => enterButtonHoverState() )
