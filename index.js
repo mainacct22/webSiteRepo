@@ -319,6 +319,7 @@ function create() {
 		.on('pointerover', () => enterButtonHoverState() )
 		.on('pointerout', () => enterButtonRestState() );
 		
+	btnRestart.scrollFactorX = 1;
 	btnRestart.visible = false;
 	btnRestart.removeInteractive();
 	   
@@ -386,7 +387,6 @@ function update(time, delta) {
 		}
 		
 	}
-	
 	
 	
 	if (sandbag.x < invLeft.x || sandbag.x > invRight.x)
