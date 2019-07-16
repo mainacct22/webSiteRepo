@@ -310,17 +310,16 @@ function create() {
 
 	   
 	btnRestart = this.add
-		.text(400, 100, 'RETRY', {
+		.text(400, 400, 'RETRY', {
 		 fill: '#00008B', 
 		 font: "48px monospace"})
 		.setInteractive()
-		.setScrollFactor(1)
+		.setScrollFactor(0)
 		.on('pointerdown', () => restartGame() )
 		.on('pointerover', () => enterButtonHoverState() )
 		.on('pointerout', () => enterButtonRestState() );
 		
-	btnRestart.scrollFactorX = 1;
-	btnRestart.visible = false;
+	//btnRestart.visible = false;
 	//btnRestart.removeInteractive();
 	   
   //TIMER CODE SHOULD GO HERE AND NOT AT THE BEGINNING OF CREATE
