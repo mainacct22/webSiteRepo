@@ -349,8 +349,9 @@ function update(time, delta) {
 	{
 		//console.log("secs = " + seconds);
 		//console.log("velocity = " + sandbag.velocity);
-		if(sandbag.velocity === 0)
+		if(sandbag.velocity == 0)
 		{
+			console.log("got in the if statement");
 			//game over
 			//throw up a retry button to start again?
 			this.scene.restart();
