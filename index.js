@@ -319,8 +319,8 @@ function create() {
 		.on('pointerover', () => enterButtonHoverState() )
 		.on('pointerout', () => enterButtonRestState() );
 		
-	//btnRestart.visible = false;
-	//btnRestart.removeInteractive();
+	btnRestart.visible = false;
+	btnRestart.removeInteractive();
 	   
   //TIMER CODE SHOULD GO HERE AND NOT AT THE BEGINNING OF CREATE
   timedEvent = this.time.addEvent({ delay: 10000, repeat: 0});
