@@ -353,22 +353,17 @@ function update(time, delta) {
 	
 	if (sandbag.y >= (gameHeight - 33))
 	{
-		console.log("inside start emitter 1");
 		if (startEmitter)
 		{
-			console.log("inside start emitter");
-			console.log("sandbag.y = " + sandbag.y);
-			emitter.startFollow(sandbag);
+			emitter.startFollow(sandbag, sandbag.x, sandbag.y);
 			emitter.start();
 			startEmitter = false;
 		}
 	}
 	else
 	{
-		console.log("inside STOP emitter 1");
 		if (!startEmitter)
 		{
-			console.log("inside stop emitter");
 			emitter.stop();
 			startEmitter = true;
 		}
@@ -384,8 +379,6 @@ function update(time, delta) {
 		dist = +dist.toFixed(2);
 		//dist = Phaser.Math.distance(120,0,sandbag.x,0)
 		lblDist.text = 'Distance = ' + dist + ' ft'; 
-		console.log("sandbag.y = " + sandbag.y);
-		console.log("gameheight = " + (gameHeight - 22));
 	}
 	
 	lblDmg.text = 'Damage = ' + dmg;	
@@ -422,6 +415,8 @@ function update(time, delta) {
 			//reset initializers
 			btnRestart.setInteractive();
 			btnRestart.visible = true;
+			emitter.stop();
+			startEmitter = false;
 			
 		}
 		
@@ -441,6 +436,7 @@ function update(time, delta) {
 function restartGame()
 {
 	setBounds = true;
+	startEmitter = true;
 	dmg = 0;
 	dist = 0;
 	gameScene.restart();	
