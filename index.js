@@ -280,13 +280,13 @@ function create() {
   });
   
   //Collision Detection
-  this.matter.world.on('collisionstart', function (event,sandbag,invTrack)
+  this.matter.world.on('collisionStart', function (event,sandbag,invTrack)
   {
 	  emitter.startFollow(sandbag);
 	  emitter.start();
   });
   
-  this.matter.world.on('collisionend', function (event,sandbag,invTrack)
+  this.matter.world.on('collisionEnd', function (event,sandbag,invTrack)
   {
 	  emitter.stop();
   });
