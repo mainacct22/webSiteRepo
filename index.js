@@ -282,12 +282,14 @@ function create() {
   //Collision Detection
   this.matter.world.on('collisionStart', function (event,sandbag,invTrack)
   {
+	  console.log("collision Start");
 	  emitter.startFollow(sandbag);
 	  emitter.start();
   });
   
   this.matter.world.on('collisionEnd', function (event,sandbag,invTrack)
   {
+	  console.log("collision End");
 	  emitter.stop();
   });
 
