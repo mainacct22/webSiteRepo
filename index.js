@@ -266,8 +266,10 @@ function create() {
   
   particles = this.add.particles('brown');
   emitter = particles.createEmitter({
+	  lifespan: 750,
 	  speed: 50,
-	  scale: {start: 1, end: 0},
+	  scale: {start: 0.4, end: 0},
+	  angle: 180,
 	  blendMode: 'ADD'
   });
 
@@ -355,7 +357,7 @@ function update(time, delta) {
 	{
 		if (startEmitter)
 		{
-			emitter.startFollow(sandbag, sandbag.x, sandbag.y);
+			emitter.startFollow(sandbag, 50, 50);
 			emitter.start();
 			startEmitter = false;
 		}
