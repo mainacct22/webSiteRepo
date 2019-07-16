@@ -349,7 +349,7 @@ function update(time, delta) {
 	{
 		//console.log("secs = " + seconds);
 		//console.log("velocity = " + sandbag.velocity);
-		if(Phaser.Point.equals(sandbag.body.velocity, new Phaser.Piont(0,0)))
+		if(Math.floor(sandbag.body.velocity.x) < 1 && Math.floor(sandbag.body.velocity.y) < 1)
 		{
 			console.log("got in the if statement");
 			//game over
