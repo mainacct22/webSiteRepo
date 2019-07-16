@@ -132,7 +132,6 @@ function create() {
 	//invTrack.displayHeight = 10;
 	//invTrack.setStatic(true);
 	//invTrack.setFriction(0.05);
-
 	
 	
 	//Add platform and inv Platform 
@@ -150,6 +149,7 @@ function create() {
 	//invLeft.displayHeight = gameHeight;
 	//invLeft.setStatic(true);
 	//invLeft.setFriction(0.04);
+
 	
 	//invRight = this.matter.add.image(platform.x + platform.width/2 + 40, 300, "invPlatform");
 	//invRight.displayWidth = 80;
@@ -158,9 +158,9 @@ function create() {
 	//invRight.setFriction(0.04);
 	
 	//Left
-	invLeft = this.matter.add.rectangle(platform.x - platform.width/2 - 40, 300, 80, gameHeight, {isStatic: true});
+	invLeft = this.matter.add.rectangle(platform.x - platform.width/2 - 40, gameHeight/2, 80, gameHeight, {isStatic: true});
 	//Right
-	invRight = this.matter.add.rectangle(platform.x + platform.width/2 + 40, 300, 80, gameHeight, {isStatic: true});
+	invRight = this.matter.add.rectangle(platform.x + platform.width/2 + 40, gameHeight/2, 80, gameHeight, {isStatic: true});
 	
 	invLeft.frictionStatic = 0;
 	invLeft.restitution = .5;
