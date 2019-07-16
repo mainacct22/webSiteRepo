@@ -314,6 +314,7 @@ function create() {
 		 fill: '#00008B', 
 		 font: "48px monospace"})
 		.setInteractive()
+		.setScrollFactor(1)
 		.on('pointerdown', () => restartGame() )
 		.on('pointerover', () => enterButtonHoverState() )
 		.on('pointerout', () => enterButtonRestState() );
