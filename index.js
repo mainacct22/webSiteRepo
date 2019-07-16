@@ -278,6 +278,18 @@ function create() {
 	  angle: 180,
 	  blendMode: 'ADD'
   });
+  
+  //Collision Detection
+  this.matter.world.on('collisionstart', function (event,sandbag,invTrack)
+  {
+	  emitter.startFollow(sandbag);
+	  emitter.start();
+  }
+  
+  this.matter.world.on('collisionend', function (event,sandbag,invTrack)
+  {
+	  emitter.stop();
+  }
 
   /*
   cursors = this.input.keyboard.createCursorKeys();
@@ -343,6 +355,7 @@ function create() {
   //TIMER CODE SHOULD GO HERE AND NOT AT THE BEGINNING OF CREATE
   timedEvent = this.time.addEvent({ delay: 10000, repeat: 0});
   
+  
   gameScene = this.scene;
 	
 
@@ -359,6 +372,8 @@ function update(time, delta) {
     
     sky.tilePositionX = camera.scrollX;
 	
+	//Lazy Detection
+	/*
 	if (sandbag.y >= (gameHeight - 33))
 	{
 		if (startEmitter)
@@ -376,6 +391,7 @@ function update(time, delta) {
 			startEmitter = true;
 		}
 	}
+	*/
 	
 	if (sandbag.x > 300)
 	{
