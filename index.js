@@ -367,8 +367,9 @@ function update(time, delta) {
 			//game over
 			//throw up a retry button to start again?
 			//reset initializers
-			setBound = true;
-			dmg = 0
+			setBounds = true;
+			dmg = 0;
+			dist = 0;
 			this.scene.restart();
 		}
 		
