@@ -57,6 +57,8 @@ let lblTime;
 let seconds;
 let clicked = false;
 
+let btnRestart;
+
 let invLeft;
 let invRight;
 let setBounds = true;
@@ -172,10 +174,6 @@ function create() {
 	//platform.x + platform.width/2
 	invTrack.restitution = .3;
 	invTrack.friction = .09;
-	
-	console.log("invRight.x = " + invRight.x);
-	console.log("invLeft.x = " + invLeft.x);
-	
 	
 
 	//Add sandbag and use matter.js
@@ -308,6 +306,15 @@ function create() {
 	   .setScrollFactor(0)
 	   .setDepth(30);
 	   
+	btnRestart = this.add.text(gameWidth/2, gameHeight/2, 'RETRY', {fill: '#0f0'})
+		.setInteractive()
+		.on('pointerdown', () => this.restartGame() )
+		.on('pointerover', () => this.enterButtonHoverState() )
+		.on('pointerout', () => this.enterButtonRestState() );
+		
+	btnRestart.visible = false;
+	btnRestart.removeInteractive();
+	   
   //TIMER CODE SHOULD GO HERE AND NOT AT THE BEGINNING OF CREATE
   timedEvent = this.time.addEvent({ delay: 10000, repeat: 0});
 	
@@ -338,8 +345,7 @@ function update(time, delta) {
 		lblDist.text = 'Distance = ' + dist + ' ft'; 
 	}
 	
-	lblDmg.text = 'Damage = ' + dmg;
-	
+	lblDmg.text = 'Damage = ' + dmg;	
 	seconds = timedEvent.getProgress() * 10;
 	seconds = seconds.toFixed(0)
 	lblTime.text = 'Time = ' + (10 - seconds);
@@ -351,7 +357,6 @@ function update(time, delta) {
 		{
 			this.matter.world.remove(invLeft);
 			this.matter.world.remove(invRight);
-			console.log("walls removed");
 			setBounds = false;
 		}
 		
@@ -359,18 +364,16 @@ function update(time, delta) {
 	
 	if(seconds >= 10)
 	{
-		//console.log("secs = " + seconds);
-		//console.log("velocity = " + sandbag.velocity);
-		if(Math.floor(sandbag.body.velocity.x) < 1 && Math.floor(sandbag.body.velocity.y) < 1)
+
+		if((Math.floor(sandbag.body.velocity.x) < 1 && Math.floor(sandbag.body.velocity.y) < 1)
+			|| (Math.floor(sandbag.body.velocity.x) < -1 && Math.floor(sandbag.body.velocity.y < -1))
 		{
-			console.log("got in the if statement");
 			//game over
 			//throw up a retry button to start again?
 			//reset initializers
-			setBounds = true;
-			dmg = 0;
-			dist = 0;
-			this.scene.restart();
+			btnRestart.setInteractive();
+			btnRestart.visible = true;
+			
 		}
 		
 	}
@@ -390,6 +393,27 @@ function update(time, delta) {
     //this.controls.update(delta);
 
 }
+
+function restartGame()
+{
+	setBounds = true;
+	dmg = 0;
+	dist = 0;
+	this.scene.restart();
+	
+}
+
+function enterButtonHoverState()
+{
+	this.btnRestart.setStyle({ fill: '#ff0'});
+}
+
+function enterButtonRestState() 
+{
+	
+	this.btnRestart.setStyle({ fill: '#0f0' });	
+}
+
 
 /*
 function resizeApp ()
@@ -426,4 +450,3 @@ function resizeApp ()
         justify-content: center;
       }
 */
-
