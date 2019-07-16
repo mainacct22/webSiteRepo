@@ -351,18 +351,21 @@ function update(time, delta) {
     
     sky.tilePositionX = camera.scrollX;
 	
-	if (sandbag.y >= (gameHeight - 22))
+	if (sandbag.y >= (gameHeight - 33))
 	{
+		console.log("inside start emitter 1");
 		if (startEmitter)
 		{
 			console.log("inside start emitter");
 			console.log("sandbag.y = " + sandbag.y);
 			emitter.startFollow(sandbag);
+			emitter.start();
 			startEmitter = false;
 		}
 	}
 	else
 	{
+		console.log("inside STOP emitter 1");
 		if (!startEmitter)
 		{
 			console.log("inside stop emitter");
@@ -401,6 +404,12 @@ function update(time, delta) {
 		}
 		
 	}
+	
+	
+	
+	
+	//642 - window size
+	//631 - sandbag.y
 	
 	if(seconds >= 10)
 	{
