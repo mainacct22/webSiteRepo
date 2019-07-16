@@ -310,7 +310,7 @@ function create() {
 
 	   
 	btnRestart = this.add
-		.text(gameWidth/2, gameHeight/2, 'RETRY', {
+		.text(400, 100, 'RETRY', {
 		 fill: '#00008B', 
 		 font: "48px monospace"})
 		.setInteractive()
@@ -321,7 +321,7 @@ function create() {
 		
 	btnRestart.scrollFactorX = 1;
 	btnRestart.visible = false;
-	btnRestart.removeInteractive();
+	//btnRestart.removeInteractive();
 	   
   //TIMER CODE SHOULD GO HERE AND NOT AT THE BEGINNING OF CREATE
   timedEvent = this.time.addEvent({ delay: 10000, repeat: 0});
@@ -381,7 +381,7 @@ function update(time, delta) {
 			//game over
 			//throw up a retry button to start again?
 			//reset initializers
-			btnRestart.setInteractive();
+			//btnRestart.setInteractive();
 			btnRestart.visible = true;
 			
 		}
