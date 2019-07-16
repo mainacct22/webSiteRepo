@@ -381,6 +381,7 @@ function update(time, delta) {
 		dist = +dist.toFixed(2);
 		//dist = Phaser.Math.distance(120,0,sandbag.x,0)
 		lblDist.text = 'Distance = ' + dist + ' ft'; 
+		console.log("sandbag.y = " + sandbag.y);
 	}
 	
 	lblDmg.text = 'Damage = ' + dmg;	
