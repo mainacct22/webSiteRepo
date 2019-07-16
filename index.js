@@ -56,6 +56,7 @@ let timedEvent;
 let lblTime;
 let seconds;
 let clicked = false;
+let gameScene;
 
 let btnRestart;
 
@@ -275,7 +276,7 @@ function create() {
   */
 
   // Help text that has a "fixed" position on the screen
-  lblDmg = this.add
+	lblDmg = this.add
       .text(100, 16, 'Damage = ' + dmg, {
       font: "18px monospace",
       fill: "#000000",
@@ -284,8 +285,9 @@ function create() {
     })
     .setScrollFactor(0)
     .setDepth(30);
+
 	
-  lblDist = this.add
+	lblDist = this.add
       .text(300, 16, 'Distance = 0 ft', {
       font: "18px monospace",
       fill: "#000000",
@@ -296,7 +298,7 @@ function create() {
     .setDepth(30);
 	
 
-  lblTime = this.add
+	lblTime = this.add
        .text(200, 100, 'Time = 10', {
 	   font: "18px monospace",
        fill: "#000000",
@@ -305,11 +307,12 @@ function create() {
 	   })
 	   .setScrollFactor(0)
 	   .setDepth(30);
+
 	   
 	btnRestart = this.add
 		.text(gameWidth/2, gameHeight/2, 'RETRY', {
-		 fill: '#0f0', 
-		 font: "36px monospace"})
+		 fill: '#00008B', 
+		 font: "48px monospace"})
 		.setInteractive()
 		.on('pointerdown', () => restartGame() )
 		.on('pointerover', () => enterButtonHoverState() )
@@ -320,6 +323,8 @@ function create() {
 	   
   //TIMER CODE SHOULD GO HERE AND NOT AT THE BEGINNING OF CREATE
   timedEvent = this.time.addEvent({ delay: 10000, repeat: 0});
+  
+  gameScene = this.scene;
 	
 
 }
@@ -402,19 +407,19 @@ function restartGame()
 	setBounds = true;
 	dmg = 0;
 	dist = 0;
-	this.scene.restart();
+	gameScene.restart();
 	
 }
 
 function enterButtonHoverState()
 {
-	btnRestart.setStyle({ fill: '#ff0'});
+	btnRestart.setStyle({ fill: '#008B8B'});
 }
 
 function enterButtonRestState() 
 {
 	
-	btnRestart.setStyle({ fill: '#0f0' });	
+	btnRestart.setStyle({ fill: '#00008B' });	
 }
 
 
