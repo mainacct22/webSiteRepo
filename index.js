@@ -284,12 +284,12 @@ function create() {
   {
 	  emitter.startFollow(sandbag);
 	  emitter.start();
-  }
+  });
   
   this.matter.world.on('collisionend', function (event,sandbag,invTrack)
   {
 	  emitter.stop();
-  }
+  });
 
   /*
   cursors = this.input.keyboard.createCursorKeys();
