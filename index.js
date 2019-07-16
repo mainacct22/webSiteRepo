@@ -59,6 +59,9 @@ let clicked = false;
 let gameScene;
 
 let btnRestart;
+let particles;
+let emitter;
+let startEmitter = true;
 
 let invLeft;
 let invRight;
@@ -260,6 +263,13 @@ function create() {
   camera = this.cameras.main;
   camera.setBounds(0, 0, gameWidth * 18, gameHeight);
   camera.startFollow(sandbag);
+  
+  particles = this.add.particles('brown');
+  emitter = particles.createEmitter({
+	  speed: 50,
+	  scale: {start: 1, end: 0},
+	  blendMode: 'ADD'
+  });
 
   /*
   cursors = this.input.keyboard.createCursorKeys();
@@ -341,6 +351,22 @@ function update(time, delta) {
     
     sky.tilePositionX = camera.scrollX;
 	
+	if (sandbag.y <= gameHight - 7)
+	{
+		if (startEmitter)
+		{
+			emitter.startFollow(sandbag);
+			startEmitter = false;
+		}
+	}
+	else
+	{
+		if (!startEmitter)
+		{
+			emitter.stop();
+			startEmitter = true;
+		}
+	}
 	
 	if (sandbag.x > 300)
 	{
