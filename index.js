@@ -310,7 +310,7 @@ function create() {
 
 	   
 	btnRestart = this.add
-		.text(400, 400, 'RETRY', {
+		.text(gameWidth/2, gameHeight/2, 'RETRY', {
 		 fill: '#00008B', 
 		 font: "48px monospace"})
 		.setInteractive()
@@ -380,7 +380,7 @@ function update(time, delta) {
 			//game over
 			//throw up a retry button to start again?
 			//reset initializers
-			//btnRestart.setInteractive();
+			btnRestart.setInteractive();
 			btnRestart.visible = true;
 			
 		}
@@ -394,12 +394,8 @@ function update(time, delta) {
 		console.log("sb x = " + sandbag.x);
 		//sandbag.translate(sandbag.x + 10);
 	}
-	
-		
-	
-    
+	 
     //this.controls.update(delta);
-
 }
 
 function restartGame()
@@ -407,8 +403,7 @@ function restartGame()
 	setBounds = true;
 	dmg = 0;
 	dist = 0;
-	gameScene.restart();
-	
+	gameScene.restart();	
 }
 
 function enterButtonHoverState()
