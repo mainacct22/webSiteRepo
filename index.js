@@ -306,11 +306,11 @@ function create() {
 	   .setScrollFactor(0)
 	   .setDepth(30);
 	   
-	btnRestart = this.add.text(gameWidth/2, gameHeight/2, 'RETRY', {fill: '#0f0'})
+	btnRestart = this.add.text(gameWidth/2, gameHeight/2, 'RETRY', {fill: '#0f0' font: "36px monospace"})
 		.setInteractive()
-		.on('pointerdown', () => this.restartGame() )
-		.on('pointerover', () => this.enterButtonHoverState() )
-		.on('pointerout', () => this.enterButtonRestState() );
+		.on('pointerdown', () => restartGame() )
+		.on('pointerover', () => enterButtonHoverState() )
+		.on('pointerout', () => enterButtonRestState() );
 		
 	btnRestart.visible = false;
 	btnRestart.removeInteractive();
@@ -405,13 +405,13 @@ function restartGame()
 
 function enterButtonHoverState()
 {
-	this.btnRestart.setStyle({ fill: '#ff0'});
+	btnRestart.setStyle({ fill: '#ff0'});
 }
 
 function enterButtonRestState() 
 {
 	
-	this.btnRestart.setStyle({ fill: '#0f0' });	
+	btnRestart.setStyle({ fill: '#0f0' });	
 }
 
 
