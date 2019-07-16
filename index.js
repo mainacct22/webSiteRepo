@@ -348,6 +348,13 @@ function update(time, delta) {
 	if(seconds >= 10)
 	{
 		//console.log("secs = " + seconds);
+		if(sandbag.velocity = 0)
+		{
+			//game over
+			//throw up a retry button to start again?
+			this.scene.restart();
+		}
+		
 	}
 	
 	if (seconds >= 7)
