@@ -357,7 +357,7 @@ function update(time, delta) {
 	{
 		if (startEmitter)
 		{
-			emitter.startFollow(sandbag, 50, 50);
+			emitter.startFollow(sandbag);
 			emitter.start();
 			startEmitter = false;
 		}
