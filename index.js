@@ -366,7 +366,7 @@ function update(time, delta) {
 	{
 
 		if((Math.floor(sandbag.body.velocity.x) < 1 && Math.floor(sandbag.body.velocity.y) < 1)
-			|| (Math.floor(sandbag.body.velocity.x) < -1 && Math.floor(sandbag.body.velocity.y < -1))
+			|| (Math.floor(sandbag.body.velocity.x) < -1 && Math.floor(sandbag.body.velocity.y < -1)))
 		{
 			//game over
 			//throw up a retry button to start again?
