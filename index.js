@@ -351,7 +351,7 @@ function update(time, delta) {
     
     sky.tilePositionX = camera.scrollX;
 	
-	if (sandbag.y <= gameHight - 7)
+	if (sandbag.y <= gameHeight - 18)
 	{
 		if (startEmitter)
 		{
