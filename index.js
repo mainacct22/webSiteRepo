@@ -67,6 +67,8 @@ let invLeft;
 let invRight;
 let setBounds = true;
 
+let whiteSmoke;
+
 function preload() {
     
     this.load.image("cloud_1", "assets/clouds_1_600.png");
@@ -81,6 +83,8 @@ function preload() {
 	this.load.image("sandbag", "assets/sandbag1.png");
     this.load.image("platform", "assets/platform_a.png");
 	this.load.image("invPlatform", "assets/invPlatform.png");
+	
+	this.load.image("whiteSmoke", "assets/whiteSmoke.png");
 
 }
 
@@ -122,6 +126,7 @@ function create() {
     cloud_4 = this.add.tileSprite(0, 0, gameWidth, gameHeight, "cloud_4");
     cloud_4.setOrigin(0,0);
     cloud_4.setScrollFactor(0);
+
 	
 	
 	//Add the track to the scene
@@ -264,11 +269,12 @@ function create() {
   camera.setBounds(0, 0, gameWidth * 18, gameHeight);
   camera.startFollow(sandbag);
   
-  particles = this.add.particles('brown');
-  emitter = particles.createEmitter({
+  whiteSmoke = this.add.particles('whiteSmoke');
+  emitter = whiteSmoke.createEmitter({
 	  lifespan: 750,
-	  speed: 50,
-	  scale: {start: 0.4, end: 0},
+	  speed: { min: 20, max: 50},
+	  scale: { start: 0.4, end: 0},
+	  alpha: { start: 0, end: 0.5},
 	  angle: 180,
 	  blendMode: 'ADD'
   });
