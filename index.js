@@ -351,7 +351,7 @@ function update(time, delta) {
     
     sky.tilePositionX = camera.scrollX;
 	
-	if (sandbag.y >= gameHeight - 22)
+	if (sandbag.y >= (gameHeight - 22))
 	{
 		if (startEmitter)
 		{
@@ -382,7 +382,7 @@ function update(time, delta) {
 		//dist = Phaser.Math.distance(120,0,sandbag.x,0)
 		lblDist.text = 'Distance = ' + dist + ' ft'; 
 		console.log("sandbag.y = " + sandbag.y);
-		console.log("gameheight = " + gameHeight - 22);
+		console.log("gameheight = " + (gameHeight - 22));
 	}
 	
 	lblDmg.text = 'Damage = ' + dmg;	
