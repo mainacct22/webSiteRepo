@@ -140,7 +140,7 @@ function create() {
 	invPlatform.displayWidth = 216;
 	invPlatform.displayHeight = 10;
 	invPlatform.setStatic(true);
-	invPlatform.setFriction(0.04);
+	invPlatform.setFriction(0.08);
 	
 	
 	//Add invisible walls to Platform
@@ -171,7 +171,7 @@ function create() {
 	invTrack = this.matter.add.rectangle(gameWidth * 9, gameHeight - 12, gameWidth * 18, 10, {isStatic: true});
 	//platform.x + platform.width/2
 	invTrack.restitution = .3;
-	invTrack.friction = .05;
+	invTrack.friction = .09;
 	
 	console.log("invRight.x = " + invRight.x);
 	console.log("invLeft.x = " + invLeft.x);
@@ -181,7 +181,7 @@ function create() {
 	//Add sandbag and use matter.js
     sandbag = this.matter.add.image(170, 250, "sandbag");
 	sandbag.restitution = 0.3;
-	sandbag.setFriction(0.05);
+	sandbag.setFriction(0.08);
 	sandbag.setFrictionAir(0.0005);
 	
 	//Set interactive so the matter object is clickable
