@@ -348,8 +348,8 @@ function update(time, delta) {
 	if(seconds >= 10)
 	{
 		//console.log("secs = " + seconds);
-		console.log("velocity = " + sandbag.velocity);
-		if(sandbag.velocity = 0)
+		//console.log("velocity = " + sandbag.velocity);
+		if(sandbag.velocity === 0)
 		{
 			//game over
 			//throw up a retry button to start again?
