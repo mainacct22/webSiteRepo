@@ -287,8 +287,11 @@ function create() {
 	  console.log(bodyA);
 	  console.log(bodyB);
 	  
-	  if (bodyA.label === 'sandbag' && bodyB.label === 'floor')
+	  if (bodyA.label === 'sandbag' && bodyB.label === 'floor'
+			|| bodyA.label === 'floor' && bodyB.label ==='sandbag')
 	  {
+		console.log("in if A = " + bodyA.label);
+		console.log("in if B = " + bodyB.label);
 		emitter.startFollow(bodyA);
 		emitter.start();
 	  }
