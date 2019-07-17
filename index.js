@@ -91,7 +91,7 @@ function preload() {
 function create() {
 	
 	
-	this.matter.world.setBounds(0,0, gameWidth * 18, gameHeight);
+	this.matter.world.setBounds(0,0, gameWidth * 36, gameHeight);
 	
 	
   
@@ -131,7 +131,7 @@ function create() {
 	
 	//Add the track to the scene
 	let x;
-	for(x = 305; x < (gameWidth * 18) - 43; x += 43) {
+	for(x = 305; x < (gameWidth * 36) - 43; x += 43) {
 		
 		this.add.image(x, gameHeight - 20, "track");
 		trackLength = x;
@@ -179,7 +179,7 @@ function create() {
 	invRight.frictionStatic = 0;
 	invRight.restitution = .5;
 	
-	invTrack = this.matter.add.rectangle(gameWidth * 9, gameHeight - 12, gameWidth * 18, 10, {isStatic: true, label: 'floor'});
+	invTrack = this.matter.add.rectangle(gameWidth * 18, gameHeight - 12, gameWidth * 36, 10, {isStatic: true, label: 'floor'});
 	invTrack.restitution = .3;
 	invTrack.friction = .09;
 	//invTrack.body.label = 'floor';
@@ -267,7 +267,7 @@ function create() {
 	//sandbag.setVelocityY(-5);
 			
   camera = this.cameras.main;
-  camera.setBounds(0, 0, gameWidth * 18, gameHeight);
+  camera.setBounds(0, 0, gameWidth * 36, gameHeight);
   camera.startFollow(sandbag);
   
   whiteSmoke = this.add.particles('whiteSmoke');
