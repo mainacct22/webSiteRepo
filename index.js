@@ -288,15 +288,15 @@ function create() {
 	  if (bodyA.label === 'sandbag' && bodyB.label === 'floor'
 			|| bodyA.label === 'floor' && bodyB.label === 'sandbag')
 	  {
-		  if(Math.floor(sandbag.body.velocity.x) < 8)
-		  {
+		  //if(Math.floor(sandbag.body.velocity.x) < 8)
+		  //{
 			if (startEmitter)
 			{
 				emitter.startFollow(sandbag);
 				emitter.start();
 				startEmitter = false;
 			}
-		  }	
+		  //}	
 	  }	  
   });
   
