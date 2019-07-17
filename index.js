@@ -220,9 +220,8 @@ function create() {
 		//blendMode: 'ADD'
 	});
 	hitEmitter.setRadial(true);
-	hitEmitter.pause();
 	hitEmitter.stop();
-	hitEmitter.visibility = false;
+	hitEmitter.visible = false;
 	console.log(hitEmitter);
 	
 	dmg = 0;
@@ -316,10 +315,10 @@ function create() {
 	  lifespan: 250,
 	  speed: { min: 2, max: 5},
 	  scale: { start: 0.25, end: 0.5},
-	  alpha: { start: 0.5, end: 0.2},
+	  alpha: { start: 0.25, end: 0},
 	  angle: { min: 0, max: 360} ,
 	  rotate: { onEmit: function () { return customAngle;}}
-	  //blendMode: 'ADD'
+	  blendMode: 'ADD'
   });
   
   //Collision Detection
