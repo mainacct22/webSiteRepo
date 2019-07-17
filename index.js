@@ -192,6 +192,7 @@ function create() {
 	sandbag.setFriction(0.08);
 	sandbag.setFrictionAir(0.0005);
 	sandbag.body.label = 'sandbag';
+	sandbag.body.mass = 100;
 	
 	//Set interactive so the matter object is clickable
 	sandbag.setInteractive();
@@ -266,6 +267,12 @@ function create() {
 	//sandbag.applyForce(-5, -5);
 	//sandbag.setVelocityX(-5);
 	//sandbag.setVelocityY(-5);
+	//var forceMagnitude = 0.02 * body.mass;
+
+    //Body.applyForce(body, body.position, { 
+    //x: (forceMagnitude + Common.random() * forceMagnitude) * Common.choose([1, -1]), 
+    //y: -forceMagnitude + Common.random() * -forceMagnitude
+	//});
 			
   
   whiteSmoke = this.add.particles('whiteSmoke');
@@ -283,8 +290,7 @@ function create() {
   this.matter.world.on('collisionstart', function (event,bodyA,bodyB)
   {
 	  
-	  if (bodyA.label === 'sandbag' && bodyB.label === 'floor'
-			|| bodyA.label === 'floor' && bodyB.label === 'sandbag')
+	  if (bodyA.label === 'floor' && bodyB.label === 'sandbag')
 	  {
 		  //if(Math.floor(sandbag.body.velocity.x) < 8)
 		  //{
@@ -303,8 +309,7 @@ function create() {
 	  console.log("collision End");
 	  console.log(bodyA);
 	  console.log(bodyB);
-	  if (bodyA.label === 'sandbag' && bodyB.label === 'floor'
-			|| bodyA.label === 'floor' && bodyB.label === 'sandbag')
+	  if (bodyA.label === 'floor' && bodyB.label === 'sandbag')
 	  {
 		  if (!startEmitter)
 		  {
