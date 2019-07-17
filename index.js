@@ -214,7 +214,7 @@ function create() {
 		lifespan: 125,
 		scale: { start: 0.5, end: 0.75},
 		alpha: { start: 1, end: 1},
-		speed: { min: 20, max: 100},
+		speed: { min: 2, max: 5},
 		angle: { min: 0, max: 360},
 		quantity: 1,
 		rotate: { onEmit: function () { return customAngle;}}
@@ -222,6 +222,8 @@ function create() {
 	});
 	hitEmitter.setRadial(true);
 	hitEmitter.stop();
+	console.log(hitEmitter);
+	hitEmitter.visibility = false;
 	
 	dmg = 0;
 	
@@ -312,7 +314,7 @@ function create() {
   whiteSmoke = this.add.particles('whiteSmoke');
   smokeEmitter = whiteSmoke.createEmitter({
 	  lifespan: 250,
-	  speed: { min: 20, max: 50},
+	  speed: { min: 2, max: 5},
 	  scale: { start: 0.25, end: 0.5},
 	  alpha: { start: 0.5, end: 0.2},
 	  angle: { min: 0, max: 360} ,
@@ -330,7 +332,7 @@ function create() {
 		  //{
 			if (startSmokeEmitter)
 			{
-				smokeEmitter.startFollow(sandbag, -(sandbag.width/2), sandbag.height/4, false);
+				smokeEmitter.startFollow(sandbag, -(sandbag.width/2), sandbag.height/5, false);
 				smokeEmitter.start();
 				startSmokeEmitter = false;
 			}
