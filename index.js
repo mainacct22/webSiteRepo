@@ -209,7 +209,7 @@ function create() {
 	
 	hitImage = this.add.particles('hitImage');
 	hitEmitter = hitImage.createEmitter({
-		lifespan = 500,
+		lifespan: 500,
 		speed: { min: 20, max: 100},
 		angle: { min: 0, max: 360},
 		quantity: 1,
