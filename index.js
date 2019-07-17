@@ -220,9 +220,10 @@ function create() {
 		//blendMode: 'ADD'
 	});
 	hitEmitter.setRadial(true);
+	hitEmitter.pause();
 	hitEmitter.stop();
-	console.log(hitEmitter);
 	hitEmitter.visibility = false;
+	console.log(hitEmitter);
 	
 	dmg = 0;
 	
@@ -317,8 +318,8 @@ function create() {
 	  scale: { start: 0.25, end: 0.5},
 	  alpha: { start: 0.5, end: 0.2},
 	  angle: { min: 0, max: 360} ,
-	  rotate: { onEmit: function () { return customAngle;}},
-	  blendMode: 'ADD'
+	  rotate: { onEmit: function () { return customAngle;}}
+	  //blendMode: 'ADD'
   });
   
   //Collision Detection
@@ -475,8 +476,8 @@ function update(time, delta) {
 	{
 		sandbag.removeInteractive();
 
-		if((Math.floor(sandbag.body.velocity.x) < 0.2 && Math.floor(sandbag.body.velocity.y) < 0.2)
-			|| (Math.floor(sandbag.body.velocity.x) < -0.2 && Math.floor(sandbag.body.velocity.y < -0.2)))
+		if(Math.floor(sandbag.body.velocity.x) < 1 && Math.floor(sandbag.body.velocity.y) < 1)
+			//|| (Math.floor(sandbag.body.velocity.x) < -1 && Math.floor(sandbag.body.velocity.y < -1)))
 		{
 			//game over
 			//reset initializers
@@ -556,3 +557,5 @@ function resizeApp ()
         justify-content: center;
       }
 */
+
+                                          
