@@ -363,9 +363,9 @@ function create() {
 
 	   
 	btnRestart = this.add
-		.text(gameWidth/2, gameHeight/2, 'RETRY', {
+		.text(100, 100, 'RETRY', {
 		 fill: '#00008B', 
-		 font: "48px monospace"})
+		 font: "36px monospace"})
 		.setInteractive()
 		.setScrollFactor(0)
 		.on('pointerdown', () => restartGame() )
