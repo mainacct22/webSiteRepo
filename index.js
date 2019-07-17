@@ -313,12 +313,12 @@ function create() {
   
   whiteSmoke = this.add.particles('whiteSmoke');
   smokeEmitter = whiteSmoke.createEmitter({
-	  lifespan: 400,
-	  speed: { min: 1, max: 2},
-	  scale: { start: 0.25, end: 0.5},
+	  lifespan: 200,
+	  speed: { min: 20, max: 50},
+	  scale: { start: 0.15, end: 0.25},
 	  alpha: { start: 0.25, end: 0},
 	  angle: { min: 0, max: 360} ,
-	  rotate: { onEmit: function () { return customAngle;}},
+	  //rotate: { onEmit: function () { return customAngle;}},
 	  blendMode: 'ADD'
   });
   smokeEmitter.setRadial(true);
@@ -335,7 +335,7 @@ function create() {
 			if (startSmokeEmitter)
 			{
 				customAngle = Math.random() * 360;
-				smokeEmitter.startFollow(sandbag, -(sandbag.width/2), sandbag.height/4.25, false);
+				smokeEmitter.startFollow(sandbag, -(sandbag.width/2.5), sandbag.height/4.25, false);
 				smokeEmitter.start();
 				startSmokeEmitter = false;
 			}
@@ -492,11 +492,12 @@ function update(time, delta) {
 	}
 	
 	
-	if (sandbag.x < invLeft.x || sandbag.x > invRight.x)
+	if(Math.floor(sandbag.body.velocity.x) < 4)
 	{
-		console.log("sb outside of barrier");
-		console.log("sb x = " + sandbag.x);
-		//sandbag.translate(sandbag.x + 10);
+		if(!startSmokeEmitter)
+		{
+			smokeEmitter.stop();
+		}
 	}
 	 
     //this.controls.update(delta);
