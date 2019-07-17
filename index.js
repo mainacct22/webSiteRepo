@@ -217,8 +217,8 @@ function create() {
 		speed: { min: 20, max: 100},
 		angle: { min: 0, max: 360},
 		quantity: 1,
-		rotate: { onEmit: function () { return customAngle;}},
-		blendMode: 'ADD'
+		rotate: { onEmit: function () { return customAngle;}}
+		//blendMode: 'ADD'
 	});
 	hitEmitter.setRadial(true);
 	hitEmitter.stop();
