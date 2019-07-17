@@ -288,15 +288,16 @@ function create() {
 	  if (bodyA.label === 'sandbag' && bodyB.label === 'floor'
 			|| bodyA.label === 'floor' && bodyB.label === 'sandbag')
 	  {
-		  if (startEmitter)
+		  if(Math.floor(sandbag.body.velocity.x) < 8)
 		  {
-			emitter.startFollow(sandbag);
-			emitter.start();
-			startEmitter = false;
-		  }
-		
-	  }
-	  
+			if (startEmitter)
+			{
+				emitter.startFollow(sandbag);
+				emitter.start();
+				startEmitter = false;
+			}
+		  }	
+	  }	  
   });
   
   this.matter.world.on('collisionend', function (event,bodyA,bodyB)
@@ -352,7 +353,7 @@ function create() {
 	
 
 	lblTime = this.add
-       .text(200, 100, 'Time = 10', {
+       .text(300, 100, 'Time = 10', {
 	   font: "18px monospace",
        fill: "#000000",
        padding: { x: 20, y: 10 },
