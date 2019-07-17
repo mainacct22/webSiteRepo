@@ -71,6 +71,7 @@ let smokeEmitter;
 let hitEmitter;
 let startHitEmitter = true;
 let startSmokeEmitter = true;
+let customAngle;
 
 function preload() {
     
@@ -213,6 +214,7 @@ function create() {
 		speed: { min: 20, max: 100},
 		angle: { min: 0, max: 360},
 		quantity: 1,
+		rotate: { onEmit: function () { return customAngle;}},
 		blendMode: 'ADD'
 	});
 	hitEmitter.setRadial(true);
@@ -229,6 +231,7 @@ function create() {
 		}
 		
 		console.log("sandbag.x = " + sandbag.x);
+		customAngle = Math.random() * 360;
 		hitEmitter.emitParticle(1,pointer.x,pointer.y);
 		
 		
