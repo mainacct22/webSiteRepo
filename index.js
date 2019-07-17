@@ -211,18 +211,16 @@ function create() {
 	hitImage = this.add.particles('hitImage');
 	hitEmitter = hitImage.createEmitter({
 		lifespan: 125,
-		x: -100,
-		y: 0,
 		scale: { start: 0.5, end: 0.75},
 		alpha: { start: 1, end: 1},
 		speed: { min: 2, max: 5},
 		angle: { min: 0, max: 360},
 		quantity: 1,
-		rotate: { onEmit: function () { return customAngle;}}
+		rotate: { onEmit: function () { return customAngle;}},
+		on: false
 		//blendMode: 'ADD'
 	});
-	hitEmitter.setRadial(true);
-	hitEmitter.stop();
+
 	console.log(hitEmitter);
 	
 	dmg = 0;
@@ -237,7 +235,7 @@ function create() {
 		
 		console.log("sandbag.x = " + sandbag.x);
 		customAngle = Math.random() * 360;
-		hitEmitter.emitParticle(1,pointer.x,pointer.y);
+		hitEmitter.emitParticleAt(pointer.x,pointer.y);
 		
 		
 		if(pointer.x > sandbag.x)
