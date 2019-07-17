@@ -89,7 +89,7 @@ function preload() {
 	this.load.image("invPlatform", "assets/invPlatform.png");
 	
 	this.load.image("whiteSmoke", "assets/whiteSmoke.png");
-	this.load.image("hitImage", "assets/hit1_60.png");
+	this.load.image("hitImage", "assets/hit1_inv_60.png");
 
 }
 
@@ -209,13 +209,14 @@ function create() {
 	
 	hitImage = this.add.particles('hitImage');
 	hitEmitter = hitImage.createEmitter({
-		lifespan: 500,
+		lifespan: 250,
 		speed: { min: 20, max: 100},
 		angle: { min: 0, max: 360},
 		quantity: 1,
 		blendMode: 'ADD'
 	});
 	hitEmitter.setRadial(true);
+	hitEmitter.stop();
 	
 	dmg = 0;
 	
