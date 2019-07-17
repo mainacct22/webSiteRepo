@@ -191,7 +191,7 @@ function create() {
 	sandbag.restitution = 0.3;
 	sandbag.setFriction(0.08);
 	sandbag.setFrictionAir(0.0005);
-	sandbag.label = 'sandbag';
+	sandbag.body.label = 'sandbag';
 	
 	//Set interactive so the matter object is clickable
 	sandbag.setInteractive();
