@@ -213,7 +213,7 @@ function create() {
 	hitEmitter = hitImage.createEmitter({
 		lifespan: 125,
 		scale: { start: 0.5, end: 0.75},
-		alpha: { start: 0, end: 0},
+		alpha: { start: 1, end: 1},
 		speed: { min: 20, max: 100},
 		angle: { min: 0, max: 360},
 		quantity: 1,
