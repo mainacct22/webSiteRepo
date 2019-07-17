@@ -152,7 +152,6 @@ function create() {
 	invPlatform.displayHeight = 10;
 	invPlatform.setStatic(true);
 	invPlatform.setFriction(0.08);
-	invPlatform.label = 'floor';
 	
 	
 	//Add invisible walls to Platform
@@ -184,6 +183,7 @@ function create() {
 	//platform.x + platform.width/2
 	invTrack.restitution = .3;
 	invTrack.friction = .09;
+	invTrack.body.label = 'floor';
 	
 
 	//Add sandbag and use matter.js
@@ -287,14 +287,23 @@ function create() {
 	  console.log("collision Start");
 	  console.log(bodyA);
 	  console.log(bodyB);
-	  emitter.startFollow(bodyA);
-	  emitter.start();
+	  
+	  if (bodyA.body.label === 'sandbag' && bodyB.body.label === 'floor')
+	  {
+		emitter.startFollow(bodyA);
+		emitter.start();
+	  }
+	  
   });
   
   this.matter.world.on('collisionend', function (event,bodyA,bodyB)
   {
 	  console.log("collision End");
-	  emitter.stop();
+	  if (bodyA.body.label === 'sandbag' && bodyB.body.label === 'floor')
+	  {
+		emitter.stop();
+	  }
+	  
   });
 
   /*
