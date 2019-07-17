@@ -292,7 +292,7 @@ function create() {
 	  {
 		console.log("in if A = " + bodyA.label);
 		console.log("in if B = " + bodyB.label);
-		emitter.startFollow(bodyB);
+		emitter.startFollow(sandbag);
 		emitter.start();
 	  }
 	  
