@@ -275,7 +275,7 @@ function create() {
 	  lifespan: 750,
 	  speed: { min: 20, max: 50},
 	  scale: { start: 0.4, end: 0},
-	  alpha: { start: 0, end: 0.5},
+	  alpha: { start: 0.5, end: 0},
 	  angle: 180,
 	  blendMode: 'ADD'
   });
