@@ -330,7 +330,7 @@ function create() {
 		  //{
 			if (startSmokeEmitter)
 			{
-				smokeEmitter.startFollow(sandbag, -(sandbag.width/2), sandbag.height/2, false);
+				smokeEmitter.startFollow(sandbag, -(sandbag.width/2), sandbag.height/4, false);
 				smokeEmitter.start();
 				startSmokeEmitter = false;
 			}
