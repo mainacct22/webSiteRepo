@@ -11,7 +11,7 @@ const config = {
   physics: {
     default: "matter",
 	matter: {
-		debug: false
+		debug: true
 	}
   },
   scene: {
@@ -268,7 +268,7 @@ function create() {
 			
   camera = this.cameras.main;
   camera.setBounds(0, 0, gameWidth * 36, gameHeight);
-  camera.startFollow(sandbag);
+  //camera.startFollow(sandbag);
   
   whiteSmoke = this.add.particles('whiteSmoke');
   emitter = whiteSmoke.createEmitter({
@@ -315,7 +315,7 @@ function create() {
 	  
   });
 
-  /*
+  
   cursors = this.input.keyboard.createCursorKeys();
   const controlConfig = {
       camera: this.cameras.main,
@@ -323,11 +323,11 @@ function create() {
       right: cursors.right,
       up: cursors.up,
       down: cursors.down,
-      speed: 1
+      speed: 5
     };
     
   this.controls = new Phaser.Cameras.Controls.FixedKeyControl(controlConfig);
-  */
+  
 
   // Help text that has a "fixed" position on the screen
 	lblDmg = this.add
@@ -395,27 +395,7 @@ function update(time, delta) {
     cloud_4.tilePositionX = camera.scrollX * .9;
     
     sky.tilePositionX = camera.scrollX;
-	
-	//Lazy Detection
-	/*
-	if (sandbag.y >= (gameHeight - 33))
-	{
-		if (startEmitter)
-		{
-			emitter.startFollow(sandbag);
-			emitter.start();
-			startEmitter = false;
-		}
-	}
-	else
-	{
-		if (!startEmitter)
-		{
-			emitter.stop();
-			startEmitter = true;
-		}
-	}
-	*/
+
 	
 	if (sandbag.x > 300)
 	{
@@ -447,11 +427,6 @@ function update(time, delta) {
 	}
 	
 	
-	
-	
-	//642 - window size
-	//631 - sandbag.y
-	
 	if(seconds >= 10)
 	{
 
@@ -478,7 +453,7 @@ function update(time, delta) {
 		//sandbag.translate(sandbag.x + 10);
 	}
 	 
-    //this.controls.update(delta);
+    this.controls.update(delta);
 }
 
 function restartGame()
