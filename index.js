@@ -283,6 +283,8 @@ function create() {
   this.matter.world.on('collisionstart', function (event,bodyA,bodyB)
   {
 	  console.log("collision Start");
+	  console.log(bodyA);
+	  console.log(bodyB);
 	  emitter.startFollow(bodyA);
 	  emitter.start();
   });
