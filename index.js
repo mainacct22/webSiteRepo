@@ -287,7 +287,7 @@ function create() {
 	  console.log(bodyA);
 	  console.log(bodyB);
 	  
-	  if (bodyA.body.label === 'sandbag' && bodyB.body.label === 'floor')
+	  if (bodyA.label === 'sandbag' && bodyB.label === 'floor')
 	  {
 		emitter.startFollow(bodyA);
 		emitter.start();
@@ -298,7 +298,7 @@ function create() {
   this.matter.world.on('collisionend', function (event,bodyA,bodyB)
   {
 	  console.log("collision End");
-	  if (bodyA.body.label === 'sandbag' && bodyB.body.label === 'floor')
+	  if (bodyA.label === 'sandbag' && bodyB.label === 'floor')
 	  {
 		emitter.stop();
 	  }
