@@ -235,7 +235,7 @@ function create() {
 		
 		console.log("sandbag.x = " + sandbag.x);
 		customAngle = Math.random() * 360;
-		hitEmitter.emitParticleAt(pointer.x,pointer.y);
+		hitEmitter.emitParticleAt(pointer.x * window.devicePixelRatio,pointer.y * window.devicePixelRatio);
 		
 		
 		if(pointer.x > sandbag.x)
