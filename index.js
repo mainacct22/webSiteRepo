@@ -311,11 +311,11 @@ function create() {
   
   whiteSmoke = this.add.particles('whiteSmoke');
   smokeEmitter = whiteSmoke.createEmitter({
-	  lifespan: 750,
+	  lifespan: 250,
 	  speed: { min: 20, max: 50},
-	  scale: { start: 0.4, end: 0},
-	  alpha: { start: 0.2, end: 0.5},
-	  angle: { min: 90, max: 180} ,
+	  scale: { start: 0.25, end: 0.5},
+	  alpha: { start: 0.5, end: 0.2},
+	  angle: { min: 0, max: 360} ,
 	  blendMode: 'ADD'
   });
   
@@ -330,7 +330,7 @@ function create() {
 		  //{
 			if (startSmokeEmitter)
 			{
-				smokeEmitter.startFollow(sandbag);
+				smokeEmitter.startFollow(sandbag, 50, 50, false);
 				smokeEmitter.start();
 				startSmokeEmitter = false;
 			}
