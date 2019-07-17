@@ -216,7 +216,8 @@ function create() {
 		speed: { min: 2, max: 5},
 		angle: { min: 0, max: 360},
 		quantity: 1,
-		rotate: { onEmit: function () { return customAngle;}},
+		//rotate: { onEmit: function () { return customAngle;}},
+		rotate: { start: 0, end: 360 },
 		on: false
 		//blendMode: 'ADD'
 	});
@@ -316,7 +317,6 @@ function create() {
 	  scale: { start: 0.15, end: 0.25},
 	  alpha: { start: 0.25, end: 0},
 	  angle: { min: 0, max: 360} ,
-	  //rotate: { onEmit: function () { return customAngle;}},
 	  blendMode: 'ADD'
   });
   smokeEmitter.setRadial(true);
