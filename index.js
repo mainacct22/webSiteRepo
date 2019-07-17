@@ -152,6 +152,7 @@ function create() {
 	invPlatform.displayHeight = 10;
 	invPlatform.setStatic(true);
 	invPlatform.setFriction(0.08);
+	invPlatform.body.label = 'platform';
 	
 	
 	//Add invisible walls to Platform
@@ -300,7 +301,10 @@ function create() {
   this.matter.world.on('collisionend', function (event,bodyA,bodyB)
   {
 	  console.log("collision End");
-	  if (bodyA.label === 'sandbag' && bodyB.label === 'floor')
+	  console.log(bodyA);
+	  console.log(bodyB);
+	  if (bodyA.label === 'sandbag' && bodyB.label === 'floor'
+			|| bodyA.label === 'floor' && bodyB.label === 'sandbag')
 	  {
 		  if (!startEmitter)
 		  {
@@ -436,7 +440,6 @@ function update(time, delta) {
 			|| (Math.floor(sandbag.body.velocity.x) < -1 && Math.floor(sandbag.body.velocity.y < -1)))
 		{
 			//game over
-			//throw up a retry button to start again?
 			//reset initializers
 			btnRestart.setInteractive();
 			btnRestart.visible = true;
