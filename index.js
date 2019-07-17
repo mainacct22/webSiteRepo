@@ -152,6 +152,7 @@ function create() {
 	invPlatform.displayHeight = 10;
 	invPlatform.setStatic(true);
 	invPlatform.setFriction(0.08);
+	invPlatform.label = 'floor';
 	
 	
 	//Add invisible walls to Platform
@@ -190,6 +191,7 @@ function create() {
 	sandbag.restitution = 0.3;
 	sandbag.setFriction(0.08);
 	sandbag.setFrictionAir(0.0005);
+	sandbag.label = 'sandbag';
 	
 	//Set interactive so the matter object is clickable
 	sandbag.setInteractive();
