@@ -71,6 +71,7 @@ let whiteSmoke;
 
 function preload() {
     
+	//First, we have to load images so the game is aware of them
     this.load.image("cloud_1", "assets/clouds_1_600.png");
     this.load.image("cloud_2", "assets/clouds_2_600.png");
     this.load.image("cloud_3", "assets/clouds_3_600.png");
@@ -90,21 +91,20 @@ function preload() {
 
 function create() {
 	
-	
+	//Set the bounds of the scene
 	this.matter.world.setBounds(0,0, gameWidth * 36, gameHeight);
 	
 	
-  
+	// create a tiled sprite with the size of our game screen
     sky = this.add.tileSprite(0, 0, gameWidth, gameHeight, "sky");
+	// Set its pivot to the top left corner
     sky.setOrigin(0,0);
-    sky.setScrollFactor(0);
-    
-    // create a tiled sprite with the size of our game screen
-    cloud_1 = this.add.tileSprite(0, 0, gameWidth, gameHeight, "cloud_1");
-    // Set its pivot to the top left corner
-    cloud_1.setOrigin(0, 0);
-    // fix it so it won't move when the camera moves.
+	// fix it so it won't move when the camera moves.
     // Instead we are moving its texture on the update
+    sky.setScrollFactor(0);
+       
+    cloud_1 = this.add.tileSprite(0, 0, gameWidth, gameHeight, "cloud_1");    
+    cloud_1.setOrigin(0, 0);
     cloud_1.setScrollFactor(0);
     
     cloud_2 = this.add.tileSprite(0, 0, gameWidth, gameHeight, "cloud_2");
@@ -273,6 +273,13 @@ function create() {
     //x: (forceMagnitude + Common.random() * forceMagnitude) * Common.choose([1, -1]), 
     //y: -forceMagnitude + Common.random() * -forceMagnitude
 	//});
+	
+	//Pointer Motion
+	//Angle: pointer.angle
+	//Disatance: pointer.distance
+	//Velocity: pointer.velocity
+	//pointer.velocity.x, pointer.velocity.y
+
 			
   
   whiteSmoke = this.add.particles('whiteSmoke');
@@ -306,19 +313,15 @@ function create() {
   
   this.matter.world.on('collisionend', function (event,bodyA,bodyB)
   {
-	  console.log("collision End");
-	  console.log(bodyA);
-	  console.log(bodyB);
+
 	  if (bodyA.label === 'floor' && bodyB.label === 'sandbag')
 	  {
 		  if (!startEmitter)
 		  {
 			  emitter.stop();
 			  startEmitter = true;
-		  }
-		  		
-	  }
-	  
+		  }  		
+	  }  
   });
 
   camera = this.cameras.main;
@@ -440,6 +443,7 @@ function update(time, delta) {
 	
 	if(seconds >= 10)
 	{
+		sandbag.removeInteractive();
 
 		if((Math.floor(sandbag.body.velocity.x) < 1 && Math.floor(sandbag.body.velocity.y) < 1)
 			|| (Math.floor(sandbag.body.velocity.x) < -1 && Math.floor(sandbag.body.velocity.y < -1)))
