@@ -211,6 +211,8 @@ function create() {
 	hitImage = this.add.particles('hitImage');
 	hitEmitter = hitImage.createEmitter({
 		lifespan: 125,
+		x: -100,
+		y: 0,
 		scale: { start: 0.5, end: 0.75},
 		alpha: { start: 1, end: 1},
 		speed: { min: 2, max: 5},
@@ -221,7 +223,6 @@ function create() {
 	});
 	hitEmitter.setRadial(true);
 	hitEmitter.stop();
-	hitEmitter.visible = false;
 	console.log(hitEmitter);
 	
 	dmg = 0;
@@ -312,14 +313,15 @@ function create() {
   
   whiteSmoke = this.add.particles('whiteSmoke');
   smokeEmitter = whiteSmoke.createEmitter({
-	  lifespan: 250,
-	  speed: { min: 2, max: 5},
+	  lifespan: 400,
+	  speed: { min: 1, max: 2},
 	  scale: { start: 0.25, end: 0.5},
 	  alpha: { start: 0.25, end: 0},
 	  angle: { min: 0, max: 360} ,
 	  rotate: { onEmit: function () { return customAngle;}},
 	  blendMode: 'ADD'
   });
+  smokeEmitter.setRadial(true);
   
   //Collision Detection
   //collisionactive
