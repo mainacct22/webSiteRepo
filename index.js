@@ -281,19 +281,20 @@ function create() {
   });
   
   //Collision Detection
+  //collisionactive
   this.matter.world.on('collisionstart', function (event,bodyA,bodyB)
   {
-	  console.log("collision Start");
-	  console.log(bodyA);
-	  console.log(bodyB);
 	  
 	  if (bodyA.label === 'sandbag' && bodyB.label === 'floor'
 			|| bodyA.label === 'floor' && bodyB.label === 'sandbag')
 	  {
-		console.log("in if A = " + bodyA.label);
-		console.log("in if B = " + bodyB.label);
-		emitter.startFollow(sandbag);
-		emitter.start();
+		  if (startEmitter)
+		  {
+			emitter.startFollow(sandbag);
+			emitter.start();
+			startEmitter = false;
+		  }
+		
 	  }
 	  
   });
@@ -303,7 +304,12 @@ function create() {
 	  console.log("collision End");
 	  if (bodyA.label === 'sandbag' && bodyB.label === 'floor')
 	  {
-		emitter.stop();
+		  if (!startEmitter)
+		  {
+			  emitter.stop();
+			  startEmitter = true;
+		  }
+		  		
 	  }
 	  
   });
