@@ -209,7 +209,6 @@ function create() {
 	
 	
 	hitImage = this.add.particles('hitImage');
-	hitImage.scale
 	hitEmitter = hitImage.createEmitter({
 		lifespan: 125,
 		scale: { start: 0.5, end: 0.75},
@@ -318,6 +317,7 @@ function create() {
 	  scale: { start: 0.25, end: 0.5},
 	  alpha: { start: 0.5, end: 0.2},
 	  angle: { min: 0, max: 360} ,
+	  rotate: { onEmit: function () { return customAngle;}},
 	  blendMode: 'ADD'
   });
   
@@ -332,7 +332,8 @@ function create() {
 		  //{
 			if (startSmokeEmitter)
 			{
-				smokeEmitter.startFollow(sandbag, -(sandbag.width/2), sandbag.height/5, false);
+				customAngle = Math.random() * 360;
+				smokeEmitter.startFollow(sandbag, -(sandbag.width/2), sandbag.height/4.25, false);
 				smokeEmitter.start();
 				startSmokeEmitter = false;
 			}
