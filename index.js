@@ -317,7 +317,7 @@ function create() {
 	  scale: { start: 0.25, end: 0.5},
 	  alpha: { start: 0.25, end: 0},
 	  angle: { min: 0, max: 360} ,
-	  rotate: { onEmit: function () { return customAngle;}}
+	  rotate: { onEmit: function () { return customAngle;}},
 	  blendMode: 'ADD'
   });
   
