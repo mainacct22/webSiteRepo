@@ -11,7 +11,7 @@ const config = {
   physics: {
     default: "matter",
 	matter: {
-		debug: true
+		debug: false
 	}
   },
   scene: {
@@ -202,7 +202,7 @@ function create() {
 	sandbag.body.label = 'sandbag';
 	sandbag.setMass(100);
 	
-	sandbag.debugShowVelocity = true;
+	//sandbag.debugShowVelocity = true;
 	
 	//Set interactive so the matter object is clickable
 	sandbag.setInteractive();
@@ -330,7 +330,7 @@ function create() {
 		  //{
 			if (startSmokeEmitter)
 			{
-				smokeEmitter.startFollow(sandbag, 50, 50, false);
+				smokeEmitter.startFollow(sandbag, -(sandbag.width/2), sandbag.height/2, false);
 				smokeEmitter.start();
 				startSmokeEmitter = false;
 			}
