@@ -211,8 +211,8 @@ function create() {
 	hitImage = this.add.particles('hitImage');
 	hitImage.scale
 	hitEmitter = hitImage.createEmitter({
-		lifespan: 75,
-		scale: { start: 0.5, end: 0.5},
+		lifespan: 125,
+		scale: { start: 0.5, end: 0.75},
 		speed: { min: 20, max: 100},
 		angle: { min: 0, max: 360},
 		quantity: 1,
