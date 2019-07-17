@@ -58,16 +58,19 @@ let seconds;
 let clicked = false;
 let gameScene;
 
-let btnRestart;
-let particles;
-let emitter;
-let startEmitter = true;
-
 let invLeft;
 let invRight;
 let setBounds = true;
 
 let whiteSmoke;
+let hitImage;
+
+let btnRestart;
+let particles;
+let smokeEmitter;
+let hitEmitter;
+let startHitEmitter = true;
+let startSmokeEmitter = true;
 
 function preload() {
     
@@ -86,6 +89,7 @@ function preload() {
 	this.load.image("invPlatform", "assets/invPlatform.png");
 	
 	this.load.image("whiteSmoke", "assets/whiteSmoke.png");
+	this.load.image("hitImage", "assets/hit1_60.png");
 
 }
 
@@ -126,6 +130,9 @@ function create() {
     cloud_4 = this.add.tileSprite(0, 0, gameWidth, gameHeight, "cloud_4");
     cloud_4.setOrigin(0,0);
     cloud_4.setScrollFactor(0);
+	
+	//hitImage = scene.add.image(0,0, "hitImage");
+	//hitImage.visible = false;
 
 	
 	
@@ -192,11 +199,23 @@ function create() {
 	sandbag.setFriction(0.08);
 	sandbag.setFrictionAir(0.0005);
 	sandbag.body.label = 'sandbag';
-	sandbag.body.mass = 100;
+	sandbag.setMass(100);
+	
+	//body.debugShowVelocity = true;
 	
 	//Set interactive so the matter object is clickable
 	sandbag.setInteractive();
 	
+	
+	hitImage = this.add.particles('hitImage');
+	hitEmitter = hitImage.createEmitter({
+		lifespan = 500,
+		speed: { min: 20, max: 100},
+		angle: { min: 0, max: 360},
+		quantity: 1,
+		blendMode: 'ADD'
+	});
+	hitEmitter.setRadial(true);
 	
 	dmg = 0;
 	
@@ -209,6 +228,8 @@ function create() {
 		}
 		
 		console.log("sandbag.x = " + sandbag.x);
+		hitEmitter.emitParticle(1,pointer.x,pointer.y);
+		
 		
 		if(pointer.x > sandbag.x)
 		{
@@ -279,11 +300,10 @@ function create() {
 	//Disatance: pointer.distance
 	//Velocity: pointer.velocity
 	//pointer.velocity.x, pointer.velocity.y
-
-			
+	  
   
   whiteSmoke = this.add.particles('whiteSmoke');
-  emitter = whiteSmoke.createEmitter({
+  smokeEmitter = whiteSmoke.createEmitter({
 	  lifespan: 750,
 	  speed: { min: 20, max: 50},
 	  scale: { start: 0.4, end: 0},
@@ -301,11 +321,11 @@ function create() {
 	  {
 		  //if(Math.floor(sandbag.body.velocity.x) < 8)
 		  //{
-			if (startEmitter)
+			if (startSmokeEmitter)
 			{
-				emitter.startFollow(sandbag);
-				emitter.start();
-				startEmitter = false;
+				smokeEmitter.startFollow(sandbag);
+				smokeEmitter.start();
+				startSmokeEmitter = false;
 			}
 		  //}	
 	  }	  
@@ -316,10 +336,10 @@ function create() {
 
 	  if (bodyA.label === 'floor' && bodyB.label === 'sandbag')
 	  {
-		  if (!startEmitter)
+		  if (!startSmokeEmitter)
 		  {
-			  emitter.stop();
-			  startEmitter = true;
+			  smokeEmitter.stop();
+			  startSmokeEmitter = true;
 		  }  		
 	  }  
   });
@@ -452,8 +472,8 @@ function update(time, delta) {
 			//reset initializers
 			btnRestart.setInteractive();
 			btnRestart.visible = true;
-			emitter.stop();
-			startEmitter = false;
+			smokeEmitter.stop();
+			startSmokeEmitter = false;
 			
 		}
 		
@@ -473,7 +493,7 @@ function update(time, delta) {
 function restartGame()
 {
 	setBounds = true;
-	startEmitter = true;
+	startSmokeEmitter = true;
 	dmg = 0;
 	dist = 0;
 	gameScene.restart();	
