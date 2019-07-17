@@ -202,7 +202,7 @@ function create() {
 	sandbag.body.label = 'sandbag';
 	sandbag.setMass(100);
 	
-	//body.debugShowVelocity = true;
+	sandbag.debugShowVelocity = true;
 	
 	//Set interactive so the matter object is clickable
 	sandbag.setInteractive();
