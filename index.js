@@ -213,6 +213,7 @@ function create() {
 	hitEmitter = hitImage.createEmitter({
 		lifespan: 125,
 		scale: { start: 0.5, end: 0.75},
+		alpha: { start: 0, end: 0},
 		speed: { min: 20, max: 100},
 		angle: { min: 0, max: 360},
 		quantity: 1,
@@ -471,8 +472,8 @@ function update(time, delta) {
 	{
 		sandbag.removeInteractive();
 
-		if((Math.floor(sandbag.body.velocity.x) < 1 && Math.floor(sandbag.body.velocity.y) < 1)
-			|| (Math.floor(sandbag.body.velocity.x) < -1 && Math.floor(sandbag.body.velocity.y < -1)))
+		if((Math.floor(sandbag.body.velocity.x) < 0.2 && Math.floor(sandbag.body.velocity.y) < 0.2)
+			|| (Math.floor(sandbag.body.velocity.x) < -0.2 && Math.floor(sandbag.body.velocity.y < -0.2)))
 		{
 			//game over
 			//reset initializers
