@@ -244,7 +244,7 @@ function create() {
 	
 	tap.on('tap', function(tap){
 		console.log("you tapped bro");
-	}, scope);
+	});
 	
 	dmg = 0;
 	
@@ -282,10 +282,6 @@ function create() {
 			{
 				dmg += 30;
 				sandbag.setVelocity(-.5 * dmg, -.25 * dmg);
-				//console.log("longpress");
-				//console.log("Down " + pointer.downTime);
-				//console.log("Up " + pointer.upTime);
-				//console.log("Duration " + pointer.getDuration());
 			}
 		}
 		else
