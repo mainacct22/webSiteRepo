@@ -268,7 +268,7 @@ function create() {
 		console.log("you tapped bro");
 		console.log(tap);
 		
-		hitEmitter.emitParticleAt(tap.x * window.devicePixelRatio,tap.y * window.devicePixelRatio);
+		hitEmitter.emitParticleAt(tap.lastPointer.downX * window.devicePixelRatio,tap.lastPointer.downY * window.devicePixelRatio);
 		console.log('tap.x = ' + tap.x);
 		console.log('tap.y = ' + tap.y);
 		
