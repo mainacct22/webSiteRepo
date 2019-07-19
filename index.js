@@ -77,6 +77,7 @@ let customAngle;
 //Gestures
 let tap;
 let swipe;
+let press;
 
 function preload() {
 	
@@ -257,14 +258,66 @@ function create() {
 		direction: '8dir'
 	});
 	
+	press = this.rexGestures.add.press(sandbag, {
+		enable: true,
+		time: 500,
+		threshold: 9
+	});
+	
 	tap.on('tap', function(tap){
 		console.log("you tapped bro");
-		cosnole.log(tap);
+		console.log(tap);
+		
+		if(tap.x > sandbag.x)
+		{
+			//right side
+			if ( dmg < 100)
+			{
+			    dmg += 5;
+				sandbag.setVelocity(-.05 * dmg , -.08 * dmg);
+			}
+			else
+			{
+				dmg += 8;
+				sandbag.setVelocity(-.15 * dmg , -.24 * dmg);
+			}
+		}
+		else
+		{
+			if (dmg < 100)
+			{
+				dmg += 5;
+				sandbag.setVelocity(.05 * dmg, -.08 * dmg);
+			}
+			else
+			{
+				dmg += 8;
+				sandbag.setVelocity(.15 * dmg, -.24 * dmg);
+			}
+		}
 	});
 	
 	swipe.on('swipe', function(swipe) {
 		console.log("don't swipe me bro");
 		console.log(swipe);
+		console.log(swipe.dragVelocity);
+	});
+	
+	press.on('pressend', function(press) {
+		console.log("press ended");
+		
+		if(press.x > sandbag.x)
+		{
+			//right side
+			dmg += 30;
+			sandbag.setVelocity(-.5 * dmg, -.25 * dmg);
+		}
+		else
+		{
+			dmg += 30;
+			sandbag.setVelocity(.5 * dmg, -.25 * dmg);
+		}
+		
 	});
 	
 	
@@ -273,6 +326,7 @@ function create() {
 	
 	//Matter.js orients x & y coords in the center of the object, so pointer.x > sandbag.x
 	//means that the pointer touched the right side of the object
+	/*
 	sandbag.on('pointerup', function (pointer) {
 		if (clicked = false)
 		{
@@ -331,6 +385,7 @@ function create() {
 		}	
 		
 	});
+	*/
 	
 
 	//sandbag.setAngularVelocity(5,-5);
