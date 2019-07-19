@@ -367,7 +367,7 @@ function create() {
 			else
 			{
 				dmg += 30;
-                sandbag.applyForce({x: -..02 * dmg, y: -.1 * dmg}, {x: pointer.x, y: pointer.y});
+                sandbag.applyForce({x: -.02 * dmg, y: -.1 * dmg}, {x: pointer.x, y: pointer.y});
 				//sandbag.setVelocity(-.5 * dmg, -.25 * dmg);
 			}
 		}
