@@ -80,10 +80,18 @@ let swipe;
 
 function preload() {
 	
+	/*
 	this.load.scenePlugin({
         key: 'rexuiplugin',
         url: 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/plugins/dist/rexuiplugin.min.js',
         sceneKey: 'rexUI'
+    });
+	*/
+	
+	this.load.scenePlugin({
+        key: 'rexgesturesplugin',
+        url: 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/plugins/dist/rexgesturesplugin.min.js',
+        sceneKey: 'rexGestures'
     });
 	
     
@@ -235,7 +243,7 @@ function create() {
 
 	console.log(hitEmitter);
 	
-	tap = this.rexUI.add.tap(sandbag, {
+	tap = this.rexGestures.add.tap(sandbag, {
 		enable: true,
 		time: 200,
 		tapInterval: 200,
@@ -243,7 +251,7 @@ function create() {
 		tapOffset: 10
 	});
 	
-	swipe = this.rexUI.add.swipe(sandbag, {
+	swipe = this.rexGestures.add.swipe(sandbag, {
 		enable: true,
 		threshold: 10,
 		direction: '8dir'
