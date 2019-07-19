@@ -76,6 +76,7 @@ let customAngle;
 
 //Gestures
 let tap;
+let swipe;
 
 function preload() {
 	
@@ -242,9 +243,21 @@ function create() {
 		tapOffset: 10
 	});
 	
+	swipe = this.rexUI.add.swipe(sandbag, {
+		enable: true,
+		threshold: 10,
+		direction: '8dir'
+	});
+	
 	tap.on('tap', function(tap){
 		console.log("you tapped bro");
 	});
+	
+	swipe.on('swipe', function(swipe) {
+		console.log("don't swipe me bro");
+	});
+	
+	
 	
 	dmg = 0;
 	
