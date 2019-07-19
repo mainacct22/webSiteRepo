@@ -251,7 +251,7 @@ function create() {
 		tapOffset: 10
 	});
 	
-	swipe = this.rexGestures.add.swipe(sandbag, {
+	swipe = this.rexGestures.add.swipe(this.scene, {
 		enable: true,
 		threshold: 10,
 		direction: '8dir'
@@ -259,10 +259,12 @@ function create() {
 	
 	tap.on('tap', function(tap){
 		console.log("you tapped bro");
+		cosnole.log(tap);
 	});
 	
 	swipe.on('swipe', function(swipe) {
 		console.log("don't swipe me bro");
+		console.log(swipe);
 	});
 	
 	
