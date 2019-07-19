@@ -74,6 +74,9 @@ let startHitEmitter = true;
 let startSmokeEmitter = true;
 let customAngle;
 
+//Gestures
+let tap;
+
 function preload() {
 	
 	this.load.scenePlugin({
@@ -81,6 +84,7 @@ function preload() {
         url: 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/plugins/dist/rexuiplugin.min.js',
         sceneKey: 'rexUI'
     });
+	
     
 	//First, we have to load images so the game is aware of them
     this.load.image("cloud_1", "assets/clouds_1_600.png");
@@ -229,6 +233,14 @@ function create() {
 	});
 
 	console.log(hitEmitter);
+	
+	tap = scene.rexUI.add.tap(sandbag, {
+		enable: true,
+		time: 200,
+		tapInterval: 200,
+		threshold: 9,
+		tapOffset: 10
+	});
 	
 	dmg = 0;
 	
