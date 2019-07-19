@@ -354,18 +354,21 @@ function create() {
 			  if ( dmg < 100)
 			  {
 			    dmg += 5;
-				sandbag.setVelocity(-.05 * dmg , -.08 * dmg);
+                sandbag.applyForce({x: -.05 * dmg, y: -.08 * dmg}, {x: pointer.x, y: pointer.y});
+				//sandbag.setVelocity(-.05 * dmg , -.08 * dmg);
 			  }
 			  else
 			  {
 				dmg += 8;
-				sandbag.setVelocity(-.15 * dmg , -.24 * dmg);
+                  sandbag.applyForce({x: -.15 * dmg, y: -.24 * dmg}, {x: pointer.x, y: pointer.y});
+				//sandbag.setVelocity(-.15 * dmg , -.24 * dmg);
 			  }
 			}
 			else
 			{
 				dmg += 30;
-				sandbag.setVelocity(-.5 * dmg, -.25 * dmg);
+                sandbag.applyForce({x: -.5 * dmg, y: -.25 * dmg}, {x: pointer.x, y: pointer.y});
+				//sandbag.setVelocity(-.5 * dmg, -.25 * dmg);
 			}
 		}
 		else
@@ -375,18 +378,21 @@ function create() {
 			  if (dmg < 100)
 			  {
 				  dmg += 5;
-				  sandbag.setVelocity(.05 * dmg, -.08 * dmg);
+                  sandbag.applyForce({x: .05 * dmg, y: -.08 * dmg}, {x: pointer.x, y: pointer.y});
+				  //sandbag.setVelocity(.05 * dmg, -.08 * dmg);
 			  }
 			  else
 			  {
 				  dmg += 8;
-				  sandbag.setVelocity(.15 * dmg, -.24 * dmg);
+                  sandbag.applyForce({x: .15 * dmg, y: -.24 * dmg}, {x: pointer.x, y: pointer.y});
+				  //sandbag.setVelocity(.15 * dmg, -.24 * dmg);
 			  }
 		    }
 			else
 			{
 				dmg += 30;
-				sandbag.setVelocity(.5 * dmg, -.25 * dmg);
+                sandbag.applyForce({x: .5 * dmg, y: -.25 * dmg}, {x: pointer.x, y: pointer.y});
+				//sandbag.setVelocity(.5 * dmg, -.25 * dmg);
 			}
 			
 		}	
