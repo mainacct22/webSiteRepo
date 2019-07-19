@@ -21,6 +21,7 @@ const config = {
   }
 };
 
+
 //width: window.innerWidth * window.devicePixelRatio,
 //height: window.innerHeight * window.devicePixelRatio,
 //parent: "game-container",
@@ -74,6 +75,12 @@ let startSmokeEmitter = true;
 let customAngle;
 
 function preload() {
+	
+	this.load.scenePlugin({
+        key: 'rexuiplugin',
+        url: 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/plugins/dist/rexuiplugin.min.js',
+        sceneKey: 'rexUI'
+    });
     
 	//First, we have to load images so the game is aware of them
     this.load.image("cloud_1", "assets/clouds_1_600.png");
