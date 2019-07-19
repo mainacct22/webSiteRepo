@@ -269,6 +269,9 @@ function create() {
 		console.log(tap);
 		
 		hitEmitter.emitParticleAt(tap.x * window.devicePixelRatio,tap.y * window.devicePixelRatio);
+		console.log('tap.x = ' + tap.x);
+		console.log('tap.y = ' + tap.y);
+		
 		
 		if(tap.x > sandbag.x)
 		{
