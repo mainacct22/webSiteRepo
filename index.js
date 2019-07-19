@@ -87,14 +87,14 @@ function preload() {
         url: 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/plugins/dist/rexuiplugin.min.js',
         sceneKey: 'rexUI'
     });
-	*/
+	
 	
 	this.load.scenePlugin({
         key: 'rexgesturesplugin',
         url: 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/plugins/dist/rexgesturesplugin.min.js',
         sceneKey: 'rexGestures'
     });
-	
+	*/
     
 	//First, we have to load images so the game is aware of them
     this.load.image("cloud_1", "assets/clouds_1_600.png");
@@ -244,6 +244,7 @@ function create() {
 
 	console.log(hitEmitter);
 	
+    /*
 	tap = this.rexGestures.add.tap(sandbag, {
 		enable: true,
 		time: 100,
@@ -264,6 +265,7 @@ function create() {
 		threshold: 9
 	});
 	
+    
 	tap.on('tap', function(tap){
 		console.log("you tapped bro");
 		console.log(tap);
@@ -325,13 +327,13 @@ function create() {
 		
 	});
 	
-	
+	*/
 	
 	dmg = 0;
 	
 	//Matter.js orients x & y coords in the center of the object, so pointer.x > sandbag.x
 	//means that the pointer touched the right side of the object
-	/*
+	
 	sandbag.on('pointerup', function (pointer) {
 		if (clicked = false)
 		{
@@ -390,7 +392,7 @@ function create() {
 		}	
 		
 	});
-	*/
+	
 	
 
 	//sandbag.setAngularVelocity(5,-5);
