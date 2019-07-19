@@ -246,8 +246,8 @@ function create() {
 	
 	tap = this.rexGestures.add.tap(sandbag, {
 		enable: true,
-		time: 200,
-		tapInterval: 200,
+		time: 100,
+		tapInterval: 100,
 		threshold: 9,
 		tapOffset: 10
 	});
@@ -258,15 +258,17 @@ function create() {
 		direction: '8dir'
 	});
 	
-	press = this.rexGestures.add.press(sandbag, {
+	press = this.rexGestures.add.press(this.scene, {
 		enable: true,
-		time: 500,
+		time: 400,
 		threshold: 9
 	});
 	
 	tap.on('tap', function(tap){
 		console.log("you tapped bro");
 		console.log(tap);
+		
+		hitEmitter.emitParticleAt(tap.x * window.devicePixelRatio,tap.y * window.devicePixelRatio);
 		
 		if(tap.x > sandbag.x)
 		{
@@ -569,7 +571,8 @@ function update(time, delta) {
 	
 	if(seconds >= 10)
 	{
-		sandbag.removeInteractive();
+		//Add Back In after testing
+		//sandbag.removeInteractive();
 
 		if(Math.floor(sandbag.body.velocity.x) < 1 && Math.floor(sandbag.body.velocity.y) < 1)
 			//|| (Math.floor(sandbag.body.velocity.x) < -1 && Math.floor(sandbag.body.velocity.y < -1)))
