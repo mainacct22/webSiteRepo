@@ -242,6 +242,10 @@ function create() {
 		tapOffset: 10
 	});
 	
+	tap.on('tap', function(tap){
+		console.log("you tapped bro");
+	}, scope);
+	
 	dmg = 0;
 	
 	//Matter.js orients x & y coords in the center of the object, so pointer.x > sandbag.x
