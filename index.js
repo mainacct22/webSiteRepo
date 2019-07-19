@@ -234,7 +234,7 @@ function create() {
 
 	console.log(hitEmitter);
 	
-	tap = scene.rexUI.add.tap(sandbag, {
+	tap = this.rexUI.add.tap(sandbag, {
 		enable: true,
 		time: 200,
 		tapInterval: 200,
