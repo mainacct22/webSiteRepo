@@ -270,7 +270,7 @@ function create() {
 		let yEnd = swipe.pointer.position.y + swipe.pointer.velocity.y;
 		
 		if ((sandbag.x - 15 > xBeg && sandbag.x - 15 < xEnd)
-			|| (sandbag.y - 30 > yBeg && sandbag.y - 15 < yEnd))
+			|| (sandbag.x - 15 < xBeg && sandbag.x - 15 > xEnd))
 		{
 			cosole.log("bag");
 			console.log(swipe.gameObject);
