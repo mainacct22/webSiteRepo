@@ -257,8 +257,19 @@ function create() {
 		console.log("don't swipe me bro");
 		console.log(swipe);
 		console.log(swipe.dragVelocity);
+		//position.x && position.y are where you begin the swipe
+		console.log("where swipe began");
 		console.log(swipe.pointer.position.x);
 		console.log(swipe.pointer.position.y);
+		console.log("last pointer");
+		console.log(swipe.lastPointer.position.x);
+		console.log(swipe.lastPointer.position.y);
+		console.log("pointer velocity");
+		console.log(swipe.pointer.velocity.x);
+		console.log(swipe.pointer.velocity.y);
+		console.log("last pointer");
+		console.log(swipe.lastPointer.velocity.x);
+		console.log(swipe.lastPointer.velocity.y);
 		
 		if (swipe.isTouchingAnyObject)
 		{
