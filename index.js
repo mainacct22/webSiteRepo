@@ -257,7 +257,6 @@ function create() {
 	});
 	
 	swipe.on('swipe', function(swipe) {
-		console.log("don't swipe me bro");
 		console.log(swipe);
 		console.log(swipe.dragVelocity);
 		//position.x && position.y are where you begin the swipe
@@ -267,14 +266,12 @@ function create() {
 		console.log("sandbag.x = " + sandbag.x);
 		console.log("sandbag.y = " + sandbag.y);
 		console.log("        ");
-		console.log(gameScene);
-		//console.log("pointer.x = " + gameScene.pointer.x);
-		//console.log("pointer.y = " + gameScene.pointer.y);
-		console.log("scale x = " + scaleX);
-		console.log("scale y = " + scaleY);
-		//console.log(swipe.pointer.velocity.x);
-		//console.log(swipe.pointer.velocity.y);
-		//console.log(gameScene.pointer);
+
+		console.log("up = " + swipe.up);
+		console.log("down = " + swipe.down);
+		console.log("left = " + swipe.left);
+		console.log("right = " + swipe.right);
+
 		
 		
 		let xBeg = swipe.pointer.position.x;
