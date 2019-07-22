@@ -260,9 +260,9 @@ function create() {
 		//position.x && position.y are where you begin the swipe
 		console.log("where swipe began");
 		console.log(swipe.pointer.position.x);
-		console.log("sandbag.x = " sandbag.x);
+		console.log("sandbag.x = " + sandbag.x);
 		console.log(swipe.pointer.position.y);
-		console.log("sandbag.y = " sandbag.y);
+		console.log("sandbag.y = " + sandbag.y);
 		console.log(swipe.pointer.velocity.x);
 		console.log(swipe.pointer.velocity.y);
 		
