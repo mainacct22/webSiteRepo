@@ -246,6 +246,7 @@ function create() {
 	
     /*
 	*/
+	gameScene = this.scene;
 	
 	swipe = this.rexGestures.add.swipe(this.scene, {
 		enable: true,
@@ -264,12 +265,13 @@ function create() {
 		console.log("sandbag.x = " + sandbag.x);
 		console.log("sandbag.y = " + sandbag.y);
 		console.log("        ");
-		console.log("pointer.x = " + this.scene.pointer.x);
-		console.log("pointer.y = " + this.scene.pointer.y);
+		console.log(gameScene);
+		console.log("pointer.x = " + gameScene.pointer.x);
+		console.log("pointer.y = " + gameScene.pointer.y);
 		console.log("        ");
 		console.log(swipe.pointer.velocity.x);
 		console.log(swipe.pointer.velocity.y);
-		console.log(this.scene.pointer);
+		console.log(gameScene.pointer);
 		
 		
 		let xBeg = swipe.pointer.position.x;
@@ -564,7 +566,7 @@ function create() {
   timedEvent = this.time.addEvent({ delay: 10000, repeat: 0});
   
   
-  gameScene = this.scene;
+  
 	
 
 }
