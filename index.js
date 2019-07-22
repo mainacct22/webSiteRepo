@@ -29,6 +29,8 @@ const config = {
 const game = new Phaser.Game(config);
 const gameWidth = window.innerWidth * window.devicePixelRatio;
 const gameHeight = window.innerHeight * window.devicePixelRatio;
+let scaleX = gameWidth / 800;
+let scaleY = gameHeight / 600;
 let cursors;
 let player;
 let platform;
@@ -266,12 +268,13 @@ function create() {
 		console.log("sandbag.y = " + sandbag.y);
 		console.log("        ");
 		console.log(gameScene);
-		console.log("pointer.x = " + gameScene.pointer.x);
-		console.log("pointer.y = " + gameScene.pointer.y);
-		console.log("        ");
-		console.log(swipe.pointer.velocity.x);
-		console.log(swipe.pointer.velocity.y);
-		console.log(gameScene.pointer);
+		//console.log("pointer.x = " + gameScene.pointer.x);
+		//console.log("pointer.y = " + gameScene.pointer.y);
+		console.log("scale x = " + scaleX);
+		console.log("scale y = " + scaleY);
+		//console.log(swipe.pointer.velocity.x);
+		//console.log(swipe.pointer.velocity.y);
+		//console.log(gameScene.pointer);
 		
 		
 		let xBeg = swipe.pointer.position.x;
