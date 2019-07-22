@@ -279,11 +279,55 @@ function create() {
 		let yBeg = swipe.pointer.position.y;
 		let yEnd = swipe.pointer.position.y + swipe.pointer.velocity.y;
 		
-		if ((sandbag.x > xBeg && sandbag.x < xEnd)
-			|| (sandbag.x < xBeg && sandbag.x > xEnd))
+		if (swipe.right)
 		{
-			console.log("bag");
+			if (swipe.down)
+			{
+				
+			}
+			else if (swipe.up)
+			{
+				
+			}
+			else
+			{
+				if ((sandbag.x > xBeg && sandbag.x < xEnd)
+					&& (yBeg >= sandbag.y - 30 && yBeg <= sandbag.y + 30))
+				{
+					console.log("bag");
+				}
+				dmg += 5;
+                sandbag.applyForce({x: -.01 * dmg, y: -.05 * dmg}, {x: pointer.x, y: pointer.y});
+			}
 		}
+		else if (swipe.left)
+		{
+			if (swipe.down)
+			{
+				
+			}
+			else if (swipe.up)
+			{
+				
+			}
+			else
+			{
+				if ((sandbag.x < xBeg && sandbag.x > xEnd)
+					&& (yBeg >= sandbag.y - 30 && yBeg <= sandbag.y + 30))
+				dmg += 5;
+                sandbag.applyForce({x: .01 * dmg, y: -.05 * dmg}, {x: pointer.x, y: pointer.y});
+			}
+			
+		}
+		else if (swipe.up)
+		{
+			
+		}
+		else if (swipe.down)
+		{
+			
+		}
+		
 	});
 	
 	/*
@@ -372,7 +416,8 @@ function create() {
 		{
 			clicked = true;
 		}
-		
+	
+		/*
 		console.log("sandbag.x = " + sandbag.x);
 		customAngle = Math.random() * 360;
 		hitEmitter.emitParticleAt(pointer.x,pointer.y);
@@ -429,6 +474,7 @@ function create() {
 			}
 			
 		}	
+		*/
 		
 	});
 	
