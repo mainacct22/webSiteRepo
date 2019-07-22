@@ -261,19 +261,18 @@ function create() {
 		console.log("where swipe began");
 		console.log(swipe.pointer.position.x);
 		console.log(swipe.pointer.position.y);
-		console.log("last pointer");
-		console.log(swipe.lastPointer.position.x);
-		console.log(swipe.lastPointer.position.y);
-		console.log("pointer velocity");
 		console.log(swipe.pointer.velocity.x);
 		console.log(swipe.pointer.velocity.y);
-		console.log("last pointer");
-		console.log(swipe.lastPointer.velocity.x);
-		console.log(swipe.lastPointer.velocity.y);
 		
-		if (swipe.isTouchingAnyObject)
+		let xBeg = swipe.pointer.position.x;
+		let xEnd = swipe.pointer.position.x + swipe.pointer.velocity.x;
+		let yBeg = swipe.pointer.position.y;
+		let yEnd = swipe.pointer.position.y + swipe.pointer.velocity.y;
+		
+		if ((sandbag.x - 15 > xBeg && sandbag.x - 15 < xEnd)
+			|| (sandbag.y - 30 > yBeg && sandbag.y - 15 < yEnd))
 		{
-			cosole.log("touched something");
+			cosole.log("bag");
 			console.log(swipe.gameObject);
 		}
 	});
