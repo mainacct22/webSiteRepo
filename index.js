@@ -259,12 +259,17 @@ function create() {
 		console.log(swipe.dragVelocity);
 		//position.x && position.y are where you begin the swipe
 		console.log("where swipe began");
-		console.log(swipe.pointer.position.x);
+		console.log("swipe.x = " + swipe.pointer.position.x);
+		console.log("swipe.y = " + swipe.pointer.position.y);
 		console.log("sandbag.x = " + sandbag.x);
-		console.log(swipe.pointer.position.y);
 		console.log("sandbag.y = " + sandbag.y);
+		console.log("        ");
+		console.log("pointer.x = " + pointer.x);
+		console.log("pointer.y = " + pointer.y);
+		console.log("        ");
 		console.log(swipe.pointer.velocity.x);
 		console.log(swipe.pointer.velocity.y);
+		console.log(pointer);
 		
 		
 		let xBeg = swipe.pointer.position.x;
@@ -276,7 +281,6 @@ function create() {
 			|| (sandbag.x < xBeg && sandbag.x > xEnd))
 		{
 			console.log("bag");
-			console.log(swipe.gameObject);
 		}
 	});
 	
