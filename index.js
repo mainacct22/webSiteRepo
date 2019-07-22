@@ -257,6 +257,14 @@ function create() {
 		console.log("don't swipe me bro");
 		console.log(swipe);
 		console.log(swipe.dragVelocity);
+		console.log(swipe.pointer.position.x);
+		console.log(swipe.pointer.position.y);
+		
+		if (swipe.isTouchingAnyObject)
+		{
+			cosole.log("touched something");
+			console.log(swipe.gameObject);
+		}
 	});
 	
 	/*
