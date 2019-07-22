@@ -87,14 +87,14 @@ function preload() {
         url: 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/plugins/dist/rexuiplugin.min.js',
         sceneKey: 'rexUI'
     });
-	
+	*/
 	
 	this.load.scenePlugin({
         key: 'rexgesturesplugin',
         url: 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/plugins/dist/rexgesturesplugin.min.js',
         sceneKey: 'rexGestures'
     });
-	*/
+	
     
 	//First, we have to load images so the game is aware of them
     this.load.image("cloud_1", "assets/clouds_1_600.png");
@@ -245,6 +245,22 @@ function create() {
 	console.log(hitEmitter);
 	
     /*
+	*/
+	
+	swipe = this.rexGestures.add.swipe(this.scene, {
+		enable: true,
+		threshold: 10,
+		direction: '8dir'
+	});
+	
+	swipe.on('swipe', function(swipe) {
+		console.log("don't swipe me bro");
+		console.log(swipe);
+		console.log(swipe.dragVelocity);
+	});
+	
+	/*
+	
 	tap = this.rexGestures.add.tap(sandbag, {
 		enable: true,
 		time: 100,
@@ -253,11 +269,6 @@ function create() {
 		tapOffset: 10
 	});
 	
-	swipe = this.rexGestures.add.swipe(this.scene, {
-		enable: true,
-		threshold: 10,
-		direction: '8dir'
-	});
 	
 	press = this.rexGestures.add.press(this.scene, {
 		enable: true,
@@ -304,11 +315,6 @@ function create() {
 		}
 	});
 	
-	swipe.on('swipe', function(swipe) {
-		console.log("don't swipe me bro");
-		console.log(swipe);
-		console.log(swipe.dragVelocity);
-	});
 	
 	press.on('pressend', function(press) {
 		console.log("press ended");
@@ -657,8 +663,6 @@ function resizeApp ()
 	canvas.style.width	= width + 'px';
 	canvas.style.height	= height + 'px';
 }
-
-
       #game-container {
         min-width: 100vw;
         min-height: 100vh;
@@ -667,5 +671,3 @@ function resizeApp ()
         justify-content: center;
       }
 */
-
-                                          
