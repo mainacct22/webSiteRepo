@@ -264,12 +264,12 @@ function create() {
 		console.log("sandbag.x = " + sandbag.x);
 		console.log("sandbag.y = " + sandbag.y);
 		console.log("        ");
-		console.log("pointer.x = " + pointer.x);
-		console.log("pointer.y = " + pointer.y);
+		console.log("pointer.x = " + this.pointer.x);
+		console.log("pointer.y = " + this.pointer.y);
 		console.log("        ");
 		console.log(swipe.pointer.velocity.x);
 		console.log(swipe.pointer.velocity.y);
-		console.log(pointer);
+		console.log(this.pointer);
 		
 		
 		let xBeg = swipe.pointer.position.x;
