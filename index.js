@@ -295,9 +295,10 @@ function create() {
 					&& (yBeg >= sandbag.y - 30 && yBeg <= sandbag.y + 30))
 				{
 					console.log("bag");
-				}
-				dmg += 5;
-                sandbag.applyForce({x: -.01 * dmg, y: -.05 * dmg}, {x: pointer.x, y: pointer.y});
+					dmg += 5;
+					sandbag.setVelocity(-.05 * dmg , -.08 * dmg);
+					//sandbag.applyForce({x: -.01 * dmg, y: -.05 * dmg}, {x: pointer.x, y: pointer.y});
+				}			
 			}
 		}
 		else if (swipe.left)
@@ -314,8 +315,12 @@ function create() {
 			{
 				if ((sandbag.x < xBeg && sandbag.x > xEnd)
 					&& (yBeg >= sandbag.y - 30 && yBeg <= sandbag.y + 30))
-				dmg += 5;
-                sandbag.applyForce({x: .01 * dmg, y: -.05 * dmg}, {x: pointer.x, y: pointer.y});
+				{
+					dmg += 5;
+					sandbag.setVelocity(.05 * dmg , -.08 * dmg);
+					//sandbag.applyForce({x: .01 * dmg, y: -.05 * dmg}, {x: pointer.x, y: pointer.y});
+				}
+				
 			}
 			
 		}
