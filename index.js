@@ -254,14 +254,14 @@ function create() {
 	
 	//Matter.js orients x & y coords in the center of the object, so pointer.x > sandbag.x
 	//means that the pointer touched the right side of the object
-	
+	/*
 	sandbag.on('pointerup', function (pointer) {
 		if (clicked = false)
 		{
 			clicked = true;
 		}
 	
-		/*
+		
 		console.log("sandbag.x = " + sandbag.x);
 		customAngle = Math.random() * 360;
 		hitEmitter.emitParticleAt(pointer.x,pointer.y);
@@ -318,9 +318,11 @@ function create() {
 			}
 			
 		}	
-		*/
+		
 		
 	});
+	*/
+	
 	  
   
   /*
@@ -371,11 +373,11 @@ function create() {
   });
   */
 
-  camera = this.cameras.main;
-  camera.setBounds(0, 0, gameWidth * 36, gameHeight);
-  camera.startFollow(sandbag);
+  //camera = this.cameras.main;
+  //camera.setBounds(0, 0, gameWidth * 36, gameHeight);
+  //camera.startFollow(sandbag);
   
-  /*
+  
   cursors = this.input.keyboard.createCursorKeys();
   const controlConfig = {
       camera: this.cameras.main,
@@ -387,7 +389,7 @@ function create() {
     };
     
   this.controls = new Phaser.Cameras.Controls.FixedKeyControl(controlConfig);
-  */
+  
   
 
   // Help text that has a "fixed" position on the screen
@@ -449,6 +451,7 @@ function create() {
 function update(time, delta) {
     
 	
+	/*
 	if (sandbag.x > 300)
 	{
 		sandbag.removeInteractive();
@@ -460,6 +463,7 @@ function update(time, delta) {
 		//dist = Phaser.Math.distance(120,0,sandbag.x,0)
 		lblDist.text = 'Distance = ' + dist + ' ft'; 
 	}
+	*/
 	
 	lblDmg.text = 'Damage = ' + dmg;	
 	seconds = timedEvent.getProgress() * 10;
@@ -467,6 +471,7 @@ function update(time, delta) {
 	lblTime.text = 'Time = ' + (10 - seconds);
 	//timedEvent.elapsed / timedEvent.delay
 	
+	/*
 	if (seconds >= 7)
 	{
 		if (setBounds)
@@ -477,6 +482,7 @@ function update(time, delta) {
 		}
 		
 	}
+	*/
 	
 	
 	if(seconds >= 10)
@@ -484,6 +490,7 @@ function update(time, delta) {
 		//Add Back In after testing
 		//sandbag.removeInteractive();
 
+		/*
 		if(Math.floor(sandbag.body.velocity.x) < 1 && Math.floor(sandbag.body.velocity.y) < 1)
 			//|| (Math.floor(sandbag.body.velocity.x) < -1 && Math.floor(sandbag.body.velocity.y < -1)))
 		{
@@ -495,10 +502,12 @@ function update(time, delta) {
 			startSmokeEmitter = false;
 			
 		}
+		*/
 		
 	}
 	
 	
+	/*
 	if(Math.floor(sandbag.body.velocity.x) < 4)
 	{
 		if(!startSmokeEmitter)
@@ -506,8 +515,9 @@ function update(time, delta) {
 			smokeEmitter.stop();
 		}
 	}
+	*/
 	 
-    //this.controls.update(delta);
+    this.controls.update(delta);
 }
 
 function restartGame()
