@@ -9,8 +9,8 @@ const config = {
   },
   pixelArt: true,
   physics: {
-    default: "matter",
-	matter: {
+    default: "arcade",
+	arcade: {
 		debug: false
 	}
   },
@@ -90,117 +90,41 @@ function preload() {
         sceneKey: 'rexUI'
     });
 	*/
-	
+	/*
 	this.load.scenePlugin({
         key: 'rexgesturesplugin',
         url: 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/plugins/dist/rexgesturesplugin.min.js',
         sceneKey: 'rexGestures'
     });
+	*/
 	
     
 	//First, we have to load images so the game is aware of them
-    this.load.image("cloud_1", "assets/clouds_1_600.png");
-    this.load.image("cloud_2", "assets/clouds_2_600.png");
-    this.load.image("cloud_3", "assets/clouds_3_600.png");
-    this.load.image("cloud_4", "assets/clouds_4_600.png");
-    this.load.image("rock_1",  "assets/rocks_1_600.png");
-    this.load.image("rock_2",  "assets/rocks_2_600.png");
-    this.load.image("sky",     "assets/sky_600.png");
-	
-	this.load.image("track",   "assets/simpleTrack.png");
-	this.load.image("sandbag", "assets/sandbag1.png");
-    this.load.image("platform", "assets/platform_a.png");
-	this.load.image("invPlatform", "assets/invPlatform.png");
-	
-	this.load.image("whiteSmoke", "assets/whiteSmoke.png");
-	this.load.image("hitImage", "assets/hit1_inv_60.png");
 
+	this.load.image("tiles", "assets/tiles_packed.png");
+	this.load.tilemapTiledJSON("map", "assets/SmashZBagMap2.json");
 }
 
 function create() {
 	
 	//Set the bounds of the scene
-	this.matter.world.setBounds(0,0, gameWidth * 36, gameHeight);
+	//this.matter.world.setBounds(0,0, gameWidth * 36, gameHeight);
 	
-	
-	// create a tiled sprite with the size of our game screen
-    sky = this.add.tileSprite(0, 0, gameWidth, gameHeight, "sky");
-	// Set its pivot to the top left corner
-    sky.setOrigin(0,0);
-	// fix it so it won't move when the camera moves.
-    // Instead we are moving its texture on the update
-    sky.setScrollFactor(0);
-       
-    cloud_1 = this.add.tileSprite(0, 0, gameWidth, gameHeight, "cloud_1");    
-    cloud_1.setOrigin(0, 0);
-    cloud_1.setScrollFactor(0);
-    
-    cloud_2 = this.add.tileSprite(0, 0, gameWidth, gameHeight, "cloud_2");
-    cloud_2.setOrigin(0,0);
-    cloud_2.setScrollFactor(0);
-    
-    rock_1 = this.add.tileSprite(0, 0, gameWidth, gameHeight, "rock_1");
-    rock_1.setOrigin(0,0);
-    rock_1.setScrollFactor(0);
-    
-    cloud_3 = this.add.tileSprite(0, 0, gameWidth, gameHeight, "cloud_3");
-    cloud_2.setOrigin(0,0);
-    cloud_2.setScrollFactor(0);
-    
-    rock_2 = this.add.tileSprite(0, 0, gameWidth, gameHeight, "rock_2");
-    rock_2.setOrigin(0,0);
-    rock_2.setScrollFactor(0);
-    
-    cloud_4 = this.add.tileSprite(0, 0, gameWidth, gameHeight, "cloud_4");
-    cloud_4.setOrigin(0,0);
-    cloud_4.setScrollFactor(0);
-	
+	const map = this.make.tilemap({ key: "map"});
+	const tileset = map.addTilesetImage("tiles_packed", "tiles");
+	// layer index, tileset, x, y
+	const worldLayer = map.createStaticLayer("Ground", tileset, 0, 0);
+	const aboveLayer = map.createStaticLayer("Above", tileset, 0, 0);
+
 	//hitImage = scene.add.image(0,0, "hitImage");
 	//hitImage.visible = false;
 
 	
 	
-	//Add the track to the scene
-	let x;
-	for(x = 305; x < (gameWidth * 36) - 43; x += 43) {
-		
-		this.add.image(x, gameHeight - 20, "track");
-		trackLength = x;
-	}
 	
-	//place the inv platform on the track
-	//invTrack = this.matter.add.image(305, gameHeight - 12, "invPlatform");
-	//invTrack.displayWidth = trackLength;
-	//invTrack.displayHeight = 10;
-	//invTrack.setStatic(true);
-	//invTrack.setFriction(0.05);
-	
-	
-	//Add platform and inv Platform 
-	platform = this.add.image(165, gameHeight - 50, "platform");
-	invPlatform = this.matter.add.image(platform.x, gameHeight - 60, "invPlatform");
-	invPlatform.displayWidth = 216;
-	invPlatform.displayHeight = 10;
-	invPlatform.setStatic(true);
-	invPlatform.setFriction(0.08);
-	invPlatform.body.label = 'platform';
-	
-	
-	//Add invisible walls to Platform
-	//invLeft = this.matter.add.image(platform.x - platform.width/2 - 40, 300, "invPlatform");
-	//invLeft.displayWidth = 80;
-	//invLeft.displayHeight = gameHeight;
-	//invLeft.setStatic(true);
-	//invLeft.setFriction(0.04);
-
-	
-	//invRight = this.matter.add.image(platform.x + platform.width/2 + 40, 300, "invPlatform");
-	//invRight.displayWidth = 80;
-	//invRight.displayHeight = gameHeight;
-	//invRight.setStatic(true);
-	//invRight.setFriction(0.04);
 	
 	//Left
+	/*
 	invLeft = this.matter.add.rectangle(platform.x - platform.width/2 - 40, gameHeight/2, 80, gameHeight, {isStatic: true});
 	//Right
 	invRight = this.matter.add.rectangle(platform.x + platform.width/2 + 40, gameHeight/2, 80, gameHeight, {isStatic: true});
@@ -210,27 +134,27 @@ function create() {
 	
 	invRight.frictionStatic = 0;
 	invRight.restitution = .5;
-	
-	invTrack = this.matter.add.rectangle(gameWidth * 18, gameHeight - 12, gameWidth * 36, 10, {isStatic: true, label: 'floor'});
-	invTrack.restitution = .3;
-	invTrack.friction = .09;
-	//invTrack.body.label = 'floor';
+	*/
+
 	
 
 	//Add sandbag and use matter.js
+	/*
     sandbag = this.matter.add.image(170, 250, "sandbag");
 	sandbag.restitution = 0.3;
 	sandbag.setFriction(0.08);
 	sandbag.setFrictionAir(0.0005);
 	sandbag.body.label = 'sandbag';
 	sandbag.setMass(100);
+	*/
 	
 	//sandbag.debugShowVelocity = true;
 	
 	//Set interactive so the matter object is clickable
-	sandbag.setInteractive();
+	//sandbag.setInteractive();
 	
 	
+	/*
 	hitImage = this.add.particles('hitImage');
 	hitEmitter = hitImage.createEmitter({
 		lifespan: 125,
@@ -243,97 +167,12 @@ function create() {
 		rotate: { start: 0, end: 360 },
 		on: false
 	});
+	*/
 
-	console.log(hitEmitter);
 	
     /*
 	*/
 	gameScene = this.scene;
-	
-	swipe = this.rexGestures.add.swipe(this.scene, {
-		enable: true,
-		threshold: 10,
-		direction: '8dir'
-	});
-	
-	swipe.on('swipe', function(swipe) {
-		console.log(swipe);
-		console.log(swipe.dragVelocity);
-		//position.x && position.y are where you begin the swipe
-		console.log("where swipe began");
-		console.log("swipe.x = " + swipe.pointer.position.x);
-		console.log("swipe.y = " + swipe.pointer.position.y);
-		console.log("sandbag.x = " + sandbag.x);
-		console.log("sandbag.y = " + sandbag.y);
-		console.log("        ");
-
-		console.log("up = " + swipe.up);
-		console.log("down = " + swipe.down);
-		console.log("left = " + swipe.left);
-		console.log("right = " + swipe.right);
-
-		
-		
-		let xBeg = swipe.pointer.position.x;
-		let xEnd = swipe.pointer.position.x + swipe.pointer.velocity.x;
-		let yBeg = swipe.pointer.position.y;
-		let yEnd = swipe.pointer.position.y + swipe.pointer.velocity.y;
-		
-		if (swipe.right)
-		{
-			if (swipe.down)
-			{
-				
-			}
-			else if (swipe.up)
-			{
-				
-			}
-			else
-			{
-				if ((sandbag.x > xBeg && sandbag.x < xEnd)
-					&& (yBeg >= sandbag.y - 30 && yBeg <= sandbag.y + 30))
-				{
-					console.log("bag");
-					dmg += 5;
-					sandbag.setVelocity(-.05 * dmg , -.08 * dmg);
-					//sandbag.applyForce({x: -.01 * dmg, y: -.05 * dmg}, {x: pointer.x, y: pointer.y});
-				}			
-			}
-		}
-		else if (swipe.left)
-		{
-			if (swipe.down)
-			{
-				
-			}
-			else if (swipe.up)
-			{
-				
-			}
-			else
-			{
-				if ((sandbag.x < xBeg && sandbag.x > xEnd)
-					&& (yBeg >= sandbag.y - 30 && yBeg <= sandbag.y + 30))
-				{
-					dmg += 5;
-					sandbag.setVelocity(.05 * dmg , -.08 * dmg);
-					//sandbag.applyForce({x: .01 * dmg, y: -.05 * dmg}, {x: pointer.x, y: pointer.y});
-				}
-				
-			}
-			
-		}
-		else if (swipe.up)
-		{
-			
-		}
-		else if (swipe.down)
-		{
-			
-		}
-		
-	});
 	
 	/*
 	
@@ -482,27 +321,9 @@ function create() {
 		*/
 		
 	});
-	
-	
-
-	//sandbag.setAngularVelocity(5,-5);
-	//sandbag.applyForce(-5, -5);
-	//sandbag.setVelocityX(-5);
-	//sandbag.setVelocityY(-5);
-	//var forceMagnitude = 0.02 * body.mass;
-
-    //Body.applyForce(body, body.position, { 
-    //x: (forceMagnitude + Common.random() * forceMagnitude) * Common.choose([1, -1]), 
-    //y: -forceMagnitude + Common.random() * -forceMagnitude
-	//});
-	
-	//Pointer Motion
-	//Angle: pointer.angle
-	//Disatance: pointer.distance
-	//Velocity: pointer.velocity
-	//pointer.velocity.x, pointer.velocity.y
 	  
   
+  /*
   whiteSmoke = this.add.particles('whiteSmoke');
   smokeEmitter = whiteSmoke.createEmitter({
 	  lifespan: 200,
@@ -513,9 +334,11 @@ function create() {
 	  blendMode: 'ADD'
   });
   smokeEmitter.setRadial(true);
+  */
   
   //Collision Detection
   //collisionactive
+  /*
   this.matter.world.on('collisionstart', function (event,bodyA,bodyB)
   {
 	  
@@ -546,6 +369,7 @@ function create() {
 		  }  		
 	  }  
   });
+  */
 
   camera = this.cameras.main;
   camera.setBounds(0, 0, gameWidth * 36, gameHeight);
@@ -624,15 +448,6 @@ function create() {
 
 function update(time, delta) {
     
-    cloud_1.tilePositionX = camera.scrollX * .2;
-    cloud_2.tilePositionX = camera.scrollX * .45;
-    rock_1.tilePositionX = camera.scrollX * .6;
-    cloud_3.tilePositionX = camera.scrollX * .75;
-    rock_2.tilePositionX = camera.scrollX * .8;
-    cloud_4.tilePositionX = camera.scrollX * .9;
-    
-    sky.tilePositionX = camera.scrollX;
-
 	
 	if (sandbag.x > 300)
 	{
@@ -714,38 +529,3 @@ function enterButtonRestState()
 	
 	btnRestart.setStyle({ fill: '#00008B' });	
 }
-
-
-/*
-function resizeApp ()
-{
-	// Width-height-ratio of game resolution
-    // Replace 360 with your game width, and replace 640 with your game height
-	let game_ratio		= 800 / 600;
-	
-	// Make div full height of browser and keep the ratio of game resolution
-	let div			= document.getElementById('phaser-app');
-	div.style.width		= (window.innerHeight * game_ratio) + 'px';
-	div.style.height	= window.innerHeight + 'px';
-	
-	// Check if device DPI messes up the width-height-ratio
-	let canvas			= document.getElementsByTagName('canvas')[0];
-	
-	let dpi_w	= parseInt(div.style.width) / canvas.width;
-	let dpi_h	= parseInt(div.style.height) / canvas.height;		
-	
-	let height	= window.innerHeight * (dpi_w / dpi_h);
-	let width	= height * game_ratio;
-	
-	// Scale canvas	
-	canvas.style.width	= width + 'px';
-	canvas.style.height	= height + 'px';
-}
-      #game-container {
-        min-width: 100vw;
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-*/
