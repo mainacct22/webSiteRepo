@@ -165,10 +165,9 @@ function create() {
 	
 	//var rect = new Phaser.Geom.Rectangle(250, 200, 300, 200);
 	
-	invPlatform = this.physics.add.image(100, gameHeight - 200, "invPlatform");
+	invPlatform = this.physics.add.image(100, 100, "invPlatform");
 	invPlatform.displayWidth = 216;
 	invPlatform.displayHeight = 10;
-	invPlatform.setStatic(true);
 	invPlatform.debugShowBody = true;
     
     
