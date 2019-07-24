@@ -4,13 +4,14 @@ const config = {
 	  parent: 'game-container',
 	  mode: Phaser.DOM.FIT,
 	  autoCenter: Phaser.DOM.CENTER_BOTH,
-	  width: 800,
-	  height: 600
+	  width: 1280,
+	  height: 720
   },
   pixelArt: true,
   physics: {
     default: "arcade",
 	arcade: {
+        gravity: { y: 1000},
 		debug: false
 	}
   },
@@ -34,7 +35,7 @@ let scaleY = gameHeight / 600;
 let cursors;
 let player;
 let platform;
-let sandbag;
+let heavyBag;
 let showDebug = false;
 let cloud_1;
 let cloud_2;
@@ -100,9 +101,14 @@ function preload() {
 	
     
 	//First, we have to load images so the game is aware of them
+    console.log("preload");
 
 	this.load.image("tiles", "assets/tiles_packed.png");
-	this.load.tilemapTiledJSON("map", "assets/SmashZBagMap2.json");
+	this.load.tilemapCSV("mapAbove", "assets/SmashZBagMap2_Above.csv");
+    this.load.tilemapCSV("mapGround", "assets/SmashZBagMap2_Ground.csv");
+    //this.load.tilemapTiledJSON("map", "assets/SmashZBagMap2.json");
+    
+    this.load.image("heavyBag", "assets/sandbag1.png");
 }
 
 function create() {
@@ -110,14 +116,47 @@ function create() {
 	//Set the bounds of the scene
 	//this.matter.world.setBounds(0,0, gameWidth * 36, gameHeight);
 	
-	const map = this.make.tilemap({ key: "map"});
-	const tileset = map.addTilesetImage("tiles_packed", "tiles");
+    
+	const mapGround = this.make.tilemap({ key: "mapGround", tileWidth: 16, tileHeight: 16});
+    const mapAbove = this.make.tilemap({ key: "mapAbove", tileWidth: 16, tileHeight: 16});
+    
+    
+    //const map = this.add.tilemap("map");
+    
+    
+	//const tileset = map.addTilesetImage("tiles_packed", "tiles");
+    const tilesetGround = mapGround.addTilesetImage("tiles");
 	// layer index, tileset, x, y
-	const worldLayer = map.createStaticLayer("Ground", tileset, 0, 0);
-	const aboveLayer = map.createStaticLayer("Above", tileset, 0, 0);
+	const groundLayer = mapGround.createStaticLayer(0, tilesetGround, 0, 0);
+    const aboveLayer = mapAbove.createStaticLayer(0, tilesetGround, 256, 256);
+	//const aboveLayer = map.createStaticLayer("Above", tileset, 0, 0);
+    //const groundLayer = map.createStaticLayer("Ground", tileset, 0, 0);
+    
+    groundLayer.setCollisionByProperty({ collides: true});
+    //5307,5334
+    groundLayer.setCollisionBetween(5300,5334);
+    //10263,10610
+    groundLayer.setCollisionBetween(10263,10610);
+    console.log(groundLayer);
+    console.log(groundLayer.getTileAt(200,218));
+    console.log(groundLayer.layers);
+    //console.log(tilesetGround);
+    
+    console.log("tile data");
+    console.log(tilesetGround.getTileData(136));
+    
+    heavyBag = this.physics.add.sprite(50,100, "heavyBag");
+    heavyBag.setBounce(1,1);
+    heavyBag.setCollideWorldBounds(true);
+    console.log(heavyBag);
+    
+    this.physics.add.collider(heavyBag, groundLayer);
+    
 
 	//hitImage = scene.add.image(0,0, "hitImage");
 	//hitImage.visible = false;
+    
+    
 
 	
 	
