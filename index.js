@@ -12,7 +12,7 @@ const config = {
     default: "arcade",
 	arcade: {
         gravity: { y: 1000},
-		debug: false
+		debug: true
 	}
   },
   scene: {
@@ -30,8 +30,8 @@ const config = {
 const game = new Phaser.Game(config);
 const gameWidth = window.innerWidth * window.devicePixelRatio;
 const gameHeight = window.innerHeight * window.devicePixelRatio;
-let scaleX = gameWidth / 800;
-let scaleY = gameHeight / 600;
+let scaleX = gameWidth / 1280;
+let scaleY = gameHeight / 720;
 let cursors;
 let player;
 let platform;
@@ -109,6 +109,7 @@ function preload() {
     //this.load.tilemapTiledJSON("map", "assets/SmashZBagMap2.json");
     
     this.load.image("heavyBag", "assets/sandbag1.png");
+	this.load.image("invPlatform", "assets/invPlatform.png");
 }
 
 function create() {
@@ -137,9 +138,11 @@ function create() {
     groundLayer.setCollisionBetween(5300,5334);
     //10263,10610
     groundLayer.setCollisionBetween(10263,10610);
-    console.log(groundLayer);
-    console.log(groundLayer.getTileAt(200,218));
-    console.log(groundLayer.layers);
+	
+	
+    //console.log(groundLayer);
+    //console.log(groundLayer.getTileAt(200,218));
+    //console.log(groundLayer.layers);
     //console.log(tilesetGround);
     
     console.log("tile data");
@@ -148,17 +151,27 @@ function create() {
     heavyBag = this.physics.add.sprite(50,100, "heavyBag");
     heavyBag.setBounce(1,1);
     heavyBag.setCollideWorldBounds(true);
+	heavyBag.setInteractive();
+	//setDebug(showBody, showVelocity, bodyColor)
+	
     console.log(heavyBag);
+
     
     this.physics.add.collider(heavyBag, groundLayer);
     
 
 	//hitImage = scene.add.image(0,0, "hitImage");
 	//hitImage.visible = false;
-    
-    
-
 	
+	//var rect = new Phaser.Geom.Rectangle(250, 200, 300, 200);
+	
+	invPlatform = this.physics.add.image(100, gameHeight - 200, "invPlatform");
+	invPlatform.displayWidth = 216;
+	invPlatform.displayHeight = 10;
+	invPlatform.setStatic(true);
+	invPlatform.debugShowBody = true;
+    
+    
 	
 	
 	
@@ -209,8 +222,7 @@ function create() {
 	*/
 
 	
-    /*
-	*/
+ 
 	gameScene = this.scene;
 	
 	/*
