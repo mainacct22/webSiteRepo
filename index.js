@@ -12,7 +12,7 @@ const config = {
     default: "arcade",
 	arcade: {
         gravity: { y: 1000},
-		debug: true
+		debug: false
 	}
   },
   scene: {
@@ -61,6 +61,8 @@ let lblTime;
 let seconds;
 let clicked = false;
 let gameScene;
+let worldPoint;
+let angle;
 
 let invLeft;
 let invRight;
@@ -109,13 +111,21 @@ function preload() {
     //this.load.tilemapTiledJSON("map", "assets/SmashZBagMap2.json");
     
     this.load.image("heavyBag", "assets/sandbag1.png");
-	this.load.image("invPlatform", "assets/invPlatform.png");
+    this.load.image("invPlatform", "assets/invPlatform.png");
 }
 
 function create() {
 	
+    gameScene = this.scene;
+    
+    this.cameras.main.setBackgroundColor('#ff8c1a')
+    
+    //this.world.setBounds(0,0, gameWidth * 36, gameHeight);
+    //Phaser.Physics.Arcade.World.setBounds(0,0, gameWidth * 36, gameHeight);
+    //gameScene.input.enabled = true;
 	//Set the bounds of the scene
-	//this.matter.world.setBounds(0,0, gameWidth * 36, gameHeight);
+	//this.game.world.setBounds(0,0, gameWidth * 36, gameHeight);
+    console.log(this.game.world);
 	
     
 	const mapGround = this.make.tilemap({ key: "mapGround", tileWidth: 16, tileHeight: 16});
@@ -128,19 +138,17 @@ function create() {
 	//const tileset = map.addTilesetImage("tiles_packed", "tiles");
     const tilesetGround = mapGround.addTilesetImage("tiles");
 	// layer index, tileset, x, y
-	const groundLayer = mapGround.createStaticLayer(0, tilesetGround, 0, 0);
-    const aboveLayer = mapAbove.createStaticLayer(0, tilesetGround, 256, 256);
+	const groundLayer = mapGround.createStaticLayer(0, tilesetGround, 0, gameHeight/4);
+    const aboveLayer = mapAbove.createStaticLayer(0, tilesetGround, 16 * 12, gameHeight/4);
 	//const aboveLayer = map.createStaticLayer("Above", tileset, 0, 0);
     //const groundLayer = map.createStaticLayer("Ground", tileset, 0, 0);
     
-    groundLayer.setCollisionByProperty({ collides: true});
+    //groundLayer.setCollisionByProperty({ collides: true});
     //5307,5334
-    groundLayer.setCollisionBetween(5300,5334);
+    //groundLayer.setCollisionBetween(5300,5334);
     //10263,10610
-    groundLayer.setCollisionBetween(10263,10610);
-	
-	
-    //console.log(groundLayer);
+    //groundLayer.setCollisionBetween(10263,10610);
+    console.log(groundLayer);
     //console.log(groundLayer.getTileAt(200,218));
     //console.log(groundLayer.layers);
     //console.log(tilesetGround);
@@ -149,60 +157,104 @@ function create() {
     console.log(tilesetGround.getTileData(136));
     
     heavyBag = this.physics.add.sprite(50,100, "heavyBag");
-    heavyBag.setBounce(1,1);
-    heavyBag.setCollideWorldBounds(true);
-	heavyBag.setInteractive();
-	//setDebug(showBody, showVelocity, bodyColor)
-	
-    console.log(heavyBag);
-
+    heavyBag.setCollideWorldBounds(false);
+    heavyBag.allowDrag = true;
+    heavyBag.allowRotation = true;
+    heavyBag.setBounce(0.3, 0.2);
+    heavyBag.setInteractive({
+        draggable: true
+    });
+    
+    
+    /*
+    const worldPoint = this.input.activePointer.positionToCamera(this.cameras.main);
+    
+    if (this.input.manager.activePointer.isDown) 
+    {
+        //console.log(worldPoint.x);
+        //console.log(worldPoint.y);
+        dmg += 5;
+        let angle = Phaser.Math.Angle.Between(heavyBag.x, heavyBag.y, worldPoint.x, worldPoint.y)
+        //var force = (radius - distance) / mass;
+        heavyBag.body.velocity.x += Math.cos(angle) * dmg;
+        heavyBag.body.velocity.y += Math.sin(angle) * dmg;
+        //object.body.velocity.x += Math.cos(angle) * force;
+        //object.body.velocity.y += Math.sin(angle) * force;
+    }
+    */
     
     this.physics.add.collider(heavyBag, groundLayer);
+    
+    camera = this.cameras.main;
+    camera.setBounds(0, 0, gameWidth * 36, gameHeight);
+    //camera.startFollow(heavyBag);
     
 
 	//hitImage = scene.add.image(0,0, "hitImage");
 	//hitImage.visible = false;
-	
-	//var rect = new Phaser.Geom.Rectangle(250, 200, 300, 200);
-	
-	invPlatform = this.physics.add.image(100, 100, "invPlatform");
-	invPlatform.displayWidth = 216;
-	invPlatform.displayHeight = 10;
-	invPlatform.debugShowBody = true;
     
     
-	
-	
-	
-	//Left
+    invPlatform = this.physics.add.sprite(0, gameHeight/4 + (15 * 16),"invPlatform");
+    invPlatform.displayWidth = 16 * 28;
+    invPlatform.displayHeight = 16;
+    invPlatform.setCollideWorldBounds(true);
+    invPlatform.debugBodyColor = 2;
+    invPlatform.body.debugShowBody = true;
+    invPlatform.body.allowGravity = false;
+    invPlatform.body.immovable = true;
+    
+    invLeft = this.physics.add.sprite(0, invPlatform.body.position.y,"invPlatform");
+    invLeft.displayWidth = 16;
+    invLeft.displayHeight = gameHeight/2;
+    invLeft.debugBodyColor = 2;
+    invLeft.body.debugShowBody = true;
+    invLeft.body.allowGravity = false;
+    invLeft.body.immovable = true;
+    
+    invRight = this.physics.add.sprite(invPlatform.displayWidth + 16, invPlatform.body.position.y,"invPlatform");
+    invRight.displayWidth = 16;
+    invRight.displayHeight = gameHeight/2;
+    invRight.debugBodyColor = 2;
+    invRight.body.debugShowBody = true;
+    invRight.body.allowGravity = false;
+    invRight.body.immovable = true;
+    
+    invTrack = this.physics.add.sprite(gameWidth * 5, gameHeight/4 + (28 * 16), "invPlatform");
+    invTrack.displayWidth = gameWidth * 5;
+    invTrack.displayHeight = 16;
+    invTrack.debugBodyColor = 2;
+    invTrack.body.debugShowBody = true;
+    invTrack.body.allowGravity = false;
+    invTrack.body.immovable = true;
+    
 	/*
-	invLeft = this.matter.add.rectangle(platform.x - platform.width/2 - 40, gameHeight/2, 80, gameHeight, {isStatic: true});
-	//Right
-	invRight = this.matter.add.rectangle(platform.x + platform.width/2 + 40, gameHeight/2, 80, gameHeight, {isStatic: true});
-	
 	invLeft.frictionStatic = 0;
 	invLeft.restitution = .5;
 	
 	invRight.frictionStatic = 0;
 	invRight.restitution = .5;
 	*/
+    
+    
+    
+    this.physics.add.collider(heavyBag, invPlatform);
+    this.physics.add.collider(heavyBag, invTrack);
+    
+
 
 	
 
-	//Add sandbag and use matter.js
+	//Add heavyBag and use matter.js
 	/*
-    sandbag = this.matter.add.image(170, 250, "sandbag");
-	sandbag.restitution = 0.3;
-	sandbag.setFriction(0.08);
-	sandbag.setFrictionAir(0.0005);
-	sandbag.body.label = 'sandbag';
-	sandbag.setMass(100);
+    heavyBag = this.matter.add.image(170, 250, "heavyBag");
+	heavyBag.restitution = 0.3;
+	heavyBag.setFriction(0.08);
+	heavyBag.setFrictionAir(0.0005);
+	heavyBag.body.label = 'heavyBag';
+	heavyBag.setMass(100);
 	*/
 	
-	//sandbag.debugShowVelocity = true;
 	
-	//Set interactive so the matter object is clickable
-	//sandbag.setInteractive();
 	
 	
 	/*
@@ -221,12 +273,12 @@ function create() {
 	*/
 
 	
- 
-	gameScene = this.scene;
+    /*
+	*/
 	
 	/*
 	
-	tap = this.rexGestures.add.tap(sandbag, {
+	tap = this.rexGestures.add.tap(heavyBag, {
 		enable: true,
 		time: 100,
 		tapInterval: 100,
@@ -251,18 +303,18 @@ function create() {
 		console.log('tap.y = ' + tap.y);
 		
 		
-		if(tap.x > sandbag.x)
+		if(tap.x > heavyBag.x)
 		{
 			//right side
 			if ( dmg < 100)
 			{
 			    dmg += 5;
-				sandbag.setVelocity(-.05 * dmg , -.08 * dmg);
+				heavyBag.setVelocity(-.05 * dmg , -.08 * dmg);
 			}
 			else
 			{
 				dmg += 8;
-				sandbag.setVelocity(-.15 * dmg , -.24 * dmg);
+				heavyBag.setVelocity(-.15 * dmg , -.24 * dmg);
 			}
 		}
 		else
@@ -270,12 +322,12 @@ function create() {
 			if (dmg < 100)
 			{
 				dmg += 5;
-				sandbag.setVelocity(.05 * dmg, -.08 * dmg);
+				heavyBag.setVelocity(.05 * dmg, -.08 * dmg);
 			}
 			else
 			{
 				dmg += 8;
-				sandbag.setVelocity(.15 * dmg, -.24 * dmg);
+				heavyBag.setVelocity(.15 * dmg, -.24 * dmg);
 			}
 		}
 	});
@@ -284,16 +336,16 @@ function create() {
 	press.on('pressend', function(press) {
 		console.log("press ended");
 		
-		if(press.x > sandbag.x)
+		if(press.x > heavyBag.x)
 		{
 			//right side
 			dmg += 30;
-			sandbag.setVelocity(-.5 * dmg, -.25 * dmg);
+			heavyBag.setVelocity(-.5 * dmg, -.25 * dmg);
 		}
 		else
 		{
 			dmg += 30;
-			sandbag.setVelocity(.5 * dmg, -.25 * dmg);
+			heavyBag.setVelocity(.5 * dmg, -.25 * dmg);
 		}
 		
 	});
@@ -302,22 +354,28 @@ function create() {
 	
 	dmg = 0;
 	
-	//Matter.js orients x & y coords in the center of the object, so pointer.x > sandbag.x
+	//Matter.js orients x & y coords in the center of the object, so pointer.x > heavyBag.x
 	//means that the pointer touched the right side of the object
-	/*
-	sandbag.on('pointerup', function (pointer) {
-		if (clicked = false)
-		{
-			clicked = true;
-		}
 	
+    
+	heavyBag.on('pointerup', function (pointer) {
 		
-		console.log("sandbag.x = " + sandbag.x);
-		customAngle = Math.random() * 360;
-		hitEmitter.emitParticleAt(pointer.x,pointer.y);
+		console.log("heavyBag.x = " + heavyBag.x);
+		//customAngle = Math.random() * 360;
+		//hitEmitter.emitParticleAt(pointer.x,pointer.y);
 		
-		
-		if(pointer.x > sandbag.x)
+    
+        //if (this.input.manager.activePointer.isDown) 
+            dmg += 5;
+            angle = Phaser.Math.Angle.Between(heavyBag.x, heavyBag.y, pointer.x, pointer.y)
+            //var force = (radius - distance) / mass;
+            heavyBag.body.velocity.x += Math.cos(angle) * (dmg * 20);
+            heavyBag.body.velocity.y += Math.sin(angle) * (dmg * 20);
+            console.log(heavyBag.body);
+            //object.body.velocity.x += Math.cos(angle) * force;
+            //object.body.velocity.y += Math.sin(angle) * force;
+		/*
+		if(pointer.x > heavyBag.x)
 		{
 			//right side
 			if (pointer.getDuration() < 600)
@@ -326,21 +384,21 @@ function create() {
 			  if ( dmg < 100)
 			  {
 			    dmg += 5;
-                sandbag.applyForce({x: -.01 * dmg, y: -.05 * dmg}, {x: pointer.x, y: pointer.y});
-				//sandbag.setVelocity(-.05 * dmg , -.08 * dmg);
+                heavyBag.applyForce({x: -.01 * dmg, y: -.05 * dmg}, {x: pointer.x, y: pointer.y});
+				//heavyBag.setVelocity(-.05 * dmg , -.08 * dmg);
 			  }
 			  else
 			  {
 				dmg += 8;
-                  sandbag.applyForce({x: -.1 * dmg, y: -.15 * dmg}, {x: pointer.x, y: pointer.y});
-				//sandbag.setVelocity(-.15 * dmg , -.24 * dmg);
+                  heavyBag.applyForce({x: -.1 * dmg, y: -.15 * dmg}, {x: pointer.x, y: pointer.y});
+				//heavyBag.setVelocity(-.15 * dmg , -.24 * dmg);
 			  }
 			}
 			else
 			{
 				dmg += 30;
-                sandbag.applyForce({x: -.1 * dmg, y: -.1 * dmg}, {x: pointer.x, y: pointer.y});
-				//sandbag.setVelocity(-.5 * dmg, -.25 * dmg);
+                heavyBag.applyForce({x: -.1 * dmg, y: -.1 * dmg}, {x: pointer.x, y: pointer.y});
+				//heavyBag.setVelocity(-.5 * dmg, -.25 * dmg);
 			}
 		}
 		else
@@ -350,28 +408,29 @@ function create() {
 			  if (dmg < 100)
 			  {
 				  dmg += 5;
-                  sandbag.applyForce({x: .01 * dmg, y: -.05 * dmg}, {x: pointer.x, y: pointer.y});
-				  //sandbag.setVelocity(.05 * dmg, -.08 * dmg);
+                  heavyBag.applyForce({x: .01 * dmg, y: -.05 * dmg}, {x: pointer.x, y: pointer.y});
+				  //heavyBag.setVelocity(.05 * dmg, -.08 * dmg);
 			  }
 			  else
 			  {
 				  dmg += 8;
-                  sandbag.applyForce({x: .1 * dmg, y: -.15 * dmg}, {x: pointer.x, y: pointer.y});
-				  //sandbag.setVelocity(.15 * dmg, -.24 * dmg);
+                  heavyBag.applyForce({x: .1 * dmg, y: -.15 * dmg}, {x: pointer.x, y: pointer.y});
+				  //heavyBag.setVelocity(.15 * dmg, -.24 * dmg);
 			  }
 		    }
 			else
 			{
 				dmg += 30;
-                sandbag.applyForce({x: .1 * dmg, y: -.1 * dmg}, {x: pointer.x, y: pointer.y});
-				//sandbag.setVelocity(.5 * dmg, -.25 * dmg);
+                heavyBag.applyForce({x: .1 * dmg, y: -.1 * dmg}, {x: pointer.x, y: pointer.y});
+				//heavyBag.setVelocity(.5 * dmg, -.25 * dmg);
 			}
 			
 		}	
+        */
 		
 		
 	});
-	*/
+	
 	
 	  
   
@@ -394,14 +453,14 @@ function create() {
   this.matter.world.on('collisionstart', function (event,bodyA,bodyB)
   {
 	  
-	  if (bodyA.label === 'floor' && bodyB.label === 'sandbag')
+	  if (bodyA.label === 'floor' && bodyB.label === 'heavyBag')
 	  {
-		  //if(Math.floor(sandbag.body.velocity.x) < 8)
+		  //if(Math.floor(heavyBag.body.velocity.x) < 8)
 		  //{
 			if (startSmokeEmitter)
 			{
 				customAngle = Math.random() * 360;
-				smokeEmitter.startFollow(sandbag, -(sandbag.width/2.5), sandbag.height/4.25, false);
+				smokeEmitter.startFollow(heavyBag, -(heavyBag.width/2.5), heavyBag.height/4.25, false);
 				smokeEmitter.start();
 				startSmokeEmitter = false;
 			}
@@ -412,7 +471,7 @@ function create() {
   this.matter.world.on('collisionend', function (event,bodyA,bodyB)
   {
 
-	  if (bodyA.label === 'floor' && bodyB.label === 'sandbag')
+	  if (bodyA.label === 'floor' && bodyB.label === 'heavyBag')
 	  {
 		  if (!startSmokeEmitter)
 		  {
@@ -422,10 +481,6 @@ function create() {
 	  }  
   });
   */
-
-  //camera = this.cameras.main;
-  //camera.setBounds(0, 0, gameWidth * 36, gameHeight);
-  //camera.startFollow(sandbag);
   
   
   cursors = this.input.keyboard.createCursorKeys();
@@ -502,15 +557,15 @@ function update(time, delta) {
     
 	
 	/*
-	if (sandbag.x > 300)
+	if (heavyBag.x > 300)
 	{
-		sandbag.removeInteractive();
-		xDif = 120 - sandbag.x;
+		heavyBag.removeInteractive();
+		xDif = 120 - heavyBag.x;
 		yDif = 0 - 0;
 		dist = Math.sqrt(xDif * xDif + yDif * yDif);
 		dist = dist/16;
 		dist = +dist.toFixed(2);
-		//dist = Phaser.Math.distance(120,0,sandbag.x,0)
+		//dist = Phaser.Math.distance(120,0,heavyBag.x,0)
 		lblDist.text = 'Distance = ' + dist + ' ft'; 
 	}
 	*/
@@ -519,30 +574,32 @@ function update(time, delta) {
 	seconds = timedEvent.getProgress() * 10;
 	seconds = seconds.toFixed(0)
 	lblTime.text = 'Time = ' + (10 - seconds);
+    
+    
 	//timedEvent.elapsed / timedEvent.delay
 	
-	/*
+	
 	if (seconds >= 7)
 	{
 		if (setBounds)
 		{
-			this.matter.world.remove(invLeft);
-			this.matter.world.remove(invRight);
+            invLeft.destroy();
+            invRight.destroy();
 			setBounds = false;
 		}
 		
 	}
-	*/
+	
 	
 	
 	if(seconds >= 10)
 	{
 		//Add Back In after testing
-		//sandbag.removeInteractive();
+		//heavyBag.removeInteractive();
 
 		/*
-		if(Math.floor(sandbag.body.velocity.x) < 1 && Math.floor(sandbag.body.velocity.y) < 1)
-			//|| (Math.floor(sandbag.body.velocity.x) < -1 && Math.floor(sandbag.body.velocity.y < -1)))
+		if(Math.floor(heavyBag.body.velocity.x) < 1 && Math.floor(heavyBag.body.velocity.y) < 1)
+			//|| (Math.floor(heavyBag.body.velocity.x) < -1 && Math.floor(heavyBag.body.velocity.y < -1)))
 		{
 			//game over
 			//reset initializers
@@ -558,7 +615,7 @@ function update(time, delta) {
 	
 	
 	/*
-	if(Math.floor(sandbag.body.velocity.x) < 4)
+	if(Math.floor(heavyBag.body.velocity.x) < 4)
 	{
 		if(!startSmokeEmitter)
 		{
