@@ -12,7 +12,7 @@ const config = {
     default: "arcade",
 	arcade: {
         gravity: { y: 1000},
-		debug: false
+		debug: true
 	}
   },
   scene: {
@@ -129,7 +129,7 @@ function create() {
 	
     
 	const mapGround = this.make.tilemap({ key: "mapGround", tileWidth: 16, tileHeight: 16});
-    const mapAbove = this.make.tilemap({ key: "mapAbove", tileWidth: 16, tileHeight: 16});
+    
     
     
     //const map = this.add.tilemap("map");
@@ -139,7 +139,7 @@ function create() {
     const tilesetGround = mapGround.addTilesetImage("tiles");
 	// layer index, tileset, x, y
 	const groundLayer = mapGround.createStaticLayer(0, tilesetGround, 0, gameHeight/4);
-    const aboveLayer = mapAbove.createStaticLayer(0, tilesetGround, 16 * 12, gameHeight/4);
+    
 	//const aboveLayer = map.createStaticLayer("Above", tileset, 0, 0);
     //const groundLayer = map.createStaticLayer("Ground", tileset, 0, 0);
     
@@ -148,7 +148,6 @@ function create() {
     //groundLayer.setCollisionBetween(5300,5334);
     //10263,10610
     //groundLayer.setCollisionBetween(10263,10610);
-    console.log(groundLayer);
     //console.log(groundLayer.getTileAt(200,218));
     //console.log(groundLayer.layers);
     //console.log(tilesetGround);
@@ -156,16 +155,8 @@ function create() {
     console.log("tile data");
     console.log(tilesetGround.getTileData(136));
     
-    heavyBag = this.physics.add.sprite(50,100, "heavyBag");
-    heavyBag.setCollideWorldBounds(false);
-    heavyBag.allowDrag = true;
-    heavyBag.allowRotation = true;
-    heavyBag.setBounce(0.3, 0.2);
-    heavyBag.setInteractive({
-        draggable: true
-    });
-    
-    
+    const mapAbove = this.make.tilemap({ key: "mapAbove", tileWidth: 16, tileHeight: 16});
+    const aboveLayer = mapAbove.createStaticLayer(0, tilesetGround, 16 * 12, gameHeight/4);
     /*
     const worldPoint = this.input.activePointer.positionToCamera(this.cameras.main);
     
@@ -183,7 +174,16 @@ function create() {
     }
     */
     
-    this.physics.add.collider(heavyBag, groundLayer);
+    heavyBag = this.physics.add.sprite(50,100, "heavyBag");
+    heavyBag.setDisplaySize(62,122);
+    heavyBag.setCollideWorldBounds(false);
+    //heavyBag.friction = 0.8;
+    heavyBag.mass = 500;
+    heavyBag.allowDrag = true;
+    heavyBag.allowRotation = true;
+    heavyBag.setBounce(0.3, 0.2);
+    heavyBag.setInteractive();
+    
     
     camera = this.cameras.main;
     camera.setBounds(0, 0, gameWidth * 36, gameHeight);
@@ -202,6 +202,7 @@ function create() {
     invPlatform.body.debugShowBody = true;
     invPlatform.body.allowGravity = false;
     invPlatform.body.immovable = true;
+    invPlatform.body.friction = 0.1
     
     invLeft = this.physics.add.sprite(0, invPlatform.body.position.y,"invPlatform");
     invLeft.displayWidth = 16;
@@ -226,6 +227,7 @@ function create() {
     invTrack.body.debugShowBody = true;
     invTrack.body.allowGravity = false;
     invTrack.body.immovable = true;
+    //invTrack.allowDrag = true;
     
 	/*
 	invLeft.frictionStatic = 0;
@@ -236,13 +238,12 @@ function create() {
 	*/
     
     
-    
+    //this.physics.add.collider(heavyBag, groundLayer);
+    this.physics.add.collider(heavyBag, invLeft);
+    this.physics.add.collider(heavyBag, invRight);
     this.physics.add.collider(heavyBag, invPlatform);
     this.physics.add.collider(heavyBag, invTrack);
-    
-
-
-	
+    	
 
 	//Add heavyBag and use matter.js
 	/*
@@ -368,13 +369,20 @@ function create() {
         //if (this.input.manager.activePointer.isDown) 
             dmg += 5;
             angle = Phaser.Math.Angle.Between(heavyBag.x, heavyBag.y, pointer.x, pointer.y)
+            if (angle >= 180)
+            {
+                angle -= 180;
+            }
+            else
+            {
+                angle += 180;
+            }
             //var force = (radius - distance) / mass;
-            heavyBag.body.velocity.x += Math.cos(angle) * (dmg * 20);
-            heavyBag.body.velocity.y += Math.sin(angle) * (dmg * 20);
-            console.log(heavyBag.body);
+            
+            console.log(heavyBag.mass);
             //object.body.velocity.x += Math.cos(angle) * force;
             //object.body.velocity.y += Math.sin(angle) * force;
-		/*
+		
 		if(pointer.x > heavyBag.x)
 		{
 			//right side
@@ -384,20 +392,26 @@ function create() {
 			  if ( dmg < 100)
 			  {
 			    dmg += 5;
-                heavyBag.applyForce({x: -.01 * dmg, y: -.05 * dmg}, {x: pointer.x, y: pointer.y});
+                  heavyBag.body.velocity.x += Math.cos(angle) * (dmg * 10);
+                  heavyBag.body.velocity.y += Math.sin(angle) * (dmg * 20);
+                //heavyBag.applyForce({x: -.01 * dmg, y: -.05 * dmg}, {x: pointer.x, y: pointer.y});
 				//heavyBag.setVelocity(-.05 * dmg , -.08 * dmg);
 			  }
 			  else
 			  {
 				dmg += 8;
-                  heavyBag.applyForce({x: -.1 * dmg, y: -.15 * dmg}, {x: pointer.x, y: pointer.y});
+                //heavyBag.body.velocity.x += ((Math.cos(angle) * (dmg * 20)) + heavyBag.body.velocity.x)-1;
+                //heavyBag.body.velocity.y += ((Math.sin(angle) * (dmg * 20)) + heavBag.body.velocity.y)-1;
+                //  heavyBag.applyForce({x: -.1 * dmg, y: -.15 * dmg}, {x: pointer.x, y: pointer.y});
 				//heavyBag.setVelocity(-.15 * dmg , -.24 * dmg);
 			  }
 			}
 			else
 			{
 				dmg += 30;
-                heavyBag.applyForce({x: -.1 * dmg, y: -.1 * dmg}, {x: pointer.x, y: pointer.y});
+                //heavyBag.body.velocity.x += ((Math.cos(angle) * (dmg * 20)) + heavyBag.body.velocity.x)-1;
+                //heavyBag.body.velocity.y += ((Math.sin(angle) * (dmg * 20)) + heavBag.body.velocity.y)-1;
+                //heavyBag.applyForce({x: -.1 * dmg, y: -.1 * dmg}, {x: pointer.x, y: pointer.y});
 				//heavyBag.setVelocity(-.5 * dmg, -.25 * dmg);
 			}
 		}
@@ -408,26 +422,27 @@ function create() {
 			  if (dmg < 100)
 			  {
 				  dmg += 5;
-                  heavyBag.applyForce({x: .01 * dmg, y: -.05 * dmg}, {x: pointer.x, y: pointer.y});
+                    heavyBag.body.velocity.x += Math.cos(angle) * (dmg * 10);
+                    heavyBag.body.velocity.y += Math.sin(angle) * (dmg * 20);
+                  //heavyBag.applyForce({x: .01 * dmg, y: -.05 * dmg}, {x: pointer.x, y: pointer.y});
 				  //heavyBag.setVelocity(.05 * dmg, -.08 * dmg);
 			  }
 			  else
 			  {
 				  dmg += 8;
-                  heavyBag.applyForce({x: .1 * dmg, y: -.15 * dmg}, {x: pointer.x, y: pointer.y});
+                  //heavyBag.applyForce({x: .1 * dmg, y: -.15 * dmg}, {x: pointer.x, y: pointer.y});
 				  //heavyBag.setVelocity(.15 * dmg, -.24 * dmg);
 			  }
 		    }
 			else
 			{
 				dmg += 30;
-                heavyBag.applyForce({x: .1 * dmg, y: -.1 * dmg}, {x: pointer.x, y: pointer.y});
+                //heavyBag.applyForce({x: .1 * dmg, y: -.1 * dmg}, {x: pointer.x, y: pointer.y});
 				//heavyBag.setVelocity(.5 * dmg, -.25 * dmg);
 			}
 			
 		}	
-        */
-		
+        
 		
 	});
 	
@@ -470,7 +485,6 @@ function create() {
   
   this.matter.world.on('collisionend', function (event,bodyA,bodyB)
   {
-
 	  if (bodyA.label === 'floor' && bodyB.label === 'heavyBag')
 	  {
 		  if (!startSmokeEmitter)
