@@ -21,7 +21,6 @@ const config = {
   }
 };
 
-
 //width: window.innerWidth * window.devicePixelRatio,
 //height: window.innerHeight * window.devicePixelRatio,
 //parent: "game-container",
@@ -29,8 +28,6 @@ const config = {
 const game = new Phaser.Game(config);
 const gameWidth = window.innerWidth * window.devicePixelRatio;
 const gameHeight = window.innerHeight * window.devicePixelRatio;
-let scaleX = gameWidth / 800;
-let scaleY = gameHeight / 600;
 let cursors;
 let player;
 let platform;
@@ -76,27 +73,7 @@ let startHitEmitter = true;
 let startSmokeEmitter = true;
 let customAngle;
 
-//Gestures
-let tap;
-let swipe;
-let press;
-
 function preload() {
-	
-	/*
-	this.load.scenePlugin({
-        key: 'rexuiplugin',
-        url: 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/plugins/dist/rexuiplugin.min.js',
-        sceneKey: 'rexUI'
-    });
-	*/
-	
-	this.load.scenePlugin({
-        key: 'rexgesturesplugin',
-        url: 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/plugins/dist/rexgesturesplugin.min.js',
-        sceneKey: 'rexGestures'
-    });
-	
     
 	//First, we have to load images so the game is aware of them
     this.load.image("cloud_1", "assets/clouds_1_600.png");
@@ -246,186 +223,19 @@ function create() {
 
 	console.log(hitEmitter);
 	
-    /*
-	*/
-	gameScene = this.scene;
-	
-	swipe = this.rexGestures.add.swipe(this.scene, {
-		enable: true,
-		threshold: 10,
-		direction: '8dir'
-	});
-	
-	swipe.on('swipe', function(swipe) {
-		console.log(swipe);
-		console.log(swipe.dragVelocity);
-		//position.x && position.y are where you begin the swipe
-		console.log("where swipe began");
-		console.log("swipe.x = " + swipe.pointer.position.x);
-		console.log("swipe.y = " + swipe.pointer.position.y);
-		console.log("sandbag.x = " + sandbag.x);
-		console.log("sandbag.y = " + sandbag.y);
-		console.log("        ");
-
-		console.log("up = " + swipe.up);
-		console.log("down = " + swipe.down);
-		console.log("left = " + swipe.left);
-		console.log("right = " + swipe.right);
-
-		
-		
-		let xBeg = swipe.pointer.position.x;
-		let xEnd = swipe.pointer.position.x + swipe.pointer.velocity.x;
-		let yBeg = swipe.pointer.position.y;
-		let yEnd = swipe.pointer.position.y + swipe.pointer.velocity.y;
-		
-		if (swipe.right)
-		{
-			if (swipe.down)
-			{
-				
-			}
-			else if (swipe.up)
-			{
-				
-			}
-			else
-			{
-				if ((sandbag.x > xBeg && sandbag.x < xEnd)
-					&& (yBeg >= sandbag.y - 30 && yBeg <= sandbag.y + 30))
-				{
-					console.log("bag");
-					dmg += 5;
-					sandbag.setVelocity(-.05 * dmg , -.08 * dmg);
-					//sandbag.applyForce({x: -.01 * dmg, y: -.05 * dmg}, {x: pointer.x, y: pointer.y});
-				}			
-			}
-		}
-		else if (swipe.left)
-		{
-			if (swipe.down)
-			{
-				
-			}
-			else if (swipe.up)
-			{
-				
-			}
-			else
-			{
-				if ((sandbag.x < xBeg && sandbag.x > xEnd)
-					&& (yBeg >= sandbag.y - 30 && yBeg <= sandbag.y + 30))
-				{
-					dmg += 5;
-					sandbag.setVelocity(.05 * dmg , -.08 * dmg);
-					//sandbag.applyForce({x: .01 * dmg, y: -.05 * dmg}, {x: pointer.x, y: pointer.y});
-				}
-				
-			}
-			
-		}
-		else if (swipe.up)
-		{
-			
-		}
-		else if (swipe.down)
-		{
-			
-		}
-		
-	});
-	
-	/*
-	
-	tap = this.rexGestures.add.tap(sandbag, {
-		enable: true,
-		time: 100,
-		tapInterval: 100,
-		threshold: 9,
-		tapOffset: 10
-	});
-	
-	
-	press = this.rexGestures.add.press(this.scene, {
-		enable: true,
-		time: 400,
-		threshold: 9
-	});
-	
-    
-	tap.on('tap', function(tap){
-		console.log("you tapped bro");
-		console.log(tap);
-		
-		hitEmitter.emitParticleAt(tap.lastPointer.downX * window.devicePixelRatio,tap.lastPointer.downY * window.devicePixelRatio);
-		console.log('tap.x = ' + tap.x);
-		console.log('tap.y = ' + tap.y);
-		
-		
-		if(tap.x > sandbag.x)
-		{
-			//right side
-			if ( dmg < 100)
-			{
-			    dmg += 5;
-				sandbag.setVelocity(-.05 * dmg , -.08 * dmg);
-			}
-			else
-			{
-				dmg += 8;
-				sandbag.setVelocity(-.15 * dmg , -.24 * dmg);
-			}
-		}
-		else
-		{
-			if (dmg < 100)
-			{
-				dmg += 5;
-				sandbag.setVelocity(.05 * dmg, -.08 * dmg);
-			}
-			else
-			{
-				dmg += 8;
-				sandbag.setVelocity(.15 * dmg, -.24 * dmg);
-			}
-		}
-	});
-	
-	
-	press.on('pressend', function(press) {
-		console.log("press ended");
-		
-		if(press.x > sandbag.x)
-		{
-			//right side
-			dmg += 30;
-			sandbag.setVelocity(-.5 * dmg, -.25 * dmg);
-		}
-		else
-		{
-			dmg += 30;
-			sandbag.setVelocity(.5 * dmg, -.25 * dmg);
-		}
-		
-	});
-	
-	*/
-	
 	dmg = 0;
 	
 	//Matter.js orients x & y coords in the center of the object, so pointer.x > sandbag.x
 	//means that the pointer touched the right side of the object
-	
 	sandbag.on('pointerup', function (pointer) {
 		if (clicked = false)
 		{
 			clicked = true;
 		}
-	
-		/*
+		
 		console.log("sandbag.x = " + sandbag.x);
 		customAngle = Math.random() * 360;
-		hitEmitter.emitParticleAt(pointer.x,pointer.y);
+		hitEmitter.emitParticleAt(pointer.x * window.devicePixelRatio,pointer.y * window.devicePixelRatio);
 		
 		
 		if(pointer.x > sandbag.x)
@@ -437,21 +247,22 @@ function create() {
 			  if ( dmg < 100)
 			  {
 			    dmg += 5;
-                sandbag.applyForce({x: -.01 * dmg, y: -.05 * dmg}, {x: pointer.x, y: pointer.y});
-				//sandbag.setVelocity(-.05 * dmg , -.08 * dmg);
+				sandbag.setVelocity(-.05 * dmg , -.08 * dmg);
 			  }
 			  else
 			  {
 				dmg += 8;
-                  sandbag.applyForce({x: -.1 * dmg, y: -.15 * dmg}, {x: pointer.x, y: pointer.y});
-				//sandbag.setVelocity(-.15 * dmg , -.24 * dmg);
+				sandbag.setVelocity(-.15 * dmg , -.24 * dmg);
 			  }
 			}
 			else
 			{
 				dmg += 30;
-                sandbag.applyForce({x: -.1 * dmg, y: -.1 * dmg}, {x: pointer.x, y: pointer.y});
-				//sandbag.setVelocity(-.5 * dmg, -.25 * dmg);
+				sandbag.setVelocity(-.5 * dmg, -.25 * dmg);
+				//console.log("longpress");
+				//console.log("Down " + pointer.downTime);
+				//console.log("Up " + pointer.upTime);
+				//console.log("Duration " + pointer.getDuration());
 			}
 		}
 		else
@@ -461,28 +272,23 @@ function create() {
 			  if (dmg < 100)
 			  {
 				  dmg += 5;
-                  sandbag.applyForce({x: .01 * dmg, y: -.05 * dmg}, {x: pointer.x, y: pointer.y});
-				  //sandbag.setVelocity(.05 * dmg, -.08 * dmg);
+				  sandbag.setVelocity(.05 * dmg, -.08 * dmg);
 			  }
 			  else
 			  {
 				  dmg += 8;
-                  sandbag.applyForce({x: .1 * dmg, y: -.15 * dmg}, {x: pointer.x, y: pointer.y});
-				  //sandbag.setVelocity(.15 * dmg, -.24 * dmg);
+				  sandbag.setVelocity(.15 * dmg, -.24 * dmg);
 			  }
 		    }
 			else
 			{
 				dmg += 30;
-                sandbag.applyForce({x: .1 * dmg, y: -.1 * dmg}, {x: pointer.x, y: pointer.y});
-				//sandbag.setVelocity(.5 * dmg, -.25 * dmg);
+				sandbag.setVelocity(.5 * dmg, -.25 * dmg);
 			}
 			
 		}	
-		*/
 		
 	});
-	
 	
 
 	//sandbag.setAngularVelocity(5,-5);
@@ -617,7 +423,7 @@ function create() {
   timedEvent = this.time.addEvent({ delay: 10000, repeat: 0});
   
   
-  
+  gameScene = this.scene;
 	
 
 }
@@ -666,8 +472,7 @@ function update(time, delta) {
 	
 	if(seconds >= 10)
 	{
-		//Add Back In after testing
-		//sandbag.removeInteractive();
+		sandbag.removeInteractive();
 
 		if(Math.floor(sandbag.body.velocity.x) < 1 && Math.floor(sandbag.body.velocity.y) < 1)
 			//|| (Math.floor(sandbag.body.velocity.x) < -1 && Math.floor(sandbag.body.velocity.y < -1)))
@@ -741,6 +546,8 @@ function resizeApp ()
 	canvas.style.width	= width + 'px';
 	canvas.style.height	= height + 'px';
 }
+
+
       #game-container {
         min-width: 100vw;
         min-height: 100vh;
@@ -749,3 +556,5 @@ function resizeApp ()
         justify-content: center;
       }
 */
+
+                                          
