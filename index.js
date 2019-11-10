@@ -4,14 +4,13 @@ const config = {
 	  parent: 'game-container',
 	  mode: Phaser.DOM.FIT,
 	  autoCenter: Phaser.DOM.CENTER_BOTH,
-	  width: 1280,
-	  height: 720
+	  width: 800,
+	  height: 600
   },
   pixelArt: true,
   physics: {
-    default: "arcade",
-	arcade: {
-        gravity: { y: 1000},
+    default: "matter",
+	matter: {
 		debug: false
 	}
   },
@@ -30,12 +29,12 @@ const config = {
 const game = new Phaser.Game(config);
 const gameWidth = window.innerWidth * window.devicePixelRatio;
 const gameHeight = window.innerHeight * window.devicePixelRatio;
-let scaleX = gameWidth / 1280;
-let scaleY = gameHeight / 720;
+let scaleX = gameWidth / 800;
+let scaleY = gameHeight / 600;
 let cursors;
 let player;
 let platform;
-let heavyBag;
+let sandbag;
 let showDebug = false;
 let cloud_1;
 let cloud_2;
@@ -61,8 +60,6 @@ let lblTime;
 let seconds;
 let clicked = false;
 let gameScene;
-let worldPoint;
-let angle;
 
 let invLeft;
 let invRight;
@@ -93,154 +90,147 @@ function preload() {
         sceneKey: 'rexUI'
     });
 	*/
-	/*
+	
 	this.load.scenePlugin({
         key: 'rexgesturesplugin',
         url: 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/plugins/dist/rexgesturesplugin.min.js',
         sceneKey: 'rexGestures'
     });
-	*/
 	
     
 	//First, we have to load images so the game is aware of them
-    console.log("preload");
+    this.load.image("cloud_1", "assets/clouds_1_600.png");
+    this.load.image("cloud_2", "assets/clouds_2_600.png");
+    this.load.image("cloud_3", "assets/clouds_3_600.png");
+    this.load.image("cloud_4", "assets/clouds_4_600.png");
+    this.load.image("rock_1",  "assets/rocks_1_600.png");
+    this.load.image("rock_2",  "assets/rocks_2_600.png");
+    this.load.image("sky",     "assets/sky_600.png");
+	
+	this.load.image("track",   "assets/simpleTrack.png");
+	this.load.image("sandbag", "assets/sandbag1.png");
+    this.load.image("platform", "assets/platform_a.png");
+	this.load.image("invPlatform", "assets/invPlatform.png");
+	
+	this.load.image("whiteSmoke", "assets/whiteSmoke.png");
+	this.load.image("hitImage", "assets/hit1_inv_60.png");
 
-	this.load.image("tiles", "assets/tiles_packed.png");
-	this.load.tilemapCSV("mapAbove", "assets/SmashZBagMap2_Above.csv");
-    this.load.tilemapCSV("mapGround", "assets/SmashZBagMap2_Ground.csv");
-    //this.load.tilemapTiledJSON("map", "assets/SmashZBagMap2.json");
-    
-    this.load.image("heavyBag", "assets/sandbag1.png");
-    this.load.image("invPlatform", "assets/invPlatform.png");
 }
 
 function create() {
 	
-    gameScene = this.scene;
-    
-    this.cameras.main.setBackgroundColor('#ff8c1a')
-    
-    //this.world.setBounds(0,0, gameWidth * 36, gameHeight);
-    //Phaser.Physics.Arcade.World.setBounds(0,0, gameWidth * 36, gameHeight);
-    //gameScene.input.enabled = true;
 	//Set the bounds of the scene
-	//this.game.world.setBounds(0,0, gameWidth * 36, gameHeight);
-    console.log(this.game.world);
+	this.matter.world.setBounds(0,0, gameWidth * 36, gameHeight);
 	
+	
+	// create a tiled sprite with the size of our game screen
+    sky = this.add.tileSprite(0, 0, gameWidth, gameHeight, "sky");
+	// Set its pivot to the top left corner
+    sky.setOrigin(0,0);
+	// fix it so it won't move when the camera moves.
+    // Instead we are moving its texture on the update
+    sky.setScrollFactor(0);
+       
+    cloud_1 = this.add.tileSprite(0, 0, gameWidth, gameHeight, "cloud_1");    
+    cloud_1.setOrigin(0, 0);
+    cloud_1.setScrollFactor(0);
     
-	const mapGround = this.make.tilemap({ key: "mapGround", tileWidth: 16, tileHeight: 16});
+    cloud_2 = this.add.tileSprite(0, 0, gameWidth, gameHeight, "cloud_2");
+    cloud_2.setOrigin(0,0);
+    cloud_2.setScrollFactor(0);
     
+    rock_1 = this.add.tileSprite(0, 0, gameWidth, gameHeight, "rock_1");
+    rock_1.setOrigin(0,0);
+    rock_1.setScrollFactor(0);
     
+    cloud_3 = this.add.tileSprite(0, 0, gameWidth, gameHeight, "cloud_3");
+    cloud_2.setOrigin(0,0);
+    cloud_2.setScrollFactor(0);
     
-    //const map = this.add.tilemap("map");
+    rock_2 = this.add.tileSprite(0, 0, gameWidth, gameHeight, "rock_2");
+    rock_2.setOrigin(0,0);
+    rock_2.setScrollFactor(0);
     
-    
-	//const tileset = map.addTilesetImage("tiles_packed", "tiles");
-    const tilesetGround = mapGround.addTilesetImage("tiles");
-	// layer index, tileset, x, y
-	const groundLayer = mapGround.createStaticLayer(0, tilesetGround, 0, gameHeight/4);
-    
-	//const aboveLayer = map.createStaticLayer("Above", tileset, 0, 0);
-    //const groundLayer = map.createStaticLayer("Ground", tileset, 0, 0);
-    
-    //groundLayer.setCollisionByProperty({ collides: true});
-    //5307,5334
-    //groundLayer.setCollisionBetween(5300,5334);
-    //10263,10610
-    //groundLayer.setCollisionBetween(10263,10610);
-
-    //var force = (radius - distance) / mass;
-
-    
-    heavyBag = this.physics.add.sprite(50,100, "heavyBag");
-    heavyBag.setDisplaySize(62,122);
-    heavyBag.setCollideWorldBounds(false);
-    heavyBag.friction = 0.8;
-    heavyBag.setGravity(0,0);
-    heavyBag.mass = 10;
-    heavyBag.allowDrag = true;
-    heavyBag.allowRotation = true;
-    heavyBag.setBounce(0.3, 0.2);
-    heavyBag.setInteractive();
-    
-    const mapAbove = this.make.tilemap({ key: "mapAbove", tileWidth: 16, tileHeight: 16});
-    const aboveLayer = mapAbove.createStaticLayer(0, tilesetGround, 16 * 12, gameHeight/4);
-    
-    
-    camera = this.cameras.main;
-    camera.setBounds(0, 0, gameWidth * 36, gameHeight);
-    camera.startFollow(heavyBag);
-    
+    cloud_4 = this.add.tileSprite(0, 0, gameWidth, gameHeight, "cloud_4");
+    cloud_4.setOrigin(0,0);
+    cloud_4.setScrollFactor(0);
+	
 	//hitImage = scene.add.image(0,0, "hitImage");
 	//hitImage.visible = false;
-       
-    invPlatform = this.physics.add.sprite(0, gameHeight/4 + (15 * 16),"invPlatform");
-    invPlatform.displayWidth = 16 * 28;
-    invPlatform.displayHeight = 16;
-    invPlatform.setCollideWorldBounds(true);
-    invPlatform.debugBodyColor = 2;
-    invPlatform.body.debugShowBody = true;
-    invPlatform.body.allowGravity = false;
-    invPlatform.body.immovable = true;
-    //invPlatform.body.friction = 0.1
-    
-    invLeft = this.physics.add.sprite(0, invPlatform.body.position.y,"invPlatform");
-    invLeft.displayWidth = 16;
-    invLeft.displayHeight = gameHeight/2;
-    invLeft.debugBodyColor = 2;
-    invLeft.body.debugShowBody = true;
-    invLeft.body.allowGravity = false;
-    invLeft.body.immovable = true;
-    
-    invRight = this.physics.add.sprite(invPlatform.displayWidth + 16, invPlatform.body.position.y,"invPlatform");
-    invRight.displayWidth = 16;
-    invRight.displayHeight = gameHeight/2;
-    invRight.debugBodyColor = 2;
-    invRight.body.debugShowBody = true;
-    invRight.body.allowGravity = false;
-    invRight.body.immovable = true;
-    
-    
-    invTrack = this.physics.add.sprite(gameWidth * 5, gameHeight/4 + (28 * 16), "invPlatform");
-    invTrack.displayWidth = gameWidth * 5;
-    invTrack.displayHeight = 16;
-    invTrack.debugBodyColor = 2;
-    invTrack.body.debugShowBody = true;
-    invTrack.body.allowGravity = false;
-    invTrack.body.immovable = true;
-    //invTrack.allowDrag = true;
-    
-    
-	/*
+
+	
+	
+	//Add the track to the scene
+	let x;
+	for(x = 305; x < (gameWidth * 36) - 43; x += 43) {
+		
+		this.add.image(x, gameHeight - 20, "track");
+		trackLength = x;
+	}
+	
+	//place the inv platform on the track
+	//invTrack = this.matter.add.image(305, gameHeight - 12, "invPlatform");
+	//invTrack.displayWidth = trackLength;
+	//invTrack.displayHeight = 10;
+	//invTrack.setStatic(true);
+	//invTrack.setFriction(0.05);
+	
+	
+	//Add platform and inv Platform 
+	platform = this.add.image(165, gameHeight - 50, "platform");
+	invPlatform = this.matter.add.image(platform.x, gameHeight - 60, "invPlatform");
+	invPlatform.displayWidth = 216;
+	invPlatform.displayHeight = 10;
+	invPlatform.setStatic(true);
+	invPlatform.setFriction(0.08);
+	invPlatform.body.label = 'platform';
+	
+	
+	//Add invisible walls to Platform
+	//invLeft = this.matter.add.image(platform.x - platform.width/2 - 40, 300, "invPlatform");
+	//invLeft.displayWidth = 80;
+	//invLeft.displayHeight = gameHeight;
+	//invLeft.setStatic(true);
+	//invLeft.setFriction(0.04);
+
+	
+	//invRight = this.matter.add.image(platform.x + platform.width/2 + 40, 300, "invPlatform");
+	//invRight.displayWidth = 80;
+	//invRight.displayHeight = gameHeight;
+	//invRight.setStatic(true);
+	//invRight.setFriction(0.04);
+	
+	//Left
+	invLeft = this.matter.add.rectangle(platform.x - platform.width/2 - 40, gameHeight/2, 80, gameHeight, {isStatic: true});
+	//Right
+	invRight = this.matter.add.rectangle(platform.x + platform.width/2 + 40, gameHeight/2, 80, gameHeight, {isStatic: true});
+	
 	invLeft.frictionStatic = 0;
 	invLeft.restitution = .5;
 	
 	invRight.frictionStatic = 0;
 	invRight.restitution = .5;
-	*/
-    
-    
-    //this.physics.add.collider(heavyBag, groundLayer);
-    this.physics.add.collider(heavyBag, invLeft);
-    this.physics.add.collider(heavyBag, invRight);
-    this.physics.add.collider(heavyBag, invPlatform);
-    this.physics.add.collider(heavyBag, invTrack);
-    	
+	
+	invTrack = this.matter.add.rectangle(gameWidth * 18, gameHeight - 12, gameWidth * 36, 10, {isStatic: true, label: 'floor'});
+	invTrack.restitution = .3;
+	invTrack.friction = .09;
+	//invTrack.body.label = 'floor';
+	
 
-	//Add heavyBag and use matter.js
-	/*
-    heavyBag = this.matter.add.image(170, 250, "heavyBag");
-	heavyBag.restitution = 0.3;
-	heavyBag.setFriction(0.08);
-	heavyBag.setFrictionAir(0.0005);
-	heavyBag.body.label = 'heavyBag';
-	heavyBag.setMass(100);
-	*/
+	//Add sandbag and use matter.js
+    sandbag = this.matter.add.image(170, 250, "sandbag");
+	sandbag.restitution = 0.3;
+	sandbag.setFriction(0.08);
+	sandbag.setFrictionAir(0.0005);
+	sandbag.body.label = 'sandbag';
+	sandbag.setMass(100);
+	
+	//sandbag.debugShowVelocity = true;
+	
+	//Set interactive so the matter object is clickable
+	sandbag.setInteractive();
 	
 	
-	
-	
-	/*
 	hitImage = this.add.particles('hitImage');
 	hitEmitter = hitImage.createEmitter({
 		lifespan: 125,
@@ -253,15 +243,101 @@ function create() {
 		rotate: { start: 0, end: 360 },
 		on: false
 	});
-	*/
 
+	console.log(hitEmitter);
 	
     /*
 	*/
+	gameScene = this.scene;
+	
+	swipe = this.rexGestures.add.swipe(this.scene, {
+		enable: true,
+		threshold: 10,
+		direction: '8dir'
+	});
+	
+	swipe.on('swipe', function(swipe) {
+		console.log(swipe);
+		console.log(swipe.dragVelocity);
+		//position.x && position.y are where you begin the swipe
+		console.log("where swipe began");
+		console.log("swipe.x = " + swipe.pointer.position.x);
+		console.log("swipe.y = " + swipe.pointer.position.y);
+		console.log("sandbag.x = " + sandbag.x);
+		console.log("sandbag.y = " + sandbag.y);
+		console.log("        ");
+
+		console.log("up = " + swipe.up);
+		console.log("down = " + swipe.down);
+		console.log("left = " + swipe.left);
+		console.log("right = " + swipe.right);
+
+		
+		
+		let xBeg = swipe.pointer.position.x;
+		let xEnd = swipe.pointer.position.x + swipe.pointer.velocity.x;
+		let yBeg = swipe.pointer.position.y;
+		let yEnd = swipe.pointer.position.y + swipe.pointer.velocity.y;
+		
+		if (swipe.right)
+		{
+			if (swipe.down)
+			{
+				
+			}
+			else if (swipe.up)
+			{
+				
+			}
+			else
+			{
+				if ((sandbag.x > xBeg && sandbag.x < xEnd)
+					&& (yBeg >= sandbag.y - 30 && yBeg <= sandbag.y + 30))
+				{
+					console.log("bag");
+					dmg += 5;
+					sandbag.setVelocity(-.05 * dmg , -.08 * dmg);
+					//sandbag.applyForce({x: -.01 * dmg, y: -.05 * dmg}, {x: pointer.x, y: pointer.y});
+				}			
+			}
+		}
+		else if (swipe.left)
+		{
+			if (swipe.down)
+			{
+				
+			}
+			else if (swipe.up)
+			{
+				
+			}
+			else
+			{
+				if ((sandbag.x < xBeg && sandbag.x > xEnd)
+					&& (yBeg >= sandbag.y - 30 && yBeg <= sandbag.y + 30))
+				{
+					dmg += 5;
+					sandbag.setVelocity(.05 * dmg , -.08 * dmg);
+					//sandbag.applyForce({x: .01 * dmg, y: -.05 * dmg}, {x: pointer.x, y: pointer.y});
+				}
+				
+			}
+			
+		}
+		else if (swipe.up)
+		{
+			
+		}
+		else if (swipe.down)
+		{
+			
+		}
+		
+	});
 	
 	/*
 	
-	tap = this.rexGestures.add.tap(heavyBag, {
+	tap = this.rexGestures.add.tap(sandbag, {
 		enable: true,
 		time: 100,
 		tapInterval: 100,
@@ -286,18 +362,18 @@ function create() {
 		console.log('tap.y = ' + tap.y);
 		
 		
-		if(tap.x > heavyBag.x)
+		if(tap.x > sandbag.x)
 		{
 			//right side
 			if ( dmg < 100)
 			{
 			    dmg += 5;
-				heavyBag.setVelocity(-.05 * dmg , -.08 * dmg);
+				sandbag.setVelocity(-.05 * dmg , -.08 * dmg);
 			}
 			else
 			{
 				dmg += 8;
-				heavyBag.setVelocity(-.15 * dmg , -.24 * dmg);
+				sandbag.setVelocity(-.15 * dmg , -.24 * dmg);
 			}
 		}
 		else
@@ -305,12 +381,12 @@ function create() {
 			if (dmg < 100)
 			{
 				dmg += 5;
-				heavyBag.setVelocity(.05 * dmg, -.08 * dmg);
+				sandbag.setVelocity(.05 * dmg, -.08 * dmg);
 			}
 			else
 			{
 				dmg += 8;
-				heavyBag.setVelocity(.15 * dmg, -.24 * dmg);
+				sandbag.setVelocity(.15 * dmg, -.24 * dmg);
 			}
 		}
 	});
@@ -319,16 +395,16 @@ function create() {
 	press.on('pressend', function(press) {
 		console.log("press ended");
 		
-		if(press.x > heavyBag.x)
+		if(press.x > sandbag.x)
 		{
 			//right side
 			dmg += 30;
-			heavyBag.setVelocity(-.5 * dmg, -.25 * dmg);
+			sandbag.setVelocity(-.5 * dmg, -.25 * dmg);
 		}
 		else
 		{
 			dmg += 30;
-			heavyBag.setVelocity(.5 * dmg, -.25 * dmg);
+			sandbag.setVelocity(.5 * dmg, -.25 * dmg);
 		}
 		
 	});
@@ -337,56 +413,96 @@ function create() {
 	
 	dmg = 0;
 	
-	//Matter.js orients x & y coords in the center of the object, so pointer.x > heavyBag.x
+	//Matter.js orients x & y coords in the center of the object, so pointer.x > sandbag.x
 	//means that the pointer touched the right side of the object
 	
-    
-	heavyBag.on('pointerup', function (pointer) {
+	sandbag.on('pointerup', function (pointer) {
+		if (clicked = false)
+		{
+			clicked = true;
+		}
+	
+		/*
+		console.log("sandbag.x = " + sandbag.x);
+		customAngle = Math.random() * 360;
+		hitEmitter.emitParticleAt(pointer.x,pointer.y);
 		
-		console.log("heavyBag.x = " + heavyBag.x);
-        console.log("pointer.x = " + pointer.x);
-		//customAngle = Math.random() * 360;
-		//hitEmitter.emitParticleAt(pointer.x,pointer.y);
- 
-        angle = Phaser.Math.Angle.Between(-heavyBag.x, -heavyBag.y, -pointer.x,-pointer.y)
-        //var force = (radius - distance) / mass;
-        
-         
-        if (pointer.getDuration() < 600)
-        {
-            if (dmg < 100)
-            {
-                dmg += 5;
-                heavyBag.body.velocity.x += Math.cos(angle) * (dmg * 10);
-                heavyBag.body.velocity.y += Math.sin(angle) * (dmg * 20);
-               //heavyBag.applyForce({x: .01 * dmg, y: -.05 * dmg}, {x: pointer.x, y: pointer.y});
-	           //heavyBag.setVelocity(.05 * dmg, -.08 * dmg);
-            }
-            else
-            {
-	           dmg += 8;
-               heavyBag.body.velocity.x += Math.cos(angle) * (dmg * 15);
-               heavyBag.body.velocity.y += Math.sin(angle) * (dmg * 25);
-               //heavyBag.applyForce({x: .1 * dmg, y: -.15 * dmg}, {x: pointer.x, y: pointer.y});
-	           //heavyBag.setVelocity(.15 * dmg, -.24 * dmg);
-            }
-        }
-        else
-        {
-	         dmg += 30;
-             heavyBag.body.velocity.x += Math.cos(angle) * (dmg * 100);
-             heavyBag.body.velocity.y += Math.sin(angle) * (dmg * 15);
-             //heavyBag.applyForce({x: .1 * dmg, y: -.1 * dmg}, {x: pointer.x, y: pointer.y});
-	          //heavyBag.setVelocity(.5 * dmg, -.25 * dmg);
-        }
-        
+		
+		if(pointer.x > sandbag.x)
+		{
+			//right side
+			if (pointer.getDuration() < 600)
+			{
+			
+			  if ( dmg < 100)
+			  {
+			    dmg += 5;
+                sandbag.applyForce({x: -.01 * dmg, y: -.05 * dmg}, {x: pointer.x, y: pointer.y});
+				//sandbag.setVelocity(-.05 * dmg , -.08 * dmg);
+			  }
+			  else
+			  {
+				dmg += 8;
+                  sandbag.applyForce({x: -.1 * dmg, y: -.15 * dmg}, {x: pointer.x, y: pointer.y});
+				//sandbag.setVelocity(-.15 * dmg , -.24 * dmg);
+			  }
+			}
+			else
+			{
+				dmg += 30;
+                sandbag.applyForce({x: -.1 * dmg, y: -.1 * dmg}, {x: pointer.x, y: pointer.y});
+				//sandbag.setVelocity(-.5 * dmg, -.25 * dmg);
+			}
+		}
+		else
+		{
+			if (pointer.getDuration() < 600)
+			{
+			  if (dmg < 100)
+			  {
+				  dmg += 5;
+                  sandbag.applyForce({x: .01 * dmg, y: -.05 * dmg}, {x: pointer.x, y: pointer.y});
+				  //sandbag.setVelocity(.05 * dmg, -.08 * dmg);
+			  }
+			  else
+			  {
+				  dmg += 8;
+                  sandbag.applyForce({x: .1 * dmg, y: -.15 * dmg}, {x: pointer.x, y: pointer.y});
+				  //sandbag.setVelocity(.15 * dmg, -.24 * dmg);
+			  }
+		    }
+			else
+			{
+				dmg += 30;
+                sandbag.applyForce({x: .1 * dmg, y: -.1 * dmg}, {x: pointer.x, y: pointer.y});
+				//sandbag.setVelocity(.5 * dmg, -.25 * dmg);
+			}
+			
+		}	
+		*/
 		
 	});
 	
 	
+
+	//sandbag.setAngularVelocity(5,-5);
+	//sandbag.applyForce(-5, -5);
+	//sandbag.setVelocityX(-5);
+	//sandbag.setVelocityY(-5);
+	//var forceMagnitude = 0.02 * body.mass;
+
+    //Body.applyForce(body, body.position, { 
+    //x: (forceMagnitude + Common.random() * forceMagnitude) * Common.choose([1, -1]), 
+    //y: -forceMagnitude + Common.random() * -forceMagnitude
+	//});
+	
+	//Pointer Motion
+	//Angle: pointer.angle
+	//Disatance: pointer.distance
+	//Velocity: pointer.velocity
+	//pointer.velocity.x, pointer.velocity.y
 	  
   
-  /*
   whiteSmoke = this.add.particles('whiteSmoke');
   smokeEmitter = whiteSmoke.createEmitter({
 	  lifespan: 200,
@@ -397,22 +513,20 @@ function create() {
 	  blendMode: 'ADD'
   });
   smokeEmitter.setRadial(true);
-  */
   
   //Collision Detection
   //collisionactive
-  /*
   this.matter.world.on('collisionstart', function (event,bodyA,bodyB)
   {
 	  
-	  if (bodyA.label === 'floor' && bodyB.label === 'heavyBag')
+	  if (bodyA.label === 'floor' && bodyB.label === 'sandbag')
 	  {
-		  //if(Math.floor(heavyBag.body.velocity.x) < 8)
+		  //if(Math.floor(sandbag.body.velocity.x) < 8)
 		  //{
 			if (startSmokeEmitter)
 			{
 				customAngle = Math.random() * 360;
-				smokeEmitter.startFollow(heavyBag, -(heavyBag.width/2.5), heavyBag.height/4.25, false);
+				smokeEmitter.startFollow(sandbag, -(sandbag.width/2.5), sandbag.height/4.25, false);
 				smokeEmitter.start();
 				startSmokeEmitter = false;
 			}
@@ -422,7 +536,8 @@ function create() {
   
   this.matter.world.on('collisionend', function (event,bodyA,bodyB)
   {
-	  if (bodyA.label === 'floor' && bodyB.label === 'heavyBag')
+
+	  if (bodyA.label === 'floor' && bodyB.label === 'sandbag')
 	  {
 		  if (!startSmokeEmitter)
 		  {
@@ -431,9 +546,12 @@ function create() {
 		  }  		
 	  }  
   });
-  */
+
+  camera = this.cameras.main;
+  camera.setBounds(0, 0, gameWidth * 36, gameHeight);
+  camera.startFollow(sandbag);
   
-  
+  /*
   cursors = this.input.keyboard.createCursorKeys();
   const controlConfig = {
       camera: this.cameras.main,
@@ -445,7 +563,7 @@ function create() {
     };
     
   this.controls = new Phaser.Cameras.Controls.FixedKeyControl(controlConfig);
-  
+  */
   
 
   // Help text that has a "fixed" position on the screen
@@ -506,51 +624,53 @@ function create() {
 
 function update(time, delta) {
     
+    cloud_1.tilePositionX = camera.scrollX * .2;
+    cloud_2.tilePositionX = camera.scrollX * .45;
+    rock_1.tilePositionX = camera.scrollX * .6;
+    cloud_3.tilePositionX = camera.scrollX * .75;
+    rock_2.tilePositionX = camera.scrollX * .8;
+    cloud_4.tilePositionX = camera.scrollX * .9;
+    
+    sky.tilePositionX = camera.scrollX;
+
 	
-	/*
-	if (heavyBag.x > 300)
+	if (sandbag.x > 300)
 	{
-		heavyBag.removeInteractive();
-		xDif = 120 - heavyBag.x;
+		sandbag.removeInteractive();
+		xDif = 120 - sandbag.x;
 		yDif = 0 - 0;
 		dist = Math.sqrt(xDif * xDif + yDif * yDif);
 		dist = dist/16;
 		dist = +dist.toFixed(2);
-		//dist = Phaser.Math.distance(120,0,heavyBag.x,0)
+		//dist = Phaser.Math.distance(120,0,sandbag.x,0)
 		lblDist.text = 'Distance = ' + dist + ' ft'; 
 	}
-	*/
 	
 	lblDmg.text = 'Damage = ' + dmg;	
 	seconds = timedEvent.getProgress() * 10;
 	seconds = seconds.toFixed(0)
 	lblTime.text = 'Time = ' + (10 - seconds);
-    
-    
 	//timedEvent.elapsed / timedEvent.delay
-	
 	
 	if (seconds >= 7)
 	{
 		if (setBounds)
 		{
-            invLeft.destroy();
-            invRight.destroy();
+			this.matter.world.remove(invLeft);
+			this.matter.world.remove(invRight);
 			setBounds = false;
 		}
 		
 	}
 	
 	
-	
 	if(seconds >= 10)
 	{
 		//Add Back In after testing
-		//heavyBag.removeInteractive();
+		//sandbag.removeInteractive();
 
-		/*
-		if(Math.floor(heavyBag.body.velocity.x) < 1 && Math.floor(heavyBag.body.velocity.y) < 1)
-			//|| (Math.floor(heavyBag.body.velocity.x) < -1 && Math.floor(heavyBag.body.velocity.y < -1)))
+		if(Math.floor(sandbag.body.velocity.x) < 1 && Math.floor(sandbag.body.velocity.y) < 1)
+			//|| (Math.floor(sandbag.body.velocity.x) < -1 && Math.floor(sandbag.body.velocity.y < -1)))
 		{
 			//game over
 			//reset initializers
@@ -560,31 +680,28 @@ function update(time, delta) {
 			startSmokeEmitter = false;
 			
 		}
-		*/
 		
 	}
 	
 	
-	/*
-	if(Math.floor(heavyBag.body.velocity.x) < 4)
+	if(Math.floor(sandbag.body.velocity.x) < 4)
 	{
 		if(!startSmokeEmitter)
 		{
 			smokeEmitter.stop();
 		}
 	}
-	*/
 	 
-    this.controls.update(delta);
+    //this.controls.update(delta);
 }
 
 function restartGame()
 {
-	//setBounds = true;
-	//startSmokeEmitter = true;
-	//dmg = 0;
-	//dist = 0;
-	//gameScene.restart();	
+	setBounds = true;
+	startSmokeEmitter = true;
+	dmg = 0;
+	dist = 0;
+	gameScene.restart();	
 }
 
 function enterButtonHoverState()
@@ -597,3 +714,38 @@ function enterButtonRestState()
 	
 	btnRestart.setStyle({ fill: '#00008B' });	
 }
+
+
+/*
+function resizeApp ()
+{
+	// Width-height-ratio of game resolution
+    // Replace 360 with your game width, and replace 640 with your game height
+	let game_ratio		= 800 / 600;
+	
+	// Make div full height of browser and keep the ratio of game resolution
+	let div			= document.getElementById('phaser-app');
+	div.style.width		= (window.innerHeight * game_ratio) + 'px';
+	div.style.height	= window.innerHeight + 'px';
+	
+	// Check if device DPI messes up the width-height-ratio
+	let canvas			= document.getElementsByTagName('canvas')[0];
+	
+	let dpi_w	= parseInt(div.style.width) / canvas.width;
+	let dpi_h	= parseInt(div.style.height) / canvas.height;		
+	
+	let height	= window.innerHeight * (dpi_w / dpi_h);
+	let width	= height * game_ratio;
+	
+	// Scale canvas	
+	canvas.style.width	= width + 'px';
+	canvas.style.height	= height + 'px';
+}
+      #game-container {
+        min-width: 100vw;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+*/
